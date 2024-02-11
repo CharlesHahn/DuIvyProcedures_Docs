@@ -34,4 +34,4 @@ SPM也会输出最短路径的权重矩阵，数值越大，表明残基对之�
 
 ## References
 
-如果您使用了DIP的本分析模块，请一定引用Sílvia Osuna文章（http://dx.doi.org/10.1021/acscatal.7b02954）、MDAnalysis、DuIvyTools(https://zenodo.org/doi/10.5281/zenodo.6339993)，以及合理引用本文档。
+如果您使用了DIP的本分析模块，请一定引用Sílvia Osuna文章（http://dx.doi.org/10.1021/acscatal.7b02954）、MDAnalysis、DuIvyTools(https://zenodo.org/doi/10.5281/zenodo.6339993)，以及合理引用本文档(https://zenodo.org/doi/10.5281/zenodo.10646113)。

@@ -41,4 +41,4 @@ UMAP是一种降维方法，此模块实现了基于坐标的和基于二面角�
 
 ## References
 
-如果您使用了DIP的本分析模块，请一定引用MDAnalysis、UMAP(https://doi.org/10.1162/neco_a_01434)、DuIvyTools(https://zenodo.org/doi/10.5281/zenodo.6339993)，以及合理引用本文档。
+如果您使用了DIP的本分析模块，请一定引用MDAnalysis、UMAP(https://doi.org/10.1162/neco_a_01434)、DuIvyTools(https://zenodo.org/doi/10.5281/zenodo.6339993)，以及合理引用本文档(https://zenodo.org/doi/10.5281/zenodo.10646113)。
