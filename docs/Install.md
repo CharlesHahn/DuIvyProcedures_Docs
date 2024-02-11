@@ -1,6 +1,6 @@
 # Installation
 
-DuIvyProcedures(DIP)有诸多依赖，比较建议先通过conda或者mamba设置好环境以及相关的依赖。
+DuIvyProcedures(DIP)有诸多依赖，比较建议先通过conda或者mamba、或自行设置好环境以及相关的依赖。
 
 ## conda环境设置
 
@@ -10,17 +10,48 @@ DuIvyProcedures(DIP)有诸多依赖，比较建议先通过conda或者mamba设�
 conda create -n DIP python=3.8
 ```
 
+**请注意，目前DIP仅测试了python3.8版本，其他版本的python请自行测试。**
+
 激活conda环境：
 
 ```bash
  conda activate DIP
  ```
 
- 安装依赖：
+安装如下的依赖：
 
- ```bash
- conda install -c conda-forge DuIvyTools Numpy Pandas Scipy Matplotlib Seaborn MDAnalysis rdkit igraph UMAP PyEMMA MDTraj ...
- ```
+```txt
+WMI                1.5.1
+psutil             5.9.8
+pycryptodome       3.20.0
+PyYAML             6.0.1
+
+numpy              1.23.1
+pandas             2.0.3
+matplotlib         3.5.3
+MDAnalysis         2.4.3
+DuIvyTools         0.5.3
+
+rdkit                     # PiStacking only if byIndex==no
+scikit-learn       1.3.2  # PCA 
+scipy              1.10.1 # RDCM
+seaborn            0.13.2 # saltbridge
+igraph             0.11.3 # SPM
+deeptime           0.4.4  # tICA
+umap-learn         0.5.5  # umap
+```
+
+首先通过conda安装rdkit：
+
+```bash
+conda install -c conda-forge rdkit
+```
+
+然后安装其他依赖：
+
+```bash
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple WMI psutil pycryptodome PyYAML numpy pandas matplotlib MDAnalysis DuIvyTools scikit-learn scipy seaborn igraph deeptime umap-learn
+```
 
 ## GROMACS设置
 
@@ -54,9 +85,9 @@ here is dip's output...
 
 ## DIP测试
 
-访问[测试案例](https://python?????TODO)下载测试轨迹文件，解压后在DIP_test文件夹路径下运行`dip run -f dip_test.yaml`命令。
+访问[测试案例](http://charles8hahn.pythonanywhere.com/download/DIP_test.zip)下载测试轨迹文件，解压后在DIP_test文件夹路径下运行`dip run -f dip_test.yaml`命令，默认的测试将进行，大约会在约60分钟后结束（取决于电脑性能，i7-6700H芯片上测的60分钟）。
 
-如果一切顺利，运行成功，会在当前目录各种分析的文件夹，里面包含了运行结果。仔细对比和验证运行得到的测试结果与下载得到的分析结果。
+如果一切顺利，运行成功，会在当前目录生成各种分析的文件夹，里面包含了运行结果，可以自行查看。如果不想跑完全部的分析，也可以在dip_test.yaml文件中用`#`注释掉不需要的分析手段。
 
 如果OK，则DIP可用了。祝您科研愉快~
 
