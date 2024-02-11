@@ -11,13 +11,11 @@
     mass_weight: yes
 ```
 
-`fit_group`：用于对齐的组。
+`fit_group`：用于对齐的组。这里的原子选择的语法完全遵从MDAnalysis的原子选择语法。请参考：https://userguide.mdanalysis.org/1.1.1/selections.html
 
-`calc_group`：用于计算RMSD的组。
+`calc_group`：用于计算RMSD的组。这里的原子选择的语法完全遵从MDAnalysis的原子选择语法。请参考：https://userguide.mdanalysis.org/1.1.1/selections.html
 
 `mass_weight`：是否对RMSD计算进行质量加权。
-
-原子组选择的语法完全遵从MDAnalysis的语法。
 
 
 ## Output

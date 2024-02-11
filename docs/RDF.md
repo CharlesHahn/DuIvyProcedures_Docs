@@ -12,9 +12,9 @@
     range: 4 # nm
 ```
 
-`center_group`：计算RDF的中心组，即RDF的中心。
+`center_group`：计算RDF的中心组，即RDF的中心。这里的原子选择的语法完全遵从MDAnalysis的原子选择语法。请参考：https://userguide.mdanalysis.org/1.1.1/selections.html
 
-`calc_group`：计算RDF的组，通常可以是连续的溶液相。
+`calc_group`：计算RDF的组，通常可以是连续的溶液相。这里的原子选择的语法完全遵从MDAnalysis的原子选择语法。请参考：https://userguide.mdanalysis.org/1.1.1/selections.html
 
 `range`：RDF计算的范围，即RDF计算的半径，单位为纳米。
 

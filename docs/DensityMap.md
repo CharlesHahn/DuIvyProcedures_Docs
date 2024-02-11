@@ -18,7 +18,7 @@
 
 `byType`：选择计算的类型，可选`Mass`（质量），`Number`（数量），`Charge`（电荷）。
 
-`byIndex`：选择使用GROMACS的索引或MDAnalysis的选择语句。如果设置"no", 下面`groups`参数的值将被认为是MDAnalysis的选择语句；如果设置"yes"，则下面的groups参数的值将被认为是GROMACS的索引组的名字，当然这个名字需要和index文件中的对应上。
+`byIndex`：选择使用GROMACS的索引或MDAnalysis的选择语句。如果设置"no", 下面`groups`参数的值将被认为是MDAnalysis的选择语句（这里的原子选择的语法完全遵从MDAnalysis的原子选择语法。请参考：https://userguide.mdanalysis.org/1.1.1/selections.html）；如果设置"yes"，则下面的groups参数的值将被认为是GROMACS的索引组的名字，当然这个名字需要和index文件中的对应上。
 
 `groups`：选择计算的原子组，可以同时声明多个组，用逗号分隔。
 

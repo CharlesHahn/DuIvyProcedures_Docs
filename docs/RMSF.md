@@ -9,7 +9,7 @@
     calc_group: protein or resname 1ZIN
 ```
 
-`calc_group`：选择计算分子的分组；语法遵从MDAnalysis的语法。
+`calc_group`：选择计算分子的分组。这里的原子选择的语法完全遵从MDAnalysis的原子选择语法。请参考：https://userguide.mdanalysis.org/1.1.1/selections.html
 
 
 ## Output

@@ -9,7 +9,7 @@
     calc_group: protein
 ```
 
-`calc_group`：计算分组，即需要计算回旋半径的原子组；选组语法完全遵从MDAnalysis的语法。
+`calc_group`：计算分组，即需要计算回旋半径的原子组。这里的原子选择的语法完全遵从MDAnalysis的原子选择语法。请参考：https://userguide.mdanalysis.org/1.1.1/selections.html
 
 ## Output
 
