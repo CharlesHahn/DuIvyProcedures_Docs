@@ -10,7 +10,7 @@ DuIvyProcedures(DIP)有诸多依赖，比较建议先通过conda或者mamba、�
 conda create -n DIP python=3.8
 ```
 
-**请注意，目前DIP仅测试了python3.8版本，其他版本的python请自行测试。**
+**请注意，目前DIP仅测试了python3.8版本。建议安装python=3.8**
 
 激活conda环境：
 
@@ -21,6 +21,7 @@ conda create -n DIP python=3.8
 安装如下的依赖：
 
 ```txt
+colorama           0.4.6
 WMI                1.5.1
 psutil             5.9.8
 pycryptodome       3.20.0
@@ -37,6 +38,7 @@ scikit-learn       1.3.2  # PCA
 scipy              1.10.1 # RDCM
 seaborn            0.13.2 # saltbridge
 igraph             0.11.3 # SPM
+pycairo            1.25.1 # SPM
 deeptime           0.4.4  # tICA
 umap-learn         0.5.5  # umap
 ```
@@ -50,7 +52,7 @@ conda install -c conda-forge rdkit
 然后安装其他依赖：
 
 ```bash
-pip install -i https://pypi.tuna.tsinghua.edu.cn/simple WMI psutil pycryptodome PyYAML numpy pandas matplotlib MDAnalysis DuIvyTools scikit-learn scipy seaborn igraph deeptime umap-learn
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple WMI psutil pycryptodome PyYAML numpy pandas matplotlib MDAnalysis DuIvyTools scikit-learn scipy seaborn igraph deeptime umap-learn pycairo colorama
 ```
 
 ## GROMACS设置
