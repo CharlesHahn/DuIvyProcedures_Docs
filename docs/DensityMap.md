@@ -36,6 +36,8 @@
 
 ![DensityMap_X](static/DensityMap_Density_distribution_X_axis.png)
 
+对于某些材料方面的领域，可能需要计算某类原子的数量密度沿着轴向的分布，可以用这里的功能去实现，只需要将`byType`设置为`Number`即可，然后`groups`参数设置为需要计算的原子，例如`name C`。
+
 之后是每一个组分在不同平面上的平均密度分布图，这里列举XY平面上的蛋白质密度图：
 
 ![DensityMap_protein_XY](static/DensityMap_Density_XY_ave_protein.png)
