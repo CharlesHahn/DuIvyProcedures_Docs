@@ -4,6 +4,8 @@
 
 基于格点技术，此模块还可以拓展出很多有意思的功能，欢迎大家的建议和反馈~
 
+使用本模块前请注意[前置处理](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7)已经完成！
+
 ## Input YAML
 
 ```yaml

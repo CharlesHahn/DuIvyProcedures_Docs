@@ -2,6 +2,8 @@
 
 本模块负责分析盐桥，并输出盐桥占有率、距离等信息。
 
+使用本模块前请注意[前置处理](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7)已经完成！
+
 ## Input YAML
 
 ```yaml

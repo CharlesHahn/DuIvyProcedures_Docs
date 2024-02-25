@@ -2,6 +2,8 @@
 
 gmx_Cluster模块依赖`gmx cluster`命令对轨迹进行聚类分析，并针对`gmx cluster`命令的输出结果进行解析，生成可视化结果，包括可视化RMSD矩阵、聚类大小、聚类分布等情况。
 
+使用本模块前请注意[前置处理](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7)已经完成！
+
 ## Input YAML
 
 ```yaml

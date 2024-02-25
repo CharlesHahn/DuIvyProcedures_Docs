@@ -4,6 +4,8 @@
 
 更多内容请参考：https://zhuanlan.zhihu.com/p/578891660
 
+使用本模块前请注意[前置处理](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7)已经完成！
+
 ## Input YAML
 
 ```yaml

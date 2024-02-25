@@ -2,6 +2,8 @@
 
 此模块利用GROMACS计算残基间的最短距离矩阵，也可以称之为残基接触矩阵。
 
+使用本模块前请注意[前置处理](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7)已经完成！
+
 ## Input YAML
 
 ```yaml

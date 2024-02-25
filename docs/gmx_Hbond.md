@@ -2,6 +2,8 @@
 
 本模块依赖GROMACS进行氢键的计算，包括氢键的数量、时间占有率、氢键形成的平均距离和角度等。
 
+使用本模块前请注意[前置处理](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7)已经完成！
+
 ## Input YAML
 
 ```yaml
@@ -22,6 +24,8 @@
 如果只需要计算氢键数量，或者当预估的氢键数量特别大时（例如计算蛋白质和水的氢键），可以将`only_calc_number`设置为`yes`，也即只计算氢键数量，而不计算其他参数。
 
 `gmx_parm`参数下面可以写一些gmx的参数，注意这些参数会被同时连接到`gmx hbond`、`gmx distance`和`gmx angle`命令中，故而必须是三个命令都有的参数才可以。通常可以写一下起止时间之类的参数。
+
+**请注意，本模块对GROMACS2024不适用，2024改了命令参数**。
 
 ## Output
 

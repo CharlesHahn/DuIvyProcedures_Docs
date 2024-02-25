@@ -1,6 +1,8 @@
 # tICA
 Time-lagged independent component analysis (TICA)是一种降维手段，此模块可以用于计算所选原子组的tICA。可以对坐标进行tICA，也可以对蛋白质骨架二面角做tICA。
 
+使用本模块前请注意[前置处理](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7)已经完成！
+
 ## Input YAML
 
 ```yaml

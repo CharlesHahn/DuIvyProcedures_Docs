@@ -2,6 +2,8 @@
 
 本模块旨在计算径向分布函数(RDF)。
 
+使用本模块前请注意[前置处理](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7)已经完成！
+
 
 ## Input YAML
 

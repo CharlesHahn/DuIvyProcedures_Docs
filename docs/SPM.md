@@ -2,7 +2,9 @@
 
 Shortest Path Map (SPM)是一种分析蛋白质等大分子别构作用和残基的远程联系的有力工具。本模块依照Sílvia Osuna文章（http://dx.doi.org/10.1021/acscatal.7b02954）进行部分复现。
 
-**此模块目前还只是个能跑的demo，后续将会有多轮优化和改进**
+**此模块目前还只是能用，后续将会有多轮优化和改进**
+
+使用本模块前请注意[前置处理](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7)已经完成！
 
 ## Input YAML
 

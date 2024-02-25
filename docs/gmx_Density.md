@@ -2,6 +2,8 @@
 
 本模块用于依赖`gmx density`命令生成体系沿某一轴向方向上的密度分布图。默认是沿z轴方向。
 
+使用本模块前请注意[前置处理](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7)已经完成！
+
 ## Input YAML
 
 ```yaml

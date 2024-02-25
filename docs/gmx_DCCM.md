@@ -4,6 +4,8 @@
 
 本模块调用`gmx covar`命令生成用户所选原子之间的协方差矩阵，之后将之转化成DCCM并可视化。
 
+使用本模块前请注意[前置处理](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7)已经完成！
+
 ## Input YAML
 
 ```yaml

@@ -10,6 +10,8 @@
 
 因此，**建议用户使用此模块进行dPCA计算之后仔细检查分析结果！！！**
 
+使用本模块前请注意[前置处理](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7)已经完成！
+
 ## Input YAML
 
 ```yaml

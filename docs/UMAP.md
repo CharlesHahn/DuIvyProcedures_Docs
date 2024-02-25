@@ -2,6 +2,8 @@
 
 UMAP是一种降维方法，此模块实现了基于坐标的和基于二面角的UMAP降维。
 
+使用本模块前请注意[前置处理](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7)已经完成！
+
 ## Input YAML
 
 ```yaml

@@ -2,6 +2,8 @@
 
 此模块计算所选原子的质量和电荷密度沿X、Y、Z方向的分布。
 
+使用本模块前请注意[前置处理](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7)已经完成！
+
 ## Input YAML
 
 ```yaml

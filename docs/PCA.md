@@ -2,6 +2,8 @@
 
 此模块可以用于计算所选原子组的主成分分析（PCA）。可以对坐标进行主成分分析，也可以对蛋白质骨架二面角做PCA。
 
+使用本模块前请注意[前置处理](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7)已经完成！
+
 
 ## Input YAML
 
