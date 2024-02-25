@@ -9,6 +9,7 @@
     group1: Protein
     group2: ZIN1 #Ligands # connot start with a number
     top2show: 6
+    only_calc_number: no
     gmx_parm:
       b: 50000
       e: 90000
@@ -17,6 +18,8 @@
 `group1`和`group2`是需要计算氢键的两个原子组，如果需要计算同一组原子内的氢键的话，两个组可以写成一样的。需要注意的是，组名不能是数字开头的，例如`1ZIN`这样的组名，会导致GROMACS识别到错误的组。
 
 `top2show`是指展示前面多少个占有率最高的氢键数量，默认是6，可以根据需要调整。
+
+如果只需要计算氢键数量，或者当预估的氢键数量特别大时（例如计算蛋白质和水的氢键），可以将`only_calc_number`设置为`yes`，也即只计算氢键数量，而不计算其他参数。
 
 `gmx_parm`参数下面可以写一些gmx的参数，注意这些参数会被同时连接到`gmx hbond`、`gmx distance`和`gmx angle`命令中，故而必须是三个命令都有的参数才可以。通常可以写一下起止时间之类的参数。
 

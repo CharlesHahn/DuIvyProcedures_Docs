@@ -23,6 +23,26 @@ Shortest Path Map (SPM)是一种分析蛋白质等大分子别构作用和残基
 
 `sp_weight_cutoff`: 最短路径权重的阈值，低于阈值的最短路径将被忽略。
 
+本模块还有三个隐藏参数可以对轨迹做帧的选择：
+
+```yaml
+      frame_start:  # start frame index
+      frame_end:   # end frame index, None for all frames
+      frame_step:  # frame index step, default=1
+```
+
+这些参数可以指定计算轨迹的起始帧、终止帧（不包含）以及帧的步长。默认情况下，用户不需要设置这些参数，模块会自动分析整个轨迹。
+
+例如我们计算从1000帧开始，到5000帧结束，每隔10帧的DCCM：
+
+```yaml
+      frame_start: 1000 # start frame index
+      frame_end:  5001 # end frame index, None for all frames
+      frame_step: 10 # frame index step, default=1
+```
+
+如果三个参数中只需要设置一个或两个，其余的参数都可以省略。
+
 ## Output
 
 DIP会输出计算得到的DCCM矩阵、距离矩阵，以及可视化的最短路径图，以及用于pymol的SPM的pml脚本。

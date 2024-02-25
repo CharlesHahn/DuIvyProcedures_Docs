@@ -21,12 +21,12 @@ gmx_Cluster模块依赖`gmx cluster`命令对轨迹进行聚类分析，并针�
 
 `gmx_parm`：`gmx cluster`命令的参数设置，包括`method`、`cutoff`、`tu`、`dt`等等。`gmx cluster`命令可用的参数，都可以在这里进行设置。有几个参数是DIP默认添加了的，所以不需要用户在yaml文件中声明：`-o`、`-g`、`-sz`、`-cl`以及`-clndx`。轨迹文件、tpr文件、ndx文件都是通过yaml的Conf部分进行输入的，因而这里也不需要输入了。
 
-请注意，`gmx cluster`的时间步长，也即`dt`设置得较短的话，会导致有较多的帧需要分析，计算量较大，耗时会较长；请用户根据自身需要设置相应的参数。
+请注意，`gmx cluster`的时间步长，也即`dt`设置得较短的话，会导致有较多的帧需要分析，计算量较大，耗时会较长，同时输出的pdb文件也会很大；请用户根据自身需要设置相应的参数。
 
 ## Output
 
 执行此模块之后，DIP会自动调用`gmx cluster`命令并执行聚类，之后DIP会对rmsd-clust.xpm、clust-size.xvg、以及rmsd-dist.xvg进行绘图。
-所有的结果文件、可视化图片、以及DIP的log文件都可以在分析路径下的相关文件夹里找到。
+所有的结果文件、可视化图片、每一个类的占比数据和折线图，以及DIP的log文件都可以在分析路径下的相关文件夹里找到。
 
 ## References
 

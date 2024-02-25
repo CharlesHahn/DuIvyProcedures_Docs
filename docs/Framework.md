@@ -118,6 +118,26 @@ Tasks:
 
 **请注意，所有组的名字都必须以英文开头，不要有空格，不能以数字开头！** 数字开头的组，如`6Lig`会被GROMACS识别成第6个组而不是6Lig组。
 
+所有不依赖GROMACS的分析模块（不以`gmx_`开头）还有三个隐藏参数可以对轨迹做帧的选择：
+
+```yaml
+      frame_start:  # start frame index
+      frame_end:   # end frame index, leave blank for all frames
+      frame_step:  # frame index step, default=1
+```
+
+这些参数可以指定计算轨迹的起始帧、终止帧（不包含）以及帧的步长。默认情况下，用户不需要设置这些参数，模块会自动分析整个轨迹。
+
+例如我们计算从1000帧开始，到5000帧结束，每隔10帧的DCCM：
+
+```yaml
+      frame_start: 1000 # start frame index
+      frame_end:  5001 # end frame index, None for all frames
+      frame_step: 10 # frame index step, default=1
+```
+
+如果三个参数中只需要设置一个或两个，其余的参数都可以省略。
+
 其他的分析模块的参数也类似，具体的分析模块的参数请参考具体的分析模块的文档。
 
 

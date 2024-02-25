@@ -23,6 +23,26 @@
 
 **需要注意的是**：dPCA的文献中讨论到二面角与坐标不同，二面角具有周期性；因而dPCA的文章中是对角度进行了三角变换再将之应用于PCA分析，而此模块并不包含二面角的三角变换过程，而是直接对角度值继续了PCA的计算。**用户在进行dPCA分析的时候，需要妥善对照文献分析计算过程是否合适！** 有任何问题或者改进的建议，请联系杜若，杜若和杜艾维非常欢迎任何的建议和argue，非常感谢！。
 
+本模块还有三个隐藏参数可以对轨迹做帧的选择：
+
+```yaml
+      frame_start:  # start frame index
+      frame_end:   # end frame index, None for all frames
+      frame_step:  # frame index step, default=1
+```
+
+这些参数可以指定计算轨迹的起始帧、终止帧（不包含）以及帧的步长。默认情况下，用户不需要设置这些参数，模块会自动分析整个轨迹。
+
+例如我们计算从1000帧开始，到5000帧结束，每隔10帧的DCCM：
+
+```yaml
+      frame_start: 1000 # start frame index
+      frame_end:  5001 # end frame index, None for all frames
+      frame_step: 10 # frame index step, default=1
+```
+
+如果三个参数中只需要设置一个或两个，其余的参数都可以省略。
+
 ## Output
 
 DIP在对体系进行PCA分析之后，会将前三个主成分的数值保存到xvg文件中，并对主成分进行两两的散点图可视化。

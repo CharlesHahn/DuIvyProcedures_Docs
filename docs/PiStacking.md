@@ -45,6 +45,26 @@
 
 `other_ring_max_atom_num`：当DIP自动寻找可形成PiStacking的环时，对于没有被判别为芳香环的环，其最大允许的原子数量。
 
+本模块还有三个隐藏参数可以对轨迹做帧的选择：
+
+```yaml
+      frame_start:  # start frame index
+      frame_end:   # end frame index, None for all frames
+      frame_step:  # frame index step, default=1
+```
+
+这些参数可以指定计算轨迹的起始帧、终止帧（不包含）以及帧的步长。默认情况下，用户不需要设置这些参数，模块会自动分析整个轨迹。
+
+例如我们计算从1000帧开始，到5000帧结束，每隔10帧的DCCM：
+
+```yaml
+      frame_start: 1000 # start frame index
+      frame_end:  5001 # end frame index, None for all frames
+      frame_step: 10 # frame index step, default=1
+```
+
+如果三个参数中只需要设置一个或两个，其余的参数都可以省略。
+
 ## Output
 
 首先是输出DIP判定的可形成PiStacking的环，以供用户判断正确性。DIP会将之输出成pdb文件，用户可以自行检查。同时DIP还会输出各个环及其对应的原子索引到txt文件，供用户进一步确认和重复利用：

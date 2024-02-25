@@ -11,7 +11,6 @@
     type_select: center # atom # min
     atom_selection: protein
     type_min_spend: time # memory
-    type_min_step: 1 # for step to calc min dist
     frames_output_step: -1 # -1 for no output
     calc_RMSD: no
     RMSD_Matrix_step: -1 # -1 for no output
@@ -20,7 +19,9 @@
     Pearson_Observe: "" # ../RMSD.xvg
     calc_PCA: no
     clustering_step: -1 # -1 for no clustering
+    calc_contact: yes
     contact_cutoff: 1.5
+    calc_encounter: yes
     encounter_low_cutoff: 0.8
     encounter_high_cutoff: 1.0
     calc_encounter_DCCM: no
@@ -32,7 +33,7 @@
 
 `type_min_spend`: 计算残基间最小距离的算法。`time`表示使用时间换空间的算法，`memory`表示使用空间换时间的算法。前者10000帧130残基的情况下在测试电脑上需要1900秒，后者大概只需要700秒左右。但是后者需要恐怖的内存空间，用户可以自行按照如下公式估算：8byte * 所有残基包含的原子数目的平方 * 帧数，这里的测试体系大概需要80G左右。（我大概写了一个很蠢的计算过程……后续我会继续改进！）
 
-`type_min_step`: 计算残基间最小距离的步长，即每隔多少帧计算一次最小距离。用户可以利用这一选项减少帧数提高计算速度。
+**请注意，如果选择`min`类型，则计算会非常慢！** 可结合后面的帧选择参数来减少要计算的帧数。
 
 `atom_selection`: 选择用于计算残基接触距离矩阵的原子组。如果`type_select`为`center`，则会直接按照残基计算质心；如果`type_select`为`atom`，则会按照此原子的坐标计算残基距离，因而不建议同时选择一个残基的多个原子；如果`type_select`为`min`，则会按照残基计算。
 
@@ -52,11 +53,35 @@
 
 `clustering_step`: `-1`表示不基于RDCM进行残基和帧的聚类；当值为正的时候，此模块会按照设置的步长去进行帧聚类并输出，同时也会对残基进行聚类。当步长太小，可能导致有较多帧需要聚类，耗时会增加且最后可视化效果不好。
 
+`calc_contact`: 是否基于RDCM计算contact。
+
 `contact_cutoff`: 定义contact的距离阈值，即两残基间距离小于此阈值的两残基视为contact。
+
+`calc_encounter`: 是否基于RDCM计算encounter。
 
 `encounter_low_cutoff`和`encounter_high_cutoff`：encounter可以视为更加严格的contact；当残基间距离小于`encounter_low_cutoff`时，视为形成encounter；当距离大于`encounter_high_cutoff`时，视为encounter断裂。这两个阈值可以结合文献进行相应的设置！
 
 `calc_encounter_DCCM`: 是否基于encounter矩阵计算DCCM。
+
+本模块还有三个隐藏参数可以对轨迹做帧的选择：
+
+```yaml
+      frame_start:  # start frame index
+      frame_end:   # end frame index, None for all frames
+      frame_step:  # frame index step, default=1
+```
+
+这些参数可以指定计算轨迹的起始帧、终止帧（不包含）以及帧的步长。默认情况下，用户不需要设置这些参数，模块会自动分析整个轨迹。
+
+例如我们计算从1000帧开始，到5000帧结束，每隔10帧的DCCM：
+
+```yaml
+      frame_start: 1000 # start frame index
+      frame_end:  5001 # end frame index, None for all frames
+      frame_step: 10 # frame index step, default=1
+```
+
+如果三个参数中只需要设置一个或两个，其余的参数都可以省略。
 
 ## Output
 
