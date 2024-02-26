@@ -17,12 +17,18 @@
 ```yaml
 - gmx_dPCA:
     group: Protein
+    fast_mode: no
     gmx_parm:
       tu: ns
 ```
 
 `group`：蛋白质组名，即`Protein`，也可以选择包含了骨架原子的其他组。
 `gmx_parm`：此模块涉及到多个GROMACS命令，这里的gmx_parm参数只会被添加到`gmx anaeig`命令中，用于导出主成分，因而可以一般可以用户自定义`gmx anaeig`命令的参数。
+
+`fast_mode`：是否使用快速模式。在执行dPCA分析的过程中，有一步`gmx angle`生成二面角的trr文件的步骤，因为该命令在生成了trr文件之后会执行一些统计计算的工作，所以需要等待非常长的时间。如果用户设置了`fast_mode: yes`，DIP不会等待`gmx angle`命令执行完，在dangle.trr文件生成之后，DIP会kill掉`gmx angle`进程，并继续执行后续的计算。
+
+**请注意，因为此分析方法依赖于GROMACS，且有一些dirty tricks，所以不能保证一定能执行完成。** 例如，用于储存二面角的trr文件中如果某一个“原子”的三个坐标值都是0的话，GROMACS会报错，导致程序无法继续执行。
+
 
 ## Output
 
