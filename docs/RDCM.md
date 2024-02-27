@@ -12,7 +12,6 @@
 - RDCM:
     type_select: center # atom # min
     atom_selection: protein
-    type_min_spend: time # memory
     frames_output_step: -1 # -1 for no output
     calc_RMSD: no
     RMSD_Matrix_step: -1 # -1 for no output
@@ -33,9 +32,9 @@
 
 `type_select`: 选择用于计算残基接触距离矩阵的类型。`center`表示使用残基质心，`atom`表示使用原子坐标、`min`表示使用残基间的最小距离。
 
-`type_min_spend`: 计算残基间最小距离的算法。`time`表示使用时间换空间的算法，`memory`表示使用空间换时间的算法。前者10000帧130残基的情况下在测试电脑上需要1900秒，后者大概只需要700秒左右。但是后者需要恐怖的内存空间，用户可以自行按照如下公式估算：8byte * 所有残基包含的原子数目的平方 * 帧数，这里的测试体系大概需要80G左右。（我大概写了一个很蠢的计算过程……后续我会继续改进！）
-
 **请注意，如果选择`min`类型，则计算会非常慢！** 可结合后面的帧选择参数来减少要计算的帧数。
+
+如果蛋白质较大且帧数较多，建议结合后面的帧选择参数来减少计算量，否则有内存不够的可能。
 
 `atom_selection`: 选择用于计算残基接触距离矩阵的原子组。如果`type_select`为`center`，则会直接按照残基计算质心；如果`type_select`为`atom`，则会按照此原子的坐标计算残基距离，因而不建议同时选择一个残基的多个原子；如果`type_select`为`min`，则会按照残基计算。
 
