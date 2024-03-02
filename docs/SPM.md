@@ -49,11 +49,11 @@ Shortest Path Map (SPM)是一种分析蛋白质等大分子别构作用和残基
 
 DIP会输出计算得到的DCCM矩阵、距离矩阵，以及可视化的最短路径图，以及用于pymol的SPM的pml脚本。
 
-![SPM_shortest_paths](static\SPM_shortest_paths.png)
+![SPM_shortest_paths](static/SPM_shortest_paths.png)
 
 SPM也会输出最短路径的权重矩阵，数值越大，表明残基对之间对动态信息的传递越强。
 
-![SPM_shortest_path_matrix](static\SPM_shortest_path_matrix.png)
+![SPM_shortest_path_matrix](static/SPM_shortest_path_matrix.png)
 
 
 
