@@ -147,6 +147,8 @@ Available analysis modules: gmx_RMSD, gmx_Gyrate, gmx_RMSF, gmx_SASA, gmx_DCCM, 
 
 访问[测试案例](http://charles8hahn.pythonanywhere.com/download/DIP_test.zip)下载测试轨迹文件，解压后在DIP_test文件夹路径下运行`dip run -f dip_test.yaml`命令，默认的测试将进行，大约会在约60分钟后结束（取决于电脑性能，i7-6700H芯片上测的60分钟）。
 
+请注意，如果是GROMACS2023，则测试的yaml文件中`gmx_DSSP`模块的`gmx2023`参数需要设置为`yes`，否则会报错。
+
 如果一切顺利，运行成功，会在当前目录生成各种分析的文件夹，里面包含了运行结果，可以自行查看。
 
 如果不想跑完全部的分析，也可以在dip_test.yaml文件中用`#`注释掉不需要的分析手段。
