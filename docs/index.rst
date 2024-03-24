@@ -28,13 +28,18 @@ Welcome to DuIvyProcedures's documentation!
    DCCM.md
    Density.md
    DensityMap.md
+   Gyrate.md
+   FEL.md
+   Hbond.md
+   Hydrophobic.md
+   MSM.md
    PCA.md
+   PiCation.md
    PiStacking.md
    RDCM.md
    RDF.md
    RMSD.md
    RMSF.md
-   Gyrate.md
    SaltBridge.md
    SPM.md
    tICA.md

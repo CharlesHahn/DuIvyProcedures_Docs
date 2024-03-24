@@ -7,10 +7,10 @@ DuIvyProcedures(DIP)有诸多依赖，比较建议先通过conda或者mamba、�
 创建conda环境：
 
 ```bash
-conda create -n DIP python=3.8
+conda create -n DIP python=3.9
 ```
 
-**请注意，目前DIP仅支持python3.8版本，如果有其他版本需求，请联系杜艾维**
+**请注意，目前DIP仅支持python3.9版本，如果有其他版本需求，请联系杜艾维**
 
 激活conda环境：
 
@@ -27,18 +27,18 @@ psutil             5.9.8
 pycryptodome       3.20.0
 PyYAML             6.0.1
 
-numpy              1.23.1
-pandas             2.0.3
-matplotlib         3.5.3
-MDAnalysis         2.4.3
+numpy              1.26.4
+pandas             2.1.4
+matplotlib         3.8.3
+MDAnalysis         2.7.0
 DuIvyTools         0.5.3
 
 rdkit                     # PiStacking only if byIndex==no
-scikit-learn       1.3.2  # PCA 
-scipy              1.10.1 # RDCM
+scikit-learn       1.4.1  # PCA 
+scipy              1.12.0 # RDCM
 seaborn            0.13.2 # saltbridge
-igraph             0.11.3 # SPM
-pycairo            1.25.1 # SPM
+igraph             0.11.4 # SPM
+pycairo            1.26.0 # SPM
 deeptime           0.4.4  # tICA
 umap-learn         0.5.5  # umap
 ```
@@ -146,8 +146,6 @@ Available analysis modules: gmx_RMSD, gmx_Gyrate, gmx_RMSF, gmx_SASA, gmx_DCCM, 
 ## DIP测试
 
 访问[测试案例](http://charles8hahn.pythonanywhere.com/download/DIP_test.zip)下载测试轨迹文件，解压后在DIP_test文件夹路径下运行`dip run -f dip_test.yaml`命令，默认的测试将进行，大约会在约60分钟后结束（取决于电脑性能，i7-6700H芯片上测的60分钟）。
-
-请注意，如果是GROMACS2023，则测试的yaml文件中`gmx_DSSP`模块的`gmx2023`参数需要设置为`yes`，否则会报错。
 
 如果一切顺利，运行成功，会在当前目录生成各种分析的文件夹，里面包含了运行结果，可以自行查看。
 

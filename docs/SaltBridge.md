@@ -14,8 +14,13 @@
     Backbone_atomnames: ["H", "N", "CA", "C", "O"]
     ignore_chain_end: no
     byIndex: yes
+    group: protein
     positive_Index: [[118,119,120,121], [343,344,345,346], [568,569,570,571], [793,794,795,796], [1018,1019,1020,1021]]
     negative_Index: [[74,75,76], [299,300,301], [524,525,526], [749,750,751], [974,975,976]]
+    calc_lifetime: no
+    tau_max: 50  # frame
+    window_step: 1 # frame
+    intermittency: 0  # allow 0 frame intermittency
 ```
 
 要计算盐桥，需要先**找到可以形成盐桥的原子组**。此模块提供了两种定义原子组的方式，第一种是通过索引，第二种是通过电荷。
@@ -28,7 +33,17 @@
 
 如果`byIndex`为`no`的话，则DIP会根据体系的电荷去寻找可能形成盐桥的原子组。但是考虑到不同的力场条件下原子的名称可能不同，并且未形成肽键的C或者N端也有可能形成盐桥。因而这里需要用户根据使用的力场去填写一下COO-和NH3+的原子名称，以帮助程序正确判断所有带电基团。
 
-`ignore_chain_end`：是否忽略链端残基，设置为`yes`则程序会忽略链端残基，，只计算链中段的带电基团。
+`group`: 如果`byIndex`为`no`，则需要指定一个组名，DIP会从该原子组中去寻找可能形成盐桥的基团。示例中默认是`protein`，即从蛋白质中寻找可能形成盐桥的基团。这里的原子选择的语法完全遵从MDAnalysis的原子选择语法。请参考：https://userguide.mdanalysis.org/1.1.1/selections.html
+
+`ignore_chain_end`：是否忽略链端残基，设置为`yes`则程序会忽略链端残基，只计算链中段的带电基团。
+
+`calc_lifetime`：是否计算SaltBridge的生命周期。
+
+`tau_max`：生命周期的最大时间，单位为帧。计算生命周期的过程中会计算从t0时刻开始，`tau_max`帧内，SaltBridge继续存在的概率。此值设置越大，则计算的窗口越大。
+
+`window_step`：生命周期的窗口平移步长，单位为帧。
+
+`intermittency`：允许的帧间隔，即允许多少帧没有发生SaltBridge仍旧视为SaltBridge；默认为0，即必须连续发生才被视为SaltBridge。
 
 本模块还有三个隐藏参数可以对轨迹做帧的选择：
 
@@ -131,6 +146,9 @@ DIP还会输出所有盐桥的占有率矩阵到xpm文件并可视化：
 
 ![sltbr_dist_stderr_matrix](static/SaltBridges_Distance_StdErr_Matrix.png)
 
+如果计算生命周期，则自相关函数会被输出并可视化；同时自相关函数的积分，也即生命周期，也会被输出到csv文件中。请注意，这里的生命周期是直接对自相关函数数据进行simpson积分得到的，准确度一般。
+
+如果观察到在自相关函数的自变量范围内函数值还没有降到0，说明应当适当调大`tau_max`参数以获得更准确的生命周期积分。
 
 ## References
 

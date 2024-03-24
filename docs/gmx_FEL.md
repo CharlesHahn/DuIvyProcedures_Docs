@@ -33,7 +33,7 @@ DIP会将`gmx sham`分析得到的xpm文件都可视化，包括gibbs.xpm、prob
 如果用户设置了需要寻找最小值，那么DIP会找出对应的轨迹帧并输出到pdb文件，在这里为：
 
 ```txt
-Minimum_1_Protein_17.71ns.pdb
+Minimum_0_Protein_17.71ns.pdb
 Minimum_1_Protein_75.88ns.pdb
 ```
 

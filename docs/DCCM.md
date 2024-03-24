@@ -11,10 +11,13 @@
 ```yaml
 - DCCM:
     atom_selection: protein and name CA
+    byType: atom # res_com, res_cog, res_coc # have to select all residues atoms
     save_xpm: yes
 ```
 
 `atom_selection`：原子选择器，用于指定计算DCCM的原子。这里的原子选择的语法完全遵从MDAnalysis的原子选择语法。请参考：https://userguide.mdanalysis.org/1.1.1/selections.html
+
+`byType`：指定计算DCCM的方式。有四种选择：`atom`、`res_com`、`res_cog`、`res_coc`。`atom`计算选中的所有原子之间的DCCM；常见的，可以选择CA原子`protein and name CA`来计算蛋白质的DCCM；`res_com`计算每个残基的质心之间的DCCM；`res_cog`计算每个残基的几何中心之间的DCCM；`res_coc`计算每个残基的电荷中心之间的DCCM。当为`res_com`、`res_cog`或`res_coc`时，原子选择器应当包含选中的残基的所有原子，否则只会计算某一残基中选中原子的质心、几何中心或者电荷中心之间的DCCM。
 
 `save_xpm`：是否保存xpm文件。如果设置为`yes`，则会保存DCCM的协方差矩阵和互相关矩阵，并将其保存成xpm文件；否则将只保存为csv文件。
 
