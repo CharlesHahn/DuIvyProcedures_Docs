@@ -1,5 +1,7 @@
 # Installation
 
+[安装过程的视频讲解](https://www.bilibili.com/video/BV1BH4y1J7m2/)
+
 DuIvyProcedures(DIP)有诸多依赖，比较建议先通过conda或者mamba、或自行设置好环境以及相关的依赖。
 
 ## conda环境设置
@@ -15,8 +17,8 @@ conda create -n DIP python=3.9
 激活conda环境：
 
 ```bash
- conda activate DIP
- ```
+conda activate DIP
+```
 
 安装如下的依赖：
 
