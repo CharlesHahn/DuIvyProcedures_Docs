@@ -16,7 +16,7 @@
 
 `dist_max_cutoff`和`dist_min_cutoff`：定义最大允许的和最小允许的距离阈值，单位为nm。DIP会计算两两碳原子之间的距离，如果距离小于等于`dist_max_cutoff`且大于`dist_min_cutoff`，则认为两原子之间存在碳-碳接触。
 
-`group1`：定义第一个原子组；`group2`：定义第二个组。这里的原子选择的语法完全遵从MDAnalysis的原子选择语法。请参考：https://userguide.mdanalysis.org/1.1.1/selections.html。DIP会从两个原子组中找出碳元素，并计算两组之间满足距离阈值的碳-碳接触的数量。
+`group1`：定义第一个原子组；`group2`：定义第二个组。这里的原子选择的语法完全遵从MDAnalysis的原子选择语法。请参考：https://userguide.mdanalysis.org/2.7.0/selections.html。DIP会从两个原子组中找出碳元素，并计算两组之间满足距离阈值的碳-碳接触的数量。
 
 
 本模块还有三个隐藏参数可以对轨迹做帧的选择：
@@ -29,7 +29,7 @@
 
 这些参数可以指定计算轨迹的起始帧、终止帧（不包含）以及帧的步长。默认情况下，用户不需要设置这些参数，模块会自动分析整个轨迹。
 
-例如我们计算从1000帧开始，到5000帧结束，每隔10帧的DCCM：
+例如我们计算从1000帧开始，到5000帧结束，每隔10帧的数据：
 
 ```yaml
       frame_start: 1000 # start frame index

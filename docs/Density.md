@@ -11,7 +11,7 @@
     atom_selection: protein  # resname *ZIN
 ```
 
-`atom_selection`：选择计算的原子组。这里的原子选择的语法完全遵从MDAnalysis的原子选择语法。请参考：https://userguide.mdanalysis.org/1.1.1/selections.html
+`atom_selection`：选择计算的原子组。这里的原子选择的语法完全遵从MDAnalysis的原子选择语法。请参考：https://userguide.mdanalysis.org/2.7.0/selections.html
 
 本模块还有三个隐藏参数可以对轨迹做帧的选择：
 
@@ -23,7 +23,7 @@
 
 这些参数可以指定计算轨迹的起始帧、终止帧（不包含）以及帧的步长。默认情况下，用户不需要设置这些参数，模块会自动分析整个轨迹。
 
-例如我们计算从1000帧开始，到5000帧结束，每隔10帧的DCCM：
+例如我们计算从1000帧开始，到5000帧结束，每隔10帧的数据：
 
 ```yaml
       frame_start: 1000 # start frame index

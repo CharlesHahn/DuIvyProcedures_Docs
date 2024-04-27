@@ -21,9 +21,9 @@
 
 这里同时列举了基于坐标和基于二面角的PCA分析所需要的参数。
 
-`atom_selection`：原子选择，用于指定需要进行PCA的原子组。如果进行二面角分析的话，则所选的原子组必须包含形成骨架二面角的原子。这里的原子选择的语法完全遵从MDAnalysis的原子选择语法。请参考：https://userguide.mdanalysis.org/1.1.1/selections.html
+`atom_selection`：原子选择，用于指定需要进行PCA的原子组。如果进行二面角分析的话，则所选的原子组必须包含形成骨架二面角的原子。这里的原子选择的语法完全遵从MDAnalysis的原子选择语法。请参考：https://userguide.mdanalysis.org/2.7.0/selections.html
 
-`byType`：指定计算基于坐标的PCA的方式，只有`target`为`coordinates`时有效。有四种选择：`atom`、`res_com`、`res_cog`、`res_coc`。`atom`计算选中的所有原子坐标的PCA；常见的，可以选择CA原子`protein and name CA`来计算蛋白质的PCA；`res_com`计算每个残基的质心的PCA；`res_cog`计算每个残基的几何中心的PCA；`res_coc`计算每个残基的电荷中心的PCA。当为`res_com`、`res_cog`或`res_coc`时，原子选择器应当包含选中的残基的所有原子，否则只会计算某一残基中选中原子的质心、几何中心或者电荷中心的PCA。
+`byType`：指定计算基于坐标的PCA的方式，只有`target`为`coordinates`时有效。有四种选择：`atom`、`res_com`、`res_cog`、`res_coc`。`atom`计算选中的所有原子坐标的PCA；常见的，可以在`atom_selection`中选择CA原子`protein and name CA`来计算蛋白质的PCA；`res_com`计算每个残基的质心的PCA；`res_cog`计算每个残基的几何中心的PCA；`res_coc`计算每个残基的电荷中心的PCA。当为`res_com`、`res_cog`或`res_coc`时，原子选择器应当包含选中的残基的所有原子，否则只会计算某一残基中选中原子的质心、几何中心或者电荷中心的PCA。
 
 `target`：PCA的目标，可以是`coordinates`或`dihedrals`。如果选择`coordinates`，则PCA将基于原子的坐标进行分析；如果选择`dihedrals`，则PCA将基于二面角进行分析。
 

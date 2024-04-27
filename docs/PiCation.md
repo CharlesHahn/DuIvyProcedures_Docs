@@ -49,7 +49,7 @@
 
 `byIndex`：是否通过索引定义可形成PiCation的环和Cation基团。如果`yes`，则`Pi_rings_Index`和`cation_Index`必须提供对应的原子索引。如果`no`, 则DIP自行寻找。
 
-`group4PiRing`和`group4Cation`：定义两个原子组，用于从中寻找芳香环和Cation结构。这两个参数只有当`byIndex`为`no`时才有效。DIP会自动从第一个组中探测芳香环结构，从第二个组中探测Cation结构；并计算两者之间的PiCation；如果需要计算组内的PiCation，可以两个组写成同样的原子组。这里的原子选择的语法完全遵从MDAnalysis的原子选择语法。请参考：https://userguide.mdanalysis.org/1.1.1/selections.html
+`group4PiRing`和`group4Cation`：定义两个原子组，用于从中寻找芳香环和Cation结构。这两个参数只有当`byIndex`为`no`时才有效。DIP会自动从第一个组中探测芳香环结构，从第二个组中探测Cation结构；并计算两者之间的PiCation；如果需要计算组内的PiCation，可以两个组写成同样的原子组。这里的原子选择的语法完全遵从MDAnalysis的原子选择语法。请参考：https://userguide.mdanalysis.org/2.7.0/selections.html
 
 `only_aromatic_rings`：当DIP自动寻找可形成PiStacking的环时，是否只考虑芳香环（环上每一根键都是芳香键），还是考虑所有环。**非芳香环极有可能存在误判，因而需要用户对结果进行检查！**
 
@@ -79,7 +79,7 @@
 
 这些参数可以指定计算轨迹的起始帧、终止帧（不包含）以及帧的步长。默认情况下，用户不需要设置这些参数，模块会自动分析整个轨迹。
 
-例如我们计算从1000帧开始，到5000帧结束，每隔10帧的DCCM：
+例如我们计算从1000帧开始，到5000帧结束，每隔10帧的数据：
 
 ```yaml
       frame_start: 1000 # start frame index

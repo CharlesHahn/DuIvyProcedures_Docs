@@ -46,7 +46,7 @@
 
 `atom_selection`：原子选择，用于指定需要进行tICA的原子组。如果进行二面角分析的话，则所选的原子组必须包含形成骨架二面角的原子。这里的原子选择的语法完全遵从MDAnalysis的原子选择语法。请参考：https://userguide.mdanalysis.org/1.1.1/selections.html
 
-`byType`：指定计算基于坐标的降维的方式，只有`target`为`coordinates`时有效。有四种选择：`atom`、`res_com`、`res_cog`、`res_coc`。`atom`计算选中的所有原子坐标的降维；常见的，可以选择CA原子`protein and name CA`来计算蛋白质的降维；`res_com`计算每个残基的质心的降维；`res_cog`计算每个残基的几何中心的降维；`res_coc`计算每个残基的电荷中心的降维。当为`res_com`、`res_cog`或`res_coc`时，原子选择器应当包含选中的残基的所有原子，否则只会计算某一残基中选中原子的质心、几何中心或者电荷中心的降维。
+`byType`：指定计算基于坐标的降维的方式，只有`target`为`coordinates`时有效。有四种选择：`atom`、`res_com`、`res_cog`、`res_coc`。`atom`计算选中的所有原子坐标的降维；常见的，可以在`atom_selection`中选择CA原子`protein and name CA`来计算蛋白质的降维；`res_com`计算每个残基的质心的降维；`res_cog`计算每个残基的几何中心的降维；`res_coc`计算每个残基的电荷中心的降维。当为`res_com`、`res_cog`或`res_coc`时，原子选择器应当包含选中的残基的所有原子，否则只会计算某一残基中选中原子的质心、几何中心或者电荷中心的降维。
 
 `coordinate_fit`：是否对原子坐标进行点云fit。如果选择`yes`，则会对原子坐标进行fit，以消除坐标的扰动。
 
@@ -79,7 +79,7 @@
 
 这些参数可以指定计算轨迹的起始帧、终止帧（不包含）以及帧的步长。默认情况下，用户不需要设置这些参数，模块会自动分析整个轨迹。
 
-例如我们计算从1000帧开始，到5000帧结束，每隔10帧的DCCM：
+例如我们计算从1000帧开始，到5000帧结束，每隔10帧的数据：
 
 ```yaml
       frame_start: 1000 # start frame index
@@ -181,7 +181,7 @@ vamp2 score == 3.5134687005728185
 ![network](static/MSM_Network.png)
 
 
-请注意，如果参数不合适，本模块是会报错终止，这是正常现象；请仔细阅读相关资料并调整参数。
+请注意，如果参数不合适或其它情况导致无法正常构建有效的MSM，本模块是会报错终止，这是正常现象；请仔细阅读相关资料并调整参数。
 
 
 ## References

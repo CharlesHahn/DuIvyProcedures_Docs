@@ -14,9 +14,9 @@
     range: 4 # nm
 ```
 
-`center_group`：计算RDF的中心组，即RDF的中心。这里的原子选择的语法完全遵从MDAnalysis的原子选择语法。请参考：https://userguide.mdanalysis.org/1.1.1/selections.html
+`center_group`：计算RDF的中心组，即RDF的中心。这里的原子选择的语法完全遵从MDAnalysis的原子选择语法。请参考：https://userguide.mdanalysis.org/2.7.0/selections.html
 
-`calc_group`：计算RDF的组，通常可以是连续的溶液相。这里的原子选择的语法完全遵从MDAnalysis的原子选择语法。请参考：https://userguide.mdanalysis.org/1.1.1/selections.html
+`calc_group`：计算RDF的组，通常可以是连续的溶液相。这里的原子选择的语法完全遵从MDAnalysis的原子选择语法。请参考：https://userguide.mdanalysis.org/2.7.0/selections.html
 
 `range`：RDF计算的范围，即RDF计算的半径，单位为纳米。
 
@@ -30,7 +30,7 @@
 
 这些参数可以指定计算轨迹的起始帧、终止帧（不包含）以及帧的步长。默认情况下，用户不需要设置这些参数，模块会自动分析整个轨迹。
 
-例如我们计算从1000帧开始，到5000帧结束，每隔10帧的DCCM：
+例如我们计算从1000帧开始，到5000帧结束，每隔10帧的数据：
 
 ```yaml
       frame_start: 1000 # start frame index

@@ -25,7 +25,6 @@
 
 `gmx_parm`参数下面可以写一些gmx的参数；由于此模块涉及到`gmx hbond`、`gmx distance`和`gmx angle`命令，s所以这里只允许6个参数：`a`、`r`、`da`这三个参数只会被连接到`gmx hbond`命令中，而`b`、`e`、`dt`参数会被连接到全部三个命令中；其余的参数都将被忽略。
 
-**请注意，本模块对GROMACS2024不适用，2024改了命令参数**。
 
 ## Output
 

@@ -20,7 +20,7 @@
 
 `byType`：选择计算的类型，可选`Mass`（质量），`Number`（数量），`Charge`（电荷）。
 
-`byIndex`：选择使用GROMACS的索引或MDAnalysis的选择语句。如果设置"no", 下面`groups`参数的值将被认为是MDAnalysis的选择语句（这里的原子选择的语法完全遵从MDAnalysis的原子选择语法。请参考：https://userguide.mdanalysis.org/1.1.1/selections.html）；如果设置"yes"，则下面的groups参数的值将被认为是GROMACS的索引组的名字，当然这个名字需要和index文件中的对应上。
+`byIndex`：选择使用GROMACS的索引或MDAnalysis的选择语句。如果设置"no", 下面`groups`参数的值将被认为是MDAnalysis的选择语句（这里的原子选择的语法完全遵从MDAnalysis的原子选择语法。请参考：https://userguide.mdanalysis.org/2.7.0/selections.html）；如果设置"yes"，则下面的groups参数的值将被认为是GROMACS的索引组的名字，当然这个名字需要和index文件中的对应上，且请组名不要以数字开头。
 
 `groups`：选择计算的原子组，可以同时声明多个组，用逗号分隔。
 
@@ -40,7 +40,7 @@
 
 这些参数可以指定计算轨迹的起始帧、终止帧（不包含）以及帧的步长。默认情况下，用户不需要设置这些参数，模块会自动分析整个轨迹。
 
-例如我们计算从1000帧开始，到5000帧结束，每隔10帧的DCCM：
+例如我们计算从1000帧开始，到5000帧结束，每隔10帧的数据：
 
 ```yaml
       frame_start: 1000 # start frame index
@@ -50,9 +50,6 @@
 
 如果三个参数中只需要设置一个或两个，其余的参数都可以省略。
 
-本模块对DCCM的计算过程做了一些改进，使得其计算耗时基本上不会随着原子数目和帧数的增加而增加太多，但是较大的原子数量会导致xpm文件非常大，保存成xpm文件就会是比较耗时的事情；如此，可以通过设置不保存xpm以节省时间。
-
-如果保存了XPM文件，则还可以通过DuIvyTools（DIT，DIP的依赖之一）重新可视化DCCM，微调图片样式等。
 
 ## Output
 

@@ -22,7 +22,7 @@
       intermittency: 0  # allow 0 frame intermittency
 ```
 
-`donor_group`和`acceptor_group`分别指定氢键的接受者和供体原子组，可以直接写明参与氢键的原子，也可以如示例一样写整体的原子组。这里的原子选择的语法完全遵从MDAnalysis的原子选择语法。请参考：https://userguide.mdanalysis.org/1.1.1/selections.html
+`donor_group`和`acceptor_group`分别指定氢键的接受者和供体原子组，可以直接写明参与氢键的原子，也可以如示例一样写整体的原子组。这里的原子选择的语法完全遵从MDAnalysis的原子选择语法。请参考：https://userguide.mdanalysis.org/2.7.0/selections.html
 
 `update_selection`指定是否需要每一帧都刷新设置的原子组，如果原子组选择的语句中有`around`等动态选择语句，则应该将此选项设置为`yes`。一般不涉及动态选择的情况下，建议将此选项设置为`no`，以大幅提高计算速度。
 
@@ -54,7 +54,7 @@
 
 这些参数可以指定计算轨迹的起始帧、终止帧（不包含）以及帧的步长。默认情况下，用户不需要设置这些参数，模块会自动分析整个轨迹。
 
-例如我们计算从1000帧开始，到5000帧结束，每隔10帧的DCCM：
+例如我们计算从1000帧开始，到5000帧结束，每隔10帧的数据：
 
 ```yaml
       frame_start: 1000 # start frame index
