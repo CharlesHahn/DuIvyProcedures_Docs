@@ -20,8 +20,8 @@
 project = "DuIvyProcedures"
 copyright = "2024, CharlesHahn, 杜艾维, 杜若"
 author = "CharlesHahn, 杜艾维, 杜若, 韩银磊"
-version = "1.0.0"
-release = "1.0.0"
+version = "1.0.3"
+release = "1.0.3"
 
 
 # -- General configuration ---------------------------------------------------
