@@ -20,7 +20,7 @@ conda create -n DIP python=3.9
 conda activate DIP
 ```
 
-安装如下的依赖：
+DIP有如下的依赖：
 
 ```txt
 colorama           0.4.6
@@ -45,16 +45,10 @@ deeptime           0.4.4  # tICA
 umap-learn         0.5.5  # umap
 ```
 
-首先通过conda安装rdkit：
+所有依赖包括rdkit都可以通过pip安装：
 
 ```bash
-conda install -c conda-forge rdkit
-```
-
-然后安装其他依赖：
-
-```bash
-pip install -i https://pypi.tuna.tsinghua.edu.cn/simple WMI psutil pycryptodome PyYAML numpy pandas matplotlib MDAnalysis DuIvyTools scikit-learn scipy seaborn igraph deeptime umap-learn pycairo colorama
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple rdkit WMI psutil pycryptodome PyYAML numpy pandas matplotlib MDAnalysis DuIvyTools scikit-learn scipy seaborn igraph deeptime umap-learn pycairo colorama
 ```
 
 ## GROMACS设置

@@ -34,6 +34,8 @@
 
 **请注意，如果选择`min`类型，则计算会非常慢！** 可结合后面的帧选择参数来减少要计算的帧数。
 
+自v1.0.3开始，`type_select`支持`res_com`、`res_cog`、`res_coc`、`res_min`、以及`atom`五种参数，同时之前的`center`、`atom`、`min`参数也继续支持，其中`center`等同于`res_com`、`min`等同于`res_min`。`res_com`、`res_cog`、`res_coc`以及`res_min`分别表示使用残基的重心、残基的几何中心、残基的电荷中心、残基对原子之间的最小距离去计算距离矩阵。
+
 如果蛋白质较大且帧数较多，建议结合后面的帧选择参数来减少计算量，否则有内存不够的可能。
 
 `atom_selection`: 选择用于计算残基接触距离矩阵的原子组。如果`type_select`为`center`，则会直接按照残基计算质心；如果`type_select`为`atom`，则会按照此原子的坐标计算残基距离，因而不建议同时选择一个残基的多个原子；如果`type_select`为`min`，则会按照残基计算。

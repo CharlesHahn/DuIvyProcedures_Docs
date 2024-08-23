@@ -67,6 +67,8 @@ DIP会将GROMACS的输出文件转化为蛋白质二级结构的热图，以及�
 
 ![DSSP_sc](static/gmx_DSSP_protein_sc.png)
 
+还会输出蛋白质二级结构含量随残基变化的堆积折线图，这里就不展示了。
+
 ## References
 
 如果您使用了DIP的本分析模块，请一定引用GROMACS模拟引擎、DuIvyTools(https://zenodo.org/doi/10.5281/zenodo.6339993)，以及合理引用本文档(https://zenodo.org/doi/10.5281/zenodo.10646113)。
