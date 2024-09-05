@@ -9,9 +9,21 @@
 ```yaml
 - SaltBridge:
     dist_cutoff: 0.32 # nm
+    ## ## below atomnames should be adopted to GORMOS forcefield
+    ## ## modification need for application !!!
+    ## NH3_atomnames: ["N", "H1", "H2", "H3"]
+    ## COO_atomnames: ["C", "O1", "O2"]
+    ## Backbone_atomnames: ["H", "N", "CA", "C", "O"]
+    ## ## below atomnames should be adopted to AMBER forcefield
+    ## ## modification need for application !!!
     NH3_atomnames: ["N", "H1", "H2", "H3"]
-    COO_atomnames: ["C", "O1", "O2"]
-    Backbone_atomnames: ["H", "N", "CA", "C", "O"]
+    COO_atomnames: ["C", "OC1", "OC2"]
+    Backbone_atomnames: ["H", "N", "CA", "HA", "C", "O"]
+    ## ## below atomnames should be adopted to CHARMM forcefield
+    ## ## modification need for application !!!
+    ## NH3_atomnames: ["N", "H1", "H2", "H3"]
+    ## COO_atomnames: ["C", "OT1", "OT2"]
+    ## Backbone_atomnames: ["HN", "N", "CA", "HA", "C", "O"]
     ignore_chain_end: no
     byIndex: yes
     group: protein
@@ -31,7 +43,7 @@
 
 `positive_Index`和`negative_Index`: 这两个参数都需要以列表的形式编写，列表的每一个元素都是一个可供形成盐桥的基团的原子编号（从1开始）。这里示例中定义了五个带正电的基团和五个带负电的基团。
 
-如果`byIndex`为`no`的话，则DIP会根据体系的电荷去寻找可能形成盐桥的原子组。但是考虑到不同的力场条件下原子的名称可能不同，并且未形成肽键的C或者N端也有可能形成盐桥。因而这里需要用户根据使用的力场去填写一下COO-和NH3+的原子名称，以帮助程序正确判断所有带电基团。
+如果`byIndex`为`no`的话，则DIP会根据体系的电荷去寻找可能形成盐桥的原子组。但是考虑到不同的力场条件下原子的名称可能不同，并且未形成肽键的C或者N端也有可能形成盐桥。**因而这里需要用户根据使用的力场去填写一下COO-和NH3+的原子名称，以帮助程序正确判断所有带电基团。** 这里默认提供了大概适用于三类主要力场的原子名称，但是不一定准确，需要根据具体的体系原子命名进行修改。
 
 `group`: 如果`byIndex`为`no`，则需要指定一个组名，DIP会从该原子组中去寻找可能形成盐桥的基团。示例中默认是`protein`，即从蛋白质中寻找可能形成盐桥的基团。这里的原子选择的语法完全遵从MDAnalysis的原子选择语法。请参考：https://userguide.mdanalysis.org/2.7.0/selections.html
 

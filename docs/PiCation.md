@@ -17,9 +17,21 @@
     only_aromatic_rings: no
     other_ring_max_atom_num: 7
     planarity_cutoff: 5  ## degree, 5 deg for planar
+    ## ## below atomnames should be adopted to GORMOS forcefield
+    ## ## modification need for application !!!
+    ## NH3_atomnames: ["N", "H1", "H2", "H3"]
+    ## COO_atomnames: ["C", "O1", "O2"]
+    ## Backbone_atomnames: ["H", "N", "CA", "C", "O"]
+    ## ## below atomnames should be adopted to AMBER forcefield
+    ## ## modification need for application !!!
     NH3_atomnames: ["N", "H1", "H2", "H3"]
-    COO_atomnames: ["C", "O1", "O2"]
-    Backbone_atomnames: ["H", "N", "CA", "C", "O"]
+    COO_atomnames: ["C", "OC1", "OC2"]
+    Backbone_atomnames: ["H", "N", "CA", "HA", "C", "O"]
+    ## ## below atomnames should be adopted to CHARMM forcefield
+    ## ## modification need for application !!!
+    ## NH3_atomnames: ["N", "H1", "H2", "H3"]
+    ## COO_atomnames: ["C", "OT1", "OT2"]
+    ## Backbone_atomnames: ["HN", "N", "CA", "HA", "C", "O"]
     ignore_chain_end: no
     Pi_rings_Index: [[ 24,  25,  27,  29,  31,  33], 
       [249, 250, 252, 254, 256, 258],
@@ -57,7 +69,7 @@
 
 `planarity_cutoff`：当DIP自动寻找可形成PiStacking的环时，对于没有被判别为芳香环的环，其允许的平面度；DIP会计算环上所有原子与其邻居原子的法向，任意两个法向之间的夹角需要小于这里设定的值才会被判别为平面环，并被DIP当作可形成PiStacking的环加以计算。**请注意，平面环并不等于芳香环，还请自行根据输出的环的pdb文件加以检查！**
 
-如果`byIndex`为`no`的话，则DIP会根据体系的电荷去寻找可能形成盐桥的原子组。但是考虑到不同的力场条件下原子的名称可能不同，并且未形成肽键的C或者N端也有可能形成盐桥。因而这里可能需要用户根据使用的力场去填写一下COO-和NH3+的原子名称，以帮助程序正确判断所有带电基团。
+如果`byIndex`为`no`的话，则DIP会根据体系的电荷去寻找可能形成盐桥的原子组。但是考虑到不同的力场条件下原子的名称可能不同，并且未形成肽键的C或者N端也有可能形成盐桥。**因而这里可能需要用户根据使用的力场去填写一下COO-和NH3+的原子名称，以帮助程序正确判断所有带电基团。** 这里默认提供了大概适用于三类主要力场的原子名称，但是不一定准确，需要根据具体的体系原子命名进行修改。
 
 `ignore_chain_end`：是否忽略链端残基，设置为`yes`则程序会忽略链端残基，只计算链中段的带电基团。
 
