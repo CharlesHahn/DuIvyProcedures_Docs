@@ -1,8 +1,8 @@
 # Hbond
 
-本模块执行氢键的计算，包括氢键的数量、时间占有率、氢键形成的平均距离和角度等。
+This module performs hydrogen bond calculations, including the number of hydrogen bonds, time occupancy, average distance and angle of hydrogen bond formation, etc.
 
-使用本模块前请注意[前置处理](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7)已经完成！
+Before using this module, please ensure that the [preprocessing](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7) has been completed!
 
 ## Input YAML
 
@@ -22,29 +22,29 @@
       intermittency: 0  # allow 0 frame intermittency
 ```
 
-`donor_group`和`acceptor_group`分别指定氢键的接受者和供体原子组，可以直接写明参与氢键的原子，也可以如示例一样写整体的原子组。这里的原子选择的语法完全遵从MDAnalysis的原子选择语法。请参考：https://userguide.mdanalysis.org/2.7.0/selections.html
+`donor_group` and `acceptor_group` specify the donor and acceptor atom groups for hydrogen bonds respectively. You can directly specify atoms involved in hydrogen bonds, or write overall atom groups as shown in the example. The atom selection syntax here follows MDAnalysis atom selection syntax. Please refer to: https://userguide.mdanalysis.org/2.7.0/selections.html
 
-`update_selection`指定是否需要每一帧都刷新设置的原子组，如果原子组选择的语句中有`around`等动态选择语句，则应该将此选项设置为`yes`。一般不涉及动态选择的情况下，建议将此选项设置为`no`，以大幅提高计算速度。
+`update_selection` specifies whether to refresh the set atom group for each frame. If the atom group selection statement contains dynamic selection statements like `around`, this option should be set to `yes`. In cases not involving dynamic selection, it is recommended to set this option to `no` to significantly improve calculation speed.
 
-`d_h_cutoff`：体系会从`donor_group`中选取符合此阈值的供体-氢原子，以计算氢键。
+`d_h_cutoff`: The system will select donor-hydrogen atoms from `donor_group` that meet this threshold for hydrogen bond calculation.
 
-`d_a_cutoff`：氢键判定条件之一，供体和受体原子的距离阈值，小于此阈值则形成氢键。
+`d_a_cutoff`: One of the hydrogen bond determination criteria, the distance threshold between donor and acceptor atoms. If less than this threshold, a hydrogen bond is formed.
 
-`d_h_a_angle_cutoff`：氢键判定条件之一，供体-氢-受体角度阈值，大于此阈值则形成氢键。
+`d_h_a_angle_cutoff`: One of the hydrogen bond determination criteria, the donor-hydrogen-acceptor angle threshold. If greater than this threshold, a hydrogen bond is formed.
 
-`top2show`是指展示前面多少个占有率最高的氢键数量，默认是10，可以根据需要调整。
+`top2show` specifies how many hydrogen bonds with the highest occupancy to display, default is 10, can be adjusted as needed.
 
-如果只需要计算氢键数量，或者当预估的氢键数量特别大时（例如计算蛋白质和水的氢键），可以将`only_calc_number`设置为`yes`，也即只计算氢键数量，而不计算其他参数
+If you only need to calculate the number of hydrogen bonds, or when the estimated number of hydrogen bonds is very large (e.g., calculating hydrogen bonds between protein and water), you can set `only_calc_number` to `yes`, which means only calculating the number of hydrogen bonds without calculating other parameters.
 
-`calc_lifetime`：是否计算氢键的生命周期。如果设置为`yes`，则会对占有率最高的`top2show`个氢键计算生命周期。
+`calc_lifetime`: Whether to calculate the lifetime of hydrogen bonds. If set to `yes`, the lifetime of the top `top2show` hydrogen bonds with highest occupancy will be calculated.
 
-`tau_max`：生命周期的最大时间，单位为帧。计算氢键生命周期的过程中会计算从t0时刻开始，`tau_max`帧内，氢键继续存在的概率。此值设置越大，则计算的窗口越大。
+`tau_max`: Maximum time for lifetime calculation, in frames. During lifetime calculation, the probability that the hydrogen bond continues to exist within `tau_max` frames from time t0 will be calculated. The larger this value, the larger the calculation window.
 
-`window_step`：生命周期的窗口平移步长，单位为帧。
+`window_step`: Window translation step for lifetime, in frames.
 
-`intermittency`：允许的帧间隔，即允许多少帧没有发生氢键仍旧视为氢键；默认为0，即必须连续发生才被视为氢键。
+`intermittency`: Allowed frame intermittency, i.e., how many frames without hydrogen bond formation are still considered as hydrogen bond; default is 0, meaning hydrogen bond must be continuous to be counted.
 
-本模块还有三个隐藏参数可以对轨迹做帧的选择：
+This module also has three hidden parameters for frame selection:
 
 ```yaml
       frame_start:  # start frame index
@@ -52,9 +52,9 @@
       frame_step:  # frame index step, default=1
 ```
 
-这些参数可以指定计算轨迹的起始帧、终止帧（不包含）以及帧的步长。默认情况下，用户不需要设置这些参数，模块会自动分析整个轨迹。
+These parameters can specify the start frame, end frame (exclusive), and frame step for trajectory calculation. By default, users do not need to set these parameters, and the module will automatically analyze the entire trajectory.
 
-例如我们计算从1000帧开始，到5000帧结束，每隔10帧的数据：
+For example, to calculate from frame 1000 to frame 5000, every 10 frames:
 
 ```yaml
       frame_start: 1000 # start frame index
@@ -62,21 +62,21 @@
       frame_step: 10 # frame index step, default=1
 ```
 
-如果三个参数中只需要设置一个或两个，其余的参数都可以省略。
+If only one or two of the three parameters need to be set, the others can be omitted.
 
 ## Output
 
-DIP会计算并可视化本组件输出的氢键数量图和氢键占有率图：
+DIP will calculate and visualize the hydrogen bond count plot and hydrogen bond occupancy plot output by this module:
 
 ![hbond_number](static/hbond_hbnum.png)
 
 ![hbond_map](static/hbond_hbmap.png)
 
-同时还会对占有率最高的几个氢键进行占有率的可视化：
+It will also visualize the occupancy of the top hydrogen bonds:
 
 ![hbond_top](static/hbond_hbmap_top10.png)
 
-DIP会统计所有氢键的时间占有率、形成了氢键的平均距离和平均角度，并输出到csv文件中:
+DIP will count the time occupancy, average distance and average angle of all hydrogen bonds, and output to a CSV file:
 
 ```csv
 id,donor@hydrogen...acceptor,occupancy(%),Present/Frames,Distance Ave(nm),Distance Std.err(nm),Angle Ave(deg),Angle Std.err(deg)
@@ -92,16 +92,16 @@ id,donor@hydrogen...acceptor,occupancy(%),Present/Frames,Distance Ave(nm),Distan
 9,ASP7N(70)@ASP7H(71)...GLU6OE1(66),6.90,690/10001,0.3123,0.0203,148.82,13.48 
 ```
 
-氢键名称由[供体@氢...受体]组成, 每部分的命名含义如下：残基名字、残基编号、原子、括号里面是原子编号。
+The hydrogen bond name consists of [donor@hydrogen...acceptor]. Each part has the following meaning: residue name, residue number, atom, with atom number in parentheses.
 
-如果计算的氢键的生命周期，则氢键的自相关函数会被输出并可视化：
+If hydrogen bond lifetime is calculated, the autocorrelation function will be output and visualized:
 
 ![hbond_lifetime](static/hbond_top10_lifetime.png)
 
-同时自相关函数的积分，也即生命周期，也会被输出到csv文件中。请注意，这里的生命周期是直接对自相关函数数据进行simpson积分得到的，准确度一般。
+The integral of the autocorrelation function, i.e., the lifetime, will also be output to a CSV file. Note that the lifetime here is obtained by direct Simpson integration of the autocorrelation function data, with moderate accuracy.
 
-如果观察到在自相关函数的自变量范围内函数值还没有降到0，说明应当适当调大`tau_max`参数以获得更准确的生命周期积分。
+If you observe that the function value has not dropped to 0 within the range of the autocorrelation function's independent variable, it indicates that you should appropriately increase the `tau_max` parameter to obtain a more accurate lifetime integral.
 
 ## References
 
-如果您使用了DIP的本分析模块，请一定引用MDAnalysis、DuIvyTools(https://zenodo.org/doi/10.5281/zenodo.6339993)，以及合理引用本文档(https://zenodo.org/doi/10.5281/zenodo.10646113)。
+If you use this analysis module from DIP, please cite MDAnalysis, DuIvyTools (https://zenodo.org/doi/10.5281/zenodo.6339993), and properly cite this documentation (https://zenodo.org/doi/10.5281/zenodo.10646113).

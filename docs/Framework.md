@@ -1,59 +1,59 @@
 # FrameWork 
 
-DIP由几个部分组成：分析模块、控制模块、输入控制模块。
+DIP consists of several parts: analysis modules, control modules, and input control modules.
 
-## 分析模块
+## Analysis Modules
 
-分析模块主要是执行分析的模块，包含了执行各种分析以及产生分析结果的代码。
+Analysis modules are mainly modules that execute analyses, containing code for performing various analyses and generating analysis results.
 
 
-## 控制模块
+## Control Modules
 
-控制模块包含了串行执行各种分析、路径控制、参数控制、日志记录等功能。
+Control modules contain functions for serial execution of various analyses, path control, parameter control, log recording, etc.
 
-## 输入控制模块
+## Input Control Modules
 
-DIP使用YAML格式的文件来存储用户输入的分析模块的参数信息。该文件中包含了GROMACS路径、轨迹文件、拓扑文件，需要执行分析的路径，以及需要执行的分析任务的名字及相关参数等情况。
+DIP uses YAML format files to store parameter information for user-input analysis modules. This file contains GROMACS paths, trajectory files, topology files, paths where analyses need to be executed, and the names and related parameters of analysis tasks to be executed.
 
-**请注意！DIP不会对用户的轨迹进行周期性矫正，请用户先自行校正轨迹，保证分子完整性、相互之间位置的合理性！**
+**Please note! DIP will not perform periodic correction on user trajectories. Please correct trajectories yourself first to ensure molecular integrity and reasonable relative positions!**
 
-### 参数文件的产生
+### Generating Parameter Files
 
-用户可以通过如下命令产生一个包含了全部分析模块的参数文件：
+Users can generate a parameter file containing all analysis modules with the following command:
 
 ```bash
 dip conf -o dip.yaml
 ```
 
-或者可以通过`-t`或者`-d`命令指定要进行的分析手段或者待分析的路径：
+Or you can specify the analysis methods to perform or the paths to analyze through `-t` or `-d` commands:
 
 ```bash
 dip conf -o dip.yaml -t gmx_RMSD DCCM -d MD0
 ```
 
-### 参数文件的修改
+### Modifying Parameter Files
 
-一般来说，默认生成的参数文件**不是开箱可用的**。需要用户根据实际情况进行修改。
+Generally, the default generated parameter file **is not ready to use out of the box**. Users need to modify it according to actual situations.
 
-常见的需要修改的地方包括：gmx可执行程序的路径、轨迹文件和拓扑文件的名字、执行分析的路径（该路径下必须包含设置的轨迹文件和拓扑文件）、以及各种分析模块的输入参数等。
+Common places that need modification include: the path to the gmx executable, names of trajectory files and topology files, paths for executing analyses (these paths must contain the set trajectory files and topology files), and input parameters for various analysis modules.
 
-请参照下方输入参数yaml文件解析，以及对应分析模块的输入参数部分。
+Please refer to the input parameter yaml file parsing below and the input parameters section for corresponding analysis modules.
 
 
-### 参数文件的使用
+### Using Parameter Files
 
-要执行分析，请运行：
+To execute analyses, please run:
 
 ```bash
 dip run -f dip.yaml
 ```
 
-DIP会按照分析路径和分析模块的顺序，依次执行分析任务，并将结果保存在对应的分析目录下。
+DIP will execute analysis tasks in order of analysis paths and analysis modules, and save results in corresponding analysis directories.
 
-### 用户输入的yaml文件内容解析
+### User Input YAML File Content Parsing
 
 
-用于用户输入的YAML文件至少需要包含以下三个部分：
+The YAML file for user input needs to contain at least the following three parts:
 
 ```yaml
 Path:
@@ -76,13 +76,13 @@ Tasks:
         tu: ns
 ```
 
-Path部分用于指定分析的路径，可以指定多个路径；DIP会依次对每个路径下的轨迹进行分析；
+The Path section is used to specify analysis paths; multiple paths can be specified; DIP will analyze trajectories under each path in sequence;
 
-Conf部分用于配置GROMACS的路径、输入文件名、索引文件名等信息；不同分析路径下的这些文件需要名字一致。例如两个不同的模拟体系，MD0和MD1，在其目录下的轨迹文件的名字都需要是md.xtc，才能被DIP读取和分析。
+The Conf section is used to configure GROMACS path, input file names, index file names, etc.; these files under different analysis paths need to have consistent names. For example, for two different simulation systems, MD0 and MD1, the trajectory files in their directories both need to be named md.xtc to be read and analyzed by DIP.
 
-对于不依赖GROMACS的分析任务（分析模块不以`gmx_`开头），轨迹文件和拓扑文件等可以是其它的格式，比如amber格式的轨迹和拓扑文件，DIP同样能识别。
+For analysis tasks that do not depend on GROMACS (analysis modules not starting with `gmx_`), trajectory files and topology files can be in other formats, such as Amber format trajectory and topology files, which DIP can also recognize.
 
-Conf部分自v1.0.3开始还能添加一个控制输出图片格式的参数`fig`，默认情况下输出的图片为png格式，可以将`fig`参数设置为`pdf`、`svg`等格式，即可输出多种格式的图片。例如：
+Starting from v1.0.3, the Conf section can also add a parameter `fig` to control output image format. By default, output images are in PNG format. You can set the `fig` parameter to `pdf`, `svg`, etc. to output images in multiple formats. For example:
 
 ```yaml
 Conf:
@@ -93,11 +93,11 @@ Conf:
   fig: pdf
 ```
 
-Tasks部分用于指定具体的分析任务，每个任务都有自己的参数，具体的分析任务由分析模块的具体实现决定。
+The Tasks section is used to specify specific analysis tasks. Each task has its own parameters, and specific analysis tasks are determined by the specific implementation of analysis modules.
 
-Tasks部分的第一行是分析模块的名字，再下面是隶属于该分析模块的参数。例如这里的gmx_RMSD模块下面需要设定fit_group等参数。
+The first line of the Tasks section is the name of the analysis module, and below are parameters belonging to that analysis module. For example, the gmx_RMSD module here needs parameters like fit_group to be set.
 
-这里的gmx_parm参数下面可以写入该分析模块所依赖的gmx命令的相关参数。例如gmx rmsd命令可以有`-b -e -tu`等参数，那么在这里可以设置为:
+The gmx_parm parameter here can contain relevant parameters for the gmx command that this analysis module depends on. For example, the gmx rmsd command can have parameters like `-b -e -tu`, which can be set here as:
 
 ```yaml
 gmx_parm:
@@ -106,9 +106,9 @@ gmx_parm:
   tu: ns
 ```
 
-DIP会直接将用户设置的gmx_parm下面的参数连接到gmx命令中进行执行。当然，`gmx_parm`参数不是必须的，如果您不需要添加额外的参数的话。
+DIP will directly append the parameters set under gmx_parm to the gmx command for execution. Of course, the `gmx_parm` parameter is not mandatory if you don't need to add extra parameters.
 
-每一个分析模块下面都有一个隐藏参数：`mkdir`。如果我们同时执行两个不同参数的同种分析，则需要将分析结果放置在不同的文件夹中，因而`mkdir`参数可以指定一个文件夹名，将该分析结果放置在该文件夹下，默认情况下，`mkdir`的参数就是该分析模块的名字。
+Each analysis module has a hidden parameter: `mkdir`. If we execute the same analysis with two different parameters simultaneously, the analysis results need to be placed in different folders. Therefore, the `mkdir` parameter can specify a folder name to place the analysis results in that folder. By default, the `mkdir` parameter is the name of the analysis module.
 
 ```yaml
 Tasks:
@@ -125,11 +125,11 @@ Tasks:
       rmsd_matrix: yes
 ```
 
-所有依赖GROMACS的分析模块，其中的选组参数的值，都必须是模拟体系中自然有的分组，如`System`、`Protein`、`Backbone`等、或者是用户通过GROMACS索引文件定义的组。
+For all analysis modules that depend on GROMACS, the values of group selection parameters must be groups that naturally exist in the simulation system, such as `System`, `Protein`, `Backbone`, etc., or groups defined by users through GROMACS index files.
 
-**请注意，所有组的名字都必须以英文开头，不要有空格，不能以数字开头！** 数字开头的组，如`6Lig`会被GROMACS识别成第6个组而不是6Lig组。
+**Please note that all group names must start with English letters, have no spaces, and cannot start with numbers!** Groups starting with numbers, such as `6Lig`, will be recognized by GROMACS as the 6th group instead of the 6Lig group.
 
-所有不依赖GROMACS的分析模块（不以`gmx_`开头）还有三个隐藏参数可以对轨迹做帧的选择：
+All analysis modules that do not depend on GROMACS (not starting with `gmx_`) also have three hidden parameters for frame selection:
 
 ```yaml
       frame_start:  # start frame index
@@ -137,9 +137,9 @@ Tasks:
       frame_step:  # frame index step, default=1
 ```
 
-这些参数可以指定计算轨迹的起始帧、终止帧（不包含）以及帧的步长。默认情况下，用户不需要设置这些参数，模块会自动分析整个轨迹。
+These parameters can specify the start frame, end frame (exclusive), and frame step for trajectory calculation. By default, users do not need to set these parameters, and the module will automatically analyze the entire trajectory.
 
-例如我们计算从1000帧开始，到5000帧结束，每隔10帧的数据：
+For example, to calculate from frame 1000 to frame 5000, every 10 frames:
 
 ```yaml
       frame_start: 1000 # start frame index
@@ -147,17 +147,17 @@ Tasks:
       frame_step: 10 # frame index step, default=1
 ```
 
-如果三个参数中只需要设置一个或两个，其余的参数都可以省略。
+If only one or two of the three parameters need to be set, the others can be omitted.
 
-其他的分析模块的参数也类似，具体的分析模块的参数请参考具体的分析模块的文档。
+Parameters for other analysis modules are similar. Please refer to the documentation for specific analysis modules.
 
 
-## 前置处理
+## Preprocessing
 
-有一些处理需要用户在使用DIP运行分析之前自行操作。
+Some processing needs to be done by users themselves before running analysis with DIP.
 
-1. 如果用户使用基于gmx的组件，则需要自行准备好拓扑文件和轨迹文件、以及索引文件。请注意，轨迹文件需要**自行进行周期性矫正**，保证分子完整性、相互之间位置的合理性。同时索引文件里面的分组以及名字都需要自行生成。
+1. If users use gmx-based modules, they need to prepare topology files and trajectory files, as well as index files themselves. Please note that trajectory files need **periodic correction by users themselves** to ensure molecular integrity and reasonable relative positions. Also, groups and names in index files need to be generated by users themselves.
 
-2. 如果用户使用基于MDAnalysis的组件，则需要自行准备好拓扑文件和轨迹文件。请注意，轨迹文件需要**自行进行周期性矫正**，保证分子完整性、相互之间位置的合理性。**拓扑文件和轨迹文件里面的原子数目必须一一对应上**，不然MDAnalysis无法读取。
+2. If users use MDAnalysis-based modules, they need to prepare topology files and trajectory files themselves. Please note that trajectory files need **periodic correction by users themselves** to ensure molecular integrity and reasonable relative positions. **The number of atoms in topology files and trajectory files must correspond one-to-one**, otherwise MDAnalysis cannot read them.
 
-3. 由于GROMACS2024在诸多分析命令上有改变，所以DIP中依赖GROMACS的分析模块可能不适用于GROMACS2024，建议是GROMACS2019到2023版本。另外如果是GROMACS2022及以下版本，运行DIP的`gmx_DSSP`组件依赖于`gmx do_dssp`命令，因而请用户自行确保DSSP已经正确安装且`gmx do_dssp`命令可用。运行`PiStacking`组件时，如果需要DIP自动寻找可能的芳香环，请确保rdkit已经正确安装并可调用。
+3. Since GROMACS 2024 has many changes in analysis commands, analysis modules in DIP that depend on GROMACS may not be suitable for GROMACS 2024. GROMACS 2019 to 2023 versions are recommended. Additionally, for GROMACS 2022 and earlier versions, running DIP's `gmx_DSSP` module depends on the `gmx do_dssp` command, so users need to ensure that DSSP is properly installed and the `gmx do_dssp` command is available. When running the `PiStacking` module, if DIP needs to automatically find possible aromatic rings, please ensure that rdkit is properly installed and callable.

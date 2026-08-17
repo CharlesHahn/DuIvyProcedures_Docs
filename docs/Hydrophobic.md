@@ -1,8 +1,8 @@
 # Hydrophobic Contact
 
-此模块计算两个组分之间的C-C接触数目。虽然分析模块名字写的是疏水相互作用，但是实际上疏水相互作用是一种熵的效应，因而这里采用碳-碳原子之间的接触来作为疏水相互作用的一种粗陋衡量。
+This module calculates the number of C-C contacts between two components. Although the analysis module is named hydrophobic interaction, hydrophobic interaction is actually an entropy effect. Therefore, here we use carbon-carbon atom contacts as a rough measure of hydrophobic interaction.
 
-使用本模块前请注意[前置处理](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7)已经完成！
+Before using this module, please ensure that the [preprocessing](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7) has been completed!
 
 ## Input YAML
 
@@ -14,12 +14,12 @@
     group2: resname *ZIN
 ```
 
-`dist_max_cutoff`和`dist_min_cutoff`：定义最大允许的和最小允许的距离阈值，单位为nm。DIP会计算两两碳原子之间的距离，如果距离小于等于`dist_max_cutoff`且大于`dist_min_cutoff`，则认为两原子之间存在碳-碳接触。
+`dist_max_cutoff` and `dist_min_cutoff`: Define the maximum and minimum allowed distance thresholds, in nm. DIP will calculate distances between pairs of carbon atoms. If the distance is less than or equal to `dist_max_cutoff` and greater than `dist_min_cutoff`, a carbon-carbon contact is considered to exist between the two atoms.
 
-`group1`：定义第一个原子组；`group2`：定义第二个组。这里的原子选择的语法完全遵从MDAnalysis的原子选择语法。请参考：https://userguide.mdanalysis.org/2.7.0/selections.html。DIP会从两个原子组中找出碳元素，并计算两组之间满足距离阈值的碳-碳接触的数量。
+`group1`: Define the first atom group; `group2`: Define the second group. The atom selection syntax here follows MDAnalysis atom selection syntax. Please refer to: https://userguide.mdanalysis.org/2.7.0/selections.html. DIP will find carbon elements from both atom groups and calculate the number of carbon-carbon contacts between the two groups that meet the distance threshold.
 
 
-本模块还有三个隐藏参数可以对轨迹做帧的选择：
+This module also has three hidden parameters for frame selection:
 
 ```yaml
       frame_start:  # start frame index
@@ -27,9 +27,9 @@
       frame_step:  # frame index step, default=1
 ```
 
-这些参数可以指定计算轨迹的起始帧、终止帧（不包含）以及帧的步长。默认情况下，用户不需要设置这些参数，模块会自动分析整个轨迹。
+These parameters can specify the start frame, end frame (exclusive), and frame step for trajectory calculation. By default, users do not need to set these parameters, and the module will automatically analyze the entire trajectory.
 
-例如我们计算从1000帧开始，到5000帧结束，每隔10帧的数据：
+For example, to calculate data from frame 1000 to frame 5000, every 10 frames:
 
 ```yaml
       frame_start: 1000 # start frame index
@@ -37,20 +37,20 @@
       frame_step: 10 # frame index step, default=1
 ```
 
-如果三个参数中只需要设置一个或两个，其余的参数都可以省略。
+If only one or two of the three parameters need to be set, the others can be omitted.
 
 
 ## Output
 
-DIP会根据用户的选组计算每一帧的C-C接触数目，并将结果保存到xvg文件中并可视化。
+DIP will calculate the C-C contact count for each frame based on user selection, save results to xvg file and visualize.
 
 ![cc](static/Hydrophobic_CC_Num_Count.png)
 
-因为C-C接触数目本身是较多的，所以DIP还按照残基对对C-C接触数目做了减少，同一对残基对之间有多个接触的，只考虑一个接触，并保留结果到`_reduced.xvg`文件中。
+Since C-C contact count itself is relatively large, DIP also reduces C-C contact count by residue pair. Multiple contacts between the same residue pair are counted as one contact, and results are saved to `_reduced.xvg` file.
 
 ![cc_reduced](static/Hydrophobic_CC_Num_Count_reduced.png)
 
-同时DIP还会将`reduced`的C-C接触的时间占有率保存到txt文件中。
+DIP also saves the time occupancy of `reduced` C-C contacts to a txt file.
 
 ```txt
 CC_name, Occupancy, frames/total_frames
@@ -66,4 +66,4 @@ PHE_107-6ZIN_136, 17.97%, 1797/10001
 
 ## References
 
-如果您使用了DIP的本分析模块，请一定引用MDAnalysis、DuIvyTools(https://zenodo.org/doi/10.5281/zenodo.6339993)，以及合理引用本文档(https://zenodo.org/doi/10.5281/zenodo.10646113)。
+If you use this analysis module from DIP, please cite MDAnalysis, DuIvyTools (https://zenodo.org/doi/10.5281/zenodo.6339993), and properly cite this documentation (https://zenodo.org/doi/10.5281/zenodo.10646113).

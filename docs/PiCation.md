@@ -1,8 +1,8 @@
 # PiCation
 
-此模块用于分析Pi-阳离子相互作用。
+This module is used to analyze Pi-cation interactions.
 
-使用本模块前请注意[前置处理](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7)已经完成！
+Before using this module, please ensure that the [preprocessing](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7) has been completed!
 
 ## Input YAML
 
@@ -51,37 +51,37 @@
     intermittency: 0  # allow 0 frame intermittency
 ```
 
-同前面的盐桥分析模块一样，这里也提供了两种方式去定义可形成PiStacking的环。第一种是通过索引，第二种是DIP通过rdkit去判别。
+Like the salt bridge analysis module above, this module also provides two ways to define rings and Cation groups that can form PiCation. The first is through index, the second is through DIP using rdkit for identification.
 
-`distance_max_cutoff`：定义PiCation相互作用距离的最大值，单位为纳米。
+`distance_max_cutoff`: Defines the maximum distance for PiCation interaction, in nanometers.
 
-`distance_min_cutoff`：定义PiCation相互作用距离的最小值，单位为纳米。
+`distance_min_cutoff`: Defines the minimum distance for PiCation interaction, in nanometers.
 
-`ring_center_offset`：定义环中心偏移量，单位为纳米。offset定义为Cation的电荷中心在环的平面上的投影，与环的质心的距离。
+`ring_center_offset`: Defines the ring center offset, in nanometers. Offset is defined as the distance between the projection of the Cation's charge center onto the ring's plane and the ring's centroid.
 
-`byIndex`：是否通过索引定义可形成PiCation的环和Cation基团。如果`yes`，则`Pi_rings_Index`和`cation_Index`必须提供对应的原子索引。如果`no`, 则DIP自行寻找。
+`byIndex`: Whether to define rings and Cation groups that can form PiCation through index. If `yes`, `Pi_rings_Index` and `cation_Index` must provide corresponding atom indices. If `no`, DIP will search automatically.
 
-`group4PiRing`和`group4Cation`：定义两个原子组，用于从中寻找芳香环和Cation结构。这两个参数只有当`byIndex`为`no`时才有效。DIP会自动从第一个组中探测芳香环结构，从第二个组中探测Cation结构；并计算两者之间的PiCation；如果需要计算组内的PiCation，可以两个组写成同样的原子组。这里的原子选择的语法完全遵从MDAnalysis的原子选择语法。请参考：https://userguide.mdanalysis.org/2.7.0/selections.html
+`group4PiRing` and `group4Cation`: Define two atom groups for finding aromatic rings and Cation structures. These two parameters are only valid when `byIndex` is `no`. DIP will automatically detect aromatic ring structures from the first group and Cation structures from the second group, and calculate PiCation between them. If you need to calculate PiCation within a group, both groups can be set to the same atom group. The atom selection syntax here follows MDAnalysis atom selection syntax. Please refer to: https://userguide.mdanalysis.org/2.7.0/selections.html
 
-`only_aromatic_rings`：当DIP自动寻找可形成PiStacking的环时，是否只考虑芳香环（环上每一根键都是芳香键），还是考虑所有环。**非芳香环极有可能存在误判，因而需要用户对结果进行检查！**
+`only_aromatic_rings`: When DIP automatically searches for rings that can form PiStacking, whether to only consider aromatic rings (every bond in the ring is an aromatic bond), or consider all rings. **Non-aromatic rings are very likely to be misidentified, so users need to check the results!**
 
-`other_ring_max_atom_num`：当DIP自动寻找可形成PiStacking的环时，对于没有被判别为芳香环的环，其最大允许的原子数量。其最小允许的原子数量为5。
+`other_ring_max_atom_num`: When DIP automatically searches for rings that can form PiStacking, the maximum allowed number of atoms for rings not identified as aromatic rings. The minimum allowed number of atoms is 5.
 
-`planarity_cutoff`：当DIP自动寻找可形成PiStacking的环时，对于没有被判别为芳香环的环，其允许的平面度；DIP会计算环上所有原子与其邻居原子的法向，任意两个法向之间的夹角需要小于这里设定的值才会被判别为平面环，并被DIP当作可形成PiStacking的环加以计算。**请注意，平面环并不等于芳香环，还请自行根据输出的环的pdb文件加以检查！**
+`planarity_cutoff`: When DIP automatically searches for rings that can form PiStacking, the allowed planarity for rings not identified as aromatic rings. DIP will calculate the normal vectors of all atoms in the ring with their neighbor atoms. The angle between any two normal vectors needs to be less than the value set here for the ring to be identified as a planar ring and be calculated by DIP as a ring that can form PiStacking. **Note that planar rings do not equal aromatic rings. Please check according to the output ring pdb file!**
 
-如果`byIndex`为`no`的话，则DIP会根据体系的电荷去寻找可能形成盐桥的原子组。但是考虑到不同的力场条件下原子的名称可能不同，并且未形成肽键的C或者N端也有可能形成盐桥。**因而这里可能需要用户根据使用的力场去填写一下COO-和NH3+的原子名称，以帮助程序正确判断所有带电基团。** 这里默认提供了大概适用于三类主要力场的原子名称，但是不一定准确，需要根据具体的体系原子命名进行修改。
+If `byIndex` is `no`, DIP will search for possible atom groups that can form salt bridges based on system charges. However, considering that atom names may differ under different force fields, and C or N terminals that haven't formed peptide bonds may also form salt bridges, **users may need to fill in the atom names for COO- and NH3+ according to the force field used to help the program correctly identify all charged groups.** Here we provide atom names that roughly apply to three major force fields by default, but they may not be accurate and need to be modified according to specific system atom naming.
 
-`ignore_chain_end`：是否忽略链端残基，设置为`yes`则程序会忽略链端残基，只计算链中段的带电基团。
+`ignore_chain_end`: Whether to ignore chain end residues. If set to `yes`, the program will ignore chain end residues and only calculate charged groups in the middle of the chain.
 
-`calc_lifetime`：是否计算PiCation的生命周期。
+`calc_lifetime`: Whether to calculate the lifetime of PiCation.
 
-`tau_max`：生命周期的最大时间，单位为帧。计算生命周期的过程中会计算从t0时刻开始，`tau_max`帧内，PiCation继续存在的概率。此值设置越大，则计算的窗口越大。
+`tau_max`: Maximum time for lifetime calculation, in frames. During lifetime calculation, the probability that the PiCation continues to exist within `tau_max` frames from time t0 will be calculated. The larger this value, the larger the calculation window.
 
-`window_step`：生命周期的窗口平移步长，单位为帧。
+`window_step`: Window translation step for lifetime, in frames.
 
-`intermittency`：允许的帧间隔，即允许多少帧没有发生PiCation仍旧视为PiCation；默认为0，即必须连续发生才被视为PiCation。
+`intermittency`: Allowed frame intermittency, i.e., how many frames without PiCation formation are still considered as PiCation; default is 0, meaning PiCation must be continuous to be counted.
 
-本模块还有三个隐藏参数可以对轨迹做帧的选择：
+This module also has three hidden parameters for frame selection:
 
 ```yaml
       frame_start:  # start frame index
@@ -89,9 +89,9 @@
       frame_step:  # frame index step, default=1
 ```
 
-这些参数可以指定计算轨迹的起始帧、终止帧（不包含）以及帧的步长。默认情况下，用户不需要设置这些参数，模块会自动分析整个轨迹。
+These parameters can specify the start frame, end frame (exclusive), and frame step for trajectory calculation. By default, users do not need to set these parameters, and the module will automatically analyze the entire trajectory.
 
-例如我们计算从1000帧开始，到5000帧结束，每隔10帧的数据：
+For example, to calculate from frame 1000 to frame 5000, every 10 frames:
 
 ```yaml
       frame_start: 1000 # start frame index
@@ -99,11 +99,11 @@
       frame_step: 10 # frame index step, default=1
 ```
 
-如果三个参数中只需要设置一个或两个，其余的参数都可以省略。
+If only one or two of the three parameters need to be set, the others can be omitted.
 
 ## Output
 
-首先是输出DIP判定的可形成PiCation的环和Cation基团，以供用户判断正确性。DIP会将之输出成pdb文件，用户可以自行检查。同时DIP还会输出各个环和Cation基团及其对应的原子索引到txt文件，供用户进一步确认和重复利用：
+First, output the rings and Cation groups that DIP identified as capable of forming PiCation for users to judge correctness. DIP will output them to pdb files for users to check. DIP will also output each ring and Cation group and their corresponding atom indices to txt files for further confirmation and reuse:
 
 ```txt
 PiStacking_Names, Indexs
@@ -112,6 +112,11 @@ PHE4, [41, 42, 44, 46, 48, 50]
 PHE29, [249, 250, 252, 254, 256, 258]
 PHE30, [266, 267, 269, 271, 273, 275]
 PHE55, [474, 475, 477, 479, 481, 483]
+PHE56, [491, 492, 494, 496, 498, 500]
+PHE81, [699, 700, 702, 704, 706, 708]
+PHE82, [716, 717, 719, 721, 723, 725]
+PHE107, [924, 925, 927, 929, 931, 933]
+PHE108, [941, 942, 944, 946, 948, 950]
 Cations_Names, Indexs
 LYS12, [118, 119, 120, 121]
 LYS38, [343, 344, 345, 346]
@@ -120,19 +125,17 @@ LYS90, [793, 794, 795, 796]
 LYS116, [1018, 1019, 1020, 1021]
 ```
 
-
-之后会输出所有PiCation的Pi质心到Cation电荷中心的距离、偏移量等数据到xvg文件，并可视化：
+Then output distance from Pi centroid to Cation charge center, offset and other data for all PiCation to xvg files and visualize:
 
 ![Pistacking_Distance](static/PiCation_Distances.png)
 
 ![PiCation_Offset](static/PiCation_Offsets.png)
 
-之后会输出所有PiCation的占有率图：
+Then output occupancy plots for all PiCation:
 
 ![PiCation_Occupancy](static/PiCation_Existence_Map.png)
 
-
-所有PiCation的汇总信息可以在输出的csv文件中找到：
+Summary information for all PiCation can be found in the output CSV file:
 
 ```csv
 id,Name,Occupancy,Frames/Total,Distance(nm),Offset(nm)
@@ -146,13 +149,12 @@ id,Name,Occupancy,Frames/Total,Distance(nm),Offset(nm)
 7,2ZIN132_13-LEU1_NH3,0.24%,24/10001,0.557451,0.147649
 8,6ZIN136-LYS116,1.82%,182/10001,0.563790,0.137136
 9,6ZIN136_21-LYS116,0.11%,11/10001,0.440715,0.171171
-
 ```
 
-如果计算生命周期，则自相关函数会被输出并可视化；同时自相关函数的积分，也即生命周期，也会被输出到csv文件中。请注意，这里的生命周期是直接对自相关函数数据进行simpson积分得到的，准确度一般。
+If lifetime is calculated, the autocorrelation function will be output and visualized; the integral of the autocorrelation function, i.e., the lifetime, will also be output to a CSV file. Note that the lifetime here is obtained by direct Simpson integration of the autocorrelation function data, with moderate accuracy.
 
-如果观察到在自相关函数的自变量范围内函数值还没有降到0，说明应当适当调大`tau_max`参数以获得更准确的生命周期积分。
+If you observe that the function value has not dropped to 0 within the range of the autocorrelation function's independent variable, it indicates that you should appropriately increase the `tau_max` parameter to obtain a more accurate lifetime integral.
 
 ## References
 
-如果您使用了DIP的本分析模块，请一定引用MDAnalysis、rdkit，DuIvyTools(https://zenodo.org/doi/10.5281/zenodo.6339993)，以及合理引用本文档(https://zenodo.org/doi/10.5281/zenodo.10646113)。
+If you use this analysis module from DIP, please cite MDAnalysis, rdkit, DuIvyTools (https://zenodo.org/doi/10.5281/zenodo.6339993), and properly cite this documentation (https://zenodo.org/doi/10.5281/zenodo.10646113).

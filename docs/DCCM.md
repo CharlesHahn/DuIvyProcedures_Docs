@@ -1,10 +1,10 @@
 # DCCM
 
-此模块计算用户所选原子之间的动态互相关矩阵(Dynamic Cross-Correlation Matrix, DCCM)。
+This module calculates the Dynamic Cross-Correlation Matrix (DCCM) between user-selected atoms.
 
-更多内容请参考：https://zhuanlan.zhihu.com/p/578891660，以及https://mp.weixin.qq.com/s/Lz_I9zmzxbO_Kc5uzDjsfw
+For more information, please refer to: https://zhuanlan.zhihu.com/p/578891660, and https://mp.weixin.qq.com/s/Lz_I9zmzxbO_Kc5uzDjsfw
 
-使用本模块前请注意[前置处理](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7)已经完成！
+Before using this module, please ensure that the [preprocessing](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7) has been completed!
 
 ## Input YAML
 
@@ -15,13 +15,13 @@
     save_xpm: yes
 ```
 
-`atom_selection`：原子选择器，用于指定计算DCCM的原子。这里的原子选择的语法完全遵从MDAnalysis的原子选择语法。请参考：https://userguide.mdanalysis.org/2.7.0/selections.html
+`atom_selection`: Atom selector for specifying atoms for DCCM calculation. The atom selection syntax here follows MDAnalysis atom selection syntax. Please refer to: https://userguide.mdanalysis.org/2.7.0/selections.html
 
-`byType`：指定计算DCCM的方式。有四种选择：`atom`、`res_com`、`res_cog`、`res_coc`。`atom`计算选中的所有原子之间的DCCM；常见的，可以在`atom_selection`中选择CA原子`protein and name CA`来计算蛋白质的DCCM；`res_com`计算每个残基的质心之间的DCCM；`res_cog`计算每个残基的几何中心之间的DCCM；`res_coc`计算每个残基的电荷中心之间的DCCM。当为`res_com`、`res_cog`或`res_coc`时，原子选择器应当包含选中的残基的所有原子，否则只会计算某一残基中选中原子的质心、几何中心或者电荷中心之间的DCCM。
+`byType`: Specifies the method for DCCM calculation. There are four options: `atom`, `res_com`, `res_cog`, `res_coc`. `atom` calculates DCCM between all selected atoms; commonly, you can select CA atoms in `atom_selection` with `protein and name CA` to calculate protein DCCM; `res_com` calculates DCCM between centers of mass of each residue; `res_cog` calculates DCCM between geometric centers of each residue; `res_coc` calculates DCCM between charge centers of each residue. When using `res_com`, `res_cog` or `res_coc`, the atom selector should contain all atoms of the selected residues, otherwise only DCCM between centers of mass, geometric centers, or charge centers of selected atoms within residues will be calculated.
 
-`save_xpm`：是否保存xpm文件。如果设置为`yes`，则会保存DCCM的协方差矩阵和互相关矩阵，并将其保存成xpm文件；否则将只保存为csv文件。
+`save_xpm`: Whether to save xpm files. If set to `yes`, the covariance matrix and cross-correlation matrix of DCCM will be saved as xpm files; otherwise, only csv files will be saved.
 
-本模块还有三个隐藏参数可以对轨迹做帧的选择：
+This module also has three hidden parameters for frame selection:
 
 ```yaml
       frame_start:  # start frame index
@@ -29,9 +29,9 @@
       frame_step:  # frame index step, default=1
 ```
 
-这些参数可以指定计算轨迹的起始帧、终止帧（不包含）以及帧的步长。默认情况下，用户不需要设置这些参数，模块会自动分析整个轨迹。
+These parameters can specify the start frame, end frame (exclusive), and frame step for trajectory calculation. By default, users do not need to set these parameters, and the module will automatically analyze the entire trajectory.
 
-例如我们计算从1000帧开始，到5000帧结束，每隔10帧的DCCM：
+For example, to calculate DCCM from frame 1000 to frame 5000, every 10 frames:
 
 ```yaml
       frame_start: 1000 # start frame index
@@ -39,15 +39,15 @@
       frame_step: 10 # frame index step, default=1
 ```
 
-如果三个参数中只需要设置一个或两个，其余的参数都可以省略。
+If only one or two of the three parameters need to be set, the others can be omitted.
 
-本模块对DCCM的计算过程做了一些改进，使得其计算耗时基本上不会随着原子数目和帧数的增加而增加太多，但是较大的原子数量会导致xpm文件非常大，保存成xpm文件就会是比较耗时的事情；如此，可以通过设置不保存xpm以节省时间。
+This module has improved the DCCM calculation process so that the computation time does not increase significantly with the number of atoms and frames. However, a larger number of atoms will result in very large xpm files, and saving xpm files can be time-consuming. Therefore, you can save time by not saving xpm files.
 
-如果保存了XPM文件，则还可以通过DuIvyTools（DIT，DIP的依赖之一）重新可视化DCCM，微调图片样式等。
+If XPM files are saved, you can also re-visualize DCCM using DuIvyTools (DIT, one of DIP's dependencies) and fine-tune the figure style.
 
 ## Output
 
-DCCM模块会输出计算得的协方差矩阵和互相关矩阵，分别保存成xpm文件和csv文件，同时也会对这两个文件进行可视化得到图片。
+The DCCM module outputs the calculated covariance matrix and cross-correlation matrix, saved as xpm files and csv files, and also visualizes these files.
 
 ![DCCM_covariance](static/DCCM_covariance_matrix.png)
 
@@ -55,4 +55,4 @@ DCCM模块会输出计算得的协方差矩阵和互相关矩阵，分别保存�
 
 ## References
 
-如果您使用了DIP的本分析模块，请一定引用MDAnalysis、DuIvyTools(https://zenodo.org/doi/10.5281/zenodo.6339993)，以及合理引用本文档(https://zenodo.org/doi/10.5281/zenodo.10646113)。
+If you use this analysis module from DIP, please cite MDAnalysis, DuIvyTools (https://zenodo.org/doi/10.5281/zenodo.6339993), and properly cite this documentation (https://zenodo.org/doi/10.5281/zenodo.10646113).

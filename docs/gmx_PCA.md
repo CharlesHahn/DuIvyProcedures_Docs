@@ -1,8 +1,8 @@
 # gmx_PCA
 
-本模块依赖GROMACS进行所选原子组的坐标的主成分分析。
+This module depends on GROMACS to perform principal component analysis on the coordinates of selected atom groups.
 
-使用本模块前请注意[前置处理](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7)已经完成！
+Before using this module, please ensure that the [preprocessing](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7) has been completed!
 
 ## Input YAML
 
@@ -13,13 +13,13 @@
       tu: ns
 ```
 
-`group`: 选择要进行主成分分析的原子组，对于蛋白质一般可以选择C-alpha。
+`group`: Select the atom group for principal component analysis. For proteins, C-alpha is usually a good choice.
 
-`gmx_parm`: 用户可以在这里附加一些`gmx covar`和`gmx anaeig`命令的共有的参数，例如控制时间的`-b -e`等。
+`gmx_parm`: Users can add shared parameters for `gmx covar` and `gmx anaeig` commands here, such as `-b`, `-e` for time control.
 
 ## Output
 
-完成PCA计算之后，本模块会导出前三个主成分并分别绘制两两主成分的散点图，以及所有和前10主成分的占比折线图。
+After completing the PCA calculation, this module will export the first three principal components and plot scatter plots for each pair of principal components, as well as a line plot showing the proportion of all and the first 10 principal components.
 
 ![gmx_PCA_dpc12](static/gmx_PCA_pc12_scatter.png)
 
@@ -31,12 +31,12 @@
 
 ![gmx_PCA_all](static/gmx_PCA_eigenval_probability.png)
 
-同时DIP也会整理好前三个主成分的两两主成分的xvg文件，可以直接用于`gmx_FEL`模块绘制基于PCA的自由能形貌图。
+DIP will also organize xvg files for pairs of the first three principal components, which can be directly used in the `gmx_FEL` module to plot PCA-based free energy landscapes.
 
-主成分余弦含量(cosine content)的计算也是对PCA的一种检查。DIP会计算每个PC的余弦含量并输出。当前几个成分的余弦含量的值接近1时，说明该PC可能对应于随机扩散，也即意味着模拟没有收敛，采样较差。关于更多余弦含量的内容，请参考 Berk Hess. Convergence of sampling in protein simulations. Phys. Rev. E 65, 031910 (2002).
+The calculation of principal component cosine content is also a check for PCA. DIP will calculate and output the cosine content for each PC. When the cosine content of the first few components is close to 1, it indicates that the PC may correspond to random diffusion, meaning the simulation has not converged and sampling is poor. For more information about cosine content, please refer to Berk Hess. Convergence of sampling in protein simulations. Phys. Rev. E 65, 031910 (2002).
 
-前三个主成分的极值在轨迹上的投影也会输出到pdb文件，如`pc1_proj.pdb`，可以通过pymol等工具可视化查看沿PC方向结构的变化。
+The projections of the extreme values of the first three principal components on the trajectory will also be output to pdb files, such as `pc1_proj.pdb`, which can be visualized using PyMOL or other tools to observe structural changes along the PC direction.
 
 ## References
 
-如果您使用了DIP的本分析模块，请一定引用GROMACS模拟引擎、DuIvyTools(https://zenodo.org/doi/10.5281/zenodo.6339993)，以及合理引用本文档(https://zenodo.org/doi/10.5281/zenodo.10646113)。
+If you use this analysis module from DIP, please cite GROMACS, DuIvyTools (https://zenodo.org/doi/10.5281/zenodo.6339993), and properly cite this documentation (https://zenodo.org/doi/10.5281/zenodo.10646113).

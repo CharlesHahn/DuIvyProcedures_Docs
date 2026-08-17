@@ -1,18 +1,18 @@
 # gmx_DSSP
 
-本模块用于调用GROMACS完成蛋白质的二级结构（DSSP）计算。
+This module calls GROMACS to perform protein secondary structure (DSSP) calculation.
 
-使用本模块前请注意[前置处理](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7)已经完成！
+Before using this module, please ensure that the [preprocessing](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7) has been completed!
 
-## 安装DSSP程序
+## Installing DSSP
 
-对于GROMACS2022及以下的GROMACS版本，请自行安装好DSSP程序并设置好环境变量（可参考：https://zhuanlan.zhihu.com/p/380242442）。
+For GROMACS 2022 and earlier versions, please install the DSSP program and set up the environment variable (reference: https://zhuanlan.zhihu.com/p/380242442).
 
-DSSP同时存在3.0和4.0的版本，我们需要的是3.0版本。
+DSSP has both version 3.0 and 4.0. We need version 3.0.
 
-建议使用conda安装DSSP3.0，会比较方便，例如：
+It is recommended to install DSSP 3.0 using conda for convenience. For example:
 
-新建环境并在新的独立环境中安装DSSP程序
+Create a new environment and install DSSP in the separate environment:
 
 ```bash
 conda create -n DSSP 
@@ -20,13 +20,13 @@ conda activate DSSP
 conda install dssp -c salilab # install DSSP 3.0 which is compatible with GROMACS 2022 and below
 ```
 
-在最新的测试(2024.02.24)中发现这样安装会缺依赖libboost=1.73.0，因此需要手动安装：
+In the latest test (2024.02.24), it was found that this installation is missing the dependency libboost=1.73.0, so it needs to be installed manually:
 
 ```bash
 conda install -c conda-forge libboost=1.73.0
 ```
 
-检查能否正常运行，并添加到环境变量：
+Check if it runs correctly and add to environment variable:
 
 ```bash
 mkdssp -h # check if mkdssp is installed correctly
@@ -39,11 +39,11 @@ which mkdssp # check the location of mkdssp (which is dssp executable)
 export DSSP=/path/to/mkdssp # set the environment variable DSSP
 ```
 
-这样安装的DSSP是在一个单独的conda环境中的，和DIP环境不会冲突。
+DSSP installed this way is in a separate conda environment and will not conflict with the DIP environment.
 
-Windows系统下，可以直接下载DSSP3.0[安装包](https://charles8hahn.pythonanywhere.com/download/DSSP.zip)，解压后将mkdssp.exe文件添加（新建）到环境变量DSSP中。
+On Windows systems, you can directly download the DSSP 3.0 [installation package](https://charles8hahn.pythonanywhere.com/download/DSSP.zip), extract it, and add (create) the mkdssp.exe file to the environment variable DSSP.
 
-对于GROMACS2023及以后的版本，则不需要安装DSSP程序。
+For GROMACS 2023 and later versions, you do not need to install the DSSP program.
 
 ## Input YAML
 
@@ -55,22 +55,21 @@ Windows系统下，可以直接下载DSSP3.0[安装包](https://charles8hahn.pyt
       dt: 0.5
 ```
 
-`group`：蛋白质的组名，这里设置的组必须至少包含蛋白质的骨架原子。
+`group`: The protein group name. The group set here must contain at least the protein backbone atoms.
 
-`gmx_parm`：GROMACS的运行参数，用户可以自定义需要的步长等参数，这里作为示例，步长较长以减小计算量。
+`gmx_parm`: GROMACS run parameters. Users can customize required parameters such as step size. Here, as an example, the step size is larger to reduce computation time.
 
 ## Output
 
-DIP会将GROMACS的输出文件转化为蛋白质二级结构的热图，以及蛋白质二级结构含量随时间的堆积折线图。
+DIP converts the GROMACS output file into a heatmap of protein secondary structure, and a stacked line plot of protein secondary structure content over time.
 
 ![DSSP](static/gmx_DSSP_protein.png)
 
 ![DSSP_sc](static/gmx_DSSP_protein_sc.png)
 
-还会输出蛋白质二级结构含量随残基变化的堆积折线图，这里就不展示了。
+It also outputs a stacked line plot of protein secondary structure content by residue, which is not shown here.
 
 ## References
 
-如果您使用了DIP的本分析模块，请一定引用GROMACS模拟引擎、DuIvyTools(https://zenodo.org/doi/10.5281/zenodo.6339993)，以及合理引用本文档(https://zenodo.org/doi/10.5281/zenodo.10646113)。
-如果分析用到了DSSP程序，还请一定引用DSSP程序。
-
+If you use this analysis module from DIP, please cite GROMACS, DuIvyTools (https://zenodo.org/doi/10.5281/zenodo.6339993), and properly cite this documentation (https://zenodo.org/doi/10.5281/zenodo.10646113).
+If the analysis uses the DSSP program, please also cite DSSP.

@@ -1,6 +1,6 @@
 # User_Mod
 
-此模块可以帮助用户自定义一些简单的分析手段。
+This module can help users customize some simple analysis methods.
 
 ## Input YAML
 
@@ -9,13 +9,13 @@
     user_commands: []  # file could be copied by bash cmd
 ```
 
-`user_commands`字段可以以列表的形式保存一系列的bash或者cmd命令，这些命令会在运行DIP的过程中执行。
+The `user_commands` field can save a series of bash or cmd commands in list form, which will be executed during DIP execution.
 
-需要注意的是，DIP会首先进去需要分析的目录，例如包含了轨迹文件的MD1目录，然后创建分析路径`User_Mod`或者自定义的文件名；之后在分析路径下执行用户输入的一系列命令。
+Note that DIP will first enter the directory to be analyzed, such as the MD1 directory containing trajectory files, then create the analysis path `User_Mod` or a custom filename; then execute a series of commands entered by the user under the analysis path.
 
 ## Output
 
-以下面的yaml输入文件计算轨迹的RMSD：
+Using the following yaml input file to calculate trajectory RMSD:
 
 ```yaml
 - User_Mod:
@@ -25,7 +25,7 @@
     ]
 ```
 
-之后执行DIP，可以看到屏显或者log里显示：
+After executing DIP, you can see in the screen display or log:
 
 ```txt
 [Info] 2024-02-04 10:43:47
@@ -40,12 +40,12 @@ Pid 13532 >>> dit xvg_show -f rmsd.xvg -xs 0.001 -x Time(ns) -ns -o rmsd.png
 DIP may you good day ! The run costs 8.98 seconds.
 ```
 
-然后可以看到分析目录下已经出现了rmsd.xvg和rmsd.png文件。
+Then you can see that rmsd.xvg and rmsd.png files have appeared in the analysis directory.
 
 ![rmsd](static/user_mod_rmsd.png)
 
-其它的简单分析也可以以这样的方式自定义，包括距离计算、角度计算等等。用户也可以在这里运行自定义的一些脚本文件等。DIP会将这些命令在不同的分析目录下执行，帮助用户快速完成分析任务。
+Other simple analyses can also be customized in this way, including distance calculation, angle calculation, etc. Users can also run custom script files here. DIP will execute these commands in different analysis directories to help users quickly complete analysis tasks.
 
 ## References
 
-如果您使用了DIP的本分析模块，请合理引用本文档。
+If you use this analysis module from DIP, please properly cite this documentation.

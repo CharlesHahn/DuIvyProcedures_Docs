@@ -1,10 +1,10 @@
 # DensityMap
 
-此模块使用格点技术对分子的空间位置进行表征，能够获得质量密度、电荷密度、数量密度在不同轴向、不同平面上的分布。不仅可以表征单一组分的分布，还能表征两个组分在密度分布上的关系。同时，还支持对组分沿着某一轴向切片，观察切片上的密度分布。
+This module uses grid technology to characterize molecular spatial positions, obtaining mass density, charge density, and number density distributions on different axes and planes. It can characterize not only single component distributions but also the relationship between two components in density distribution. It also supports slicing along a certain axis to observe density distribution on slices.
 
-目前此模块还较为粗糙，基于格点技术，此模块还可以拓展出很多有意思的功能，欢迎大家的建议和反馈~
+Currently this module is still relatively rough. Based on grid technology, many interesting functions can be extended. Welcome your suggestions and feedback~
 
-使用本模块前请注意[前置处理](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7)已经完成！
+Before using this module, please ensure that the [preprocessing](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7) has been completed!
 
 ## Input YAML
 
@@ -18,19 +18,19 @@
     doSplit_saveXPM: no
 ```
 
-`byType`：选择计算的类型，可选`Mass`（质量），`Number`（数量），`Charge`（电荷）。
+`byType`: Select the calculation type, options are `Mass`, `Number`, `Charge`.
 
-`byIndex`：选择使用GROMACS的索引或MDAnalysis的选择语句。如果设置"no", 下面`groups`参数的值将被认为是MDAnalysis的选择语句（这里的原子选择的语法完全遵从MDAnalysis的原子选择语法。请参考：https://userguide.mdanalysis.org/2.7.0/selections.html）；如果设置"yes"，则下面的groups参数的值将被认为是GROMACS的索引组的名字，当然这个名字需要和index文件中的对应上，且请组名不要以数字开头。
+`byIndex`: Choose whether to use GROMACS index or MDAnalysis selection statements. If set to "no", the `groups` parameter values below will be treated as MDAnalysis selection statements (the atom selection syntax here follows MDAnalysis atom selection syntax. Please refer to: https://userguide.mdanalysis.org/2.7.0/selections.html). If set to "yes", the groups parameter values will be treated as GROMACS index group names, which need to correspond to the index file. Please do not start group names with numbers.
 
-`groups`：选择计算的原子组，可以同时声明多个组，用逗号分隔。
+`groups`: Select atom groups for calculation, multiple groups can be declared simultaneously, separated by commas.
 
-`grid_bin`：格点的大小，单位为埃。1.2埃差不多是氢原子的范德华半径。用户可以调整格点的尺寸以获得最佳的表征效果。
+`grid_bin`: Grid size, in Angstroms. 1.2 Angstroms is approximately the van der Waals radius of a hydrogen atom. Users can adjust the grid size to obtain the best characterization effect.
 
-`doSplit_axis`：选择沿着哪个轴切片，可选`X`、`Y`、`Z`，也可以同时对多个轴向进行切片，如`XY`等。如果不选择切片，则不会进行切片的计算。
+`doSplit_axis`: Choose which axis to slice along, options are `X`, `Y`, `Z`, or multiple axes simultaneously like `XY`. If no slice is selected, no slice calculation will be performed.
 
-`doSplit_saveXPM`：选择是否保存切片的XPM文件，如果选择"yes"，则会将每一个切片都用xpm文件格式保存下来，这会比较耗时。
+`doSplit_saveXPM`: Choose whether to save XPM files of slices. If "yes", each slice will be saved in xpm file format, which can be time-consuming.
 
-本模块还有三个隐藏参数可以对轨迹做帧的选择：
+This module also has three hidden parameters for frame selection:
 
 ```yaml
       frame_start:  # start frame index
@@ -38,9 +38,9 @@
       frame_step:  # frame index step, default=1
 ```
 
-这些参数可以指定计算轨迹的起始帧、终止帧（不包含）以及帧的步长。默认情况下，用户不需要设置这些参数，模块会自动分析整个轨迹。
+These parameters can specify the start frame, end frame (exclusive), and frame step for trajectory calculation. By default, users do not need to set these parameters, and the module will automatically analyze the entire trajectory.
 
-例如我们计算从1000帧开始，到5000帧结束，每隔10帧的数据：
+For example, to calculate data from frame 1000 to frame 5000, every 10 frames:
 
 ```yaml
       frame_start: 1000 # start frame index
@@ -48,40 +48,39 @@
       frame_step: 10 # frame index step, default=1
 ```
 
-如果三个参数中只需要设置一个或两个，其余的参数都可以省略。
+If only one or two of the three parameters need to be set, the others can be omitted.
 
 
 ## Output
 
-此模块会输出较多的图片。
+This module outputs many figures.
 
-首先是所有组分在三个轴向上的平均密度分布折线图，这里列举X轴向上的：
+First, the average density distribution line plots of all components on three axes. Here is an example for the X-axis:
 
 ![DensityMap_X](static/DensityMap_Density_distribution_X_axis.png)
 
-对于某些材料方面的领域，可能需要计算某类原子的数量密度沿着轴向的分布，可以用这里的功能去实现，只需要将`byType`设置为`Number`即可，然后`groups`参数设置为需要计算的原子，例如`name C`。
+For certain material science fields, you may need to calculate the number density distribution of certain atoms along axes. This can be achieved by setting `byType` to `Number` and `groups` parameter to the atoms to be calculated, such as `name C`.
 
-之后是每一个组分在不同平面上的平均密度分布图，这里列举XY平面上的蛋白质密度图：
+Next, the average density distribution plots of each component on different planes. Here is an example of protein density plot on the XY plane:
 
 ![DensityMap_protein_XY](static/DensityMap_Density_XY_ave_protein.png)
 
-之后是任意两两组分在不同平面上的平均密度分布图，因为很难很好地重叠两张热图，因而这里的分布图实际上是**一张密度分布图减去另一张热图得到的差值**。对于有上下重叠的位置关系，这样的可视化方法会带来一定的误差。
+Then, the average density distribution plots of any two components on different planes. Since it's difficult to overlay two heatmaps well, the distribution plot here is actually the **difference obtained by subtracting one density distribution plot from another**. For positions with vertical overlap, this visualization method may introduce some errors.
 
-这里列举XY平面上的蛋白质和配体密度分布图：
+Here is an example of protein and ligand density distribution plot on the XY plane:
 
 ![DensityMap_protein_ligand_XY](static/DensityMap_Density_XY_resname_ZIN-protein_ave.png)
 
-
-如果选择了切片的计算，则会输出每一个切片的密度分布图，这里任意列举两帧Y轴向上的蛋白质和配体的切片图：
+If slice calculation is selected, density distribution plots for each slice will be output. Here are two random examples of protein and ligand slice plots along the Y-axis:
 
 ![DensityMap_protein_ligand_Y_frame1](static/DensityMap_Density_XZ_resname_ZIN-protein_3.0nm.png)
 
 ![DensityMap_protein_ligand_Y_frame2](static/DensityMap_Density_XZ_resname_ZIN-protein_4.0nm.png)
 
-当然用户也可以自行将切片出来的图片文件组合成视频或者gif文件，看起来会比较有意思。例如：
+Users can also combine the sliced image files into videos or gif files, which looks interesting. For example:
 
 ![gif](static/DensityMap_split.gif)
 
 ## References
 
-如果您使用了DIP的本分析模块，请一定引用MDAnalysis、DuIvyTools(https://zenodo.org/doi/10.5281/zenodo.6339993)，以及合理引用本文档(https://zenodo.org/doi/10.5281/zenodo.10646113)。
+If you use this analysis module from DIP, please cite MDAnalysis, DuIvyTools (https://zenodo.org/doi/10.5281/zenodo.6339993), and properly cite this documentation (https://zenodo.org/doi/10.5281/zenodo.10646113).

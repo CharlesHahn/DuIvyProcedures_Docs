@@ -1,8 +1,8 @@
 # gmx_Mdmat
 
-此模块利用GROMACS计算残基间的最短距离矩阵，也可以称之为残基接触矩阵。
+This module uses GROMACS to calculate the shortest distance matrix between residues, also known as the residue contact matrix.
 
-使用本模块前请注意[前置处理](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7)已经完成！
+Before using this module, please ensure that the [preprocessing](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7) has been completed!
 
 ## Input YAML
 
@@ -13,11 +13,11 @@
       t: 1.5
 ```
 
-只需要确定需要计算的组就可以了。也可以通过`gmx_parm`参数来设置一些额外的参数，如这里设置了距离截断`-t 1.5`。DIP默认会调用`-mean -no`两个输出参数，因而这俩个不需要在这里添加。
+You only need to determine the group for calculation. You can also set some additional parameters through `gmx_parm`, such as the distance cutoff `-t 1.5` set here. DIP will call `-mean -no` output parameters by default, so these two do not need to be added here.
 
 ## Output
 
-DIP会将产生的平均的残基接触矩阵可视化，以及绘制接触数量随时间变化的折线图：
+DIP will visualize the generated average residue contact matrix and plot the line graph of contact count over time:
 
 ![gmx_Mdmat_dm](static/gmx_Mdmat_dm.png)
 
@@ -25,5 +25,4 @@ DIP会将产生的平均的残基接触矩阵可视化，以及绘制接触数�
 
 ## References
 
-如果您使用了DIP的本分析模块，请一定引用GROMACS模拟引擎、DuIvyTools(https://zenodo.org/doi/10.5281/zenodo.6339993)，以及合理引用本文档(https://zenodo.org/doi/10.5281/zenodo.10646113)。
-
+If you use this analysis module from DIP, please cite GROMACS, DuIvyTools (https://zenodo.org/doi/10.5281/zenodo.6339993), and properly cite this documentation (https://zenodo.org/doi/10.5281/zenodo.10646113).

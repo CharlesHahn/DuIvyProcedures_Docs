@@ -1,8 +1,8 @@
 # gmx_RMSD
 
-此模块依赖GROMACS进行均方根偏差的计算。
+This module depends on GROMACS to calculate the root mean square deviation (RMSD).
 
-使用本模块前请注意[前置处理](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7)已经完成！
+Before using this module, please ensure that the [preprocessing](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7) has been completed!
 
 ## Input YAML
 
@@ -13,9 +13,9 @@
     rmsd_matrix: no
 ```
 
-RMSD计算过程中需要先对体系进行对齐，之后再计算结构与参考结构的RMSD。因而这里`fit_group`是用于指定对齐组的，而`calc_group`用于指定计算RMSD的组。
+During the RMSD calculation process, the system needs to be aligned first, then the RMSD between the structure and the reference structure is calculated. Therefore, `fit_group` is used to specify the alignment group, while `calc_group` is used to specify the group for RMSD calculation.
 
-`rmsd_matrix`用于指定是否输出帧间的RMSD矩阵。如果设置为`yes`，则会输出RMSD矩阵，但请注意，计算RMSD矩阵是一个比较耗时的过程，用户可以通过`gmx_parm`参数设置一下连接到`gmx rms`命令的参数，以减少需要计算的帧，例如：
+`rmsd_matrix` is used to specify whether to output the inter-frame RMSD matrix. If set to `yes`, the RMSD matrix will be output, but please note that calculating the RMSD matrix is a relatively time-consuming process. Users can set parameters through `gmx_parm` to connect to the `gmx rms` command to reduce the number of frames to calculate, for example:
 
 ```yaml
 - gmx_RMSD:
@@ -30,7 +30,7 @@ RMSD计算过程中需要先对体系进行对齐，之后再计算结构与参�
 
 ## Output
 
-DIP会将计算的到的RMSD数据绘制成折线图，如果有计算RMSD矩阵的话，DIP也会一同可视化。
+DIP will plot the calculated RMSD data as a line graph, and if the RMSD matrix is calculated, DIP will also visualize it together.
 
 ![gmx_RMSD](static/gmx_RMSD_rmsd.png)
 
@@ -39,4 +39,4 @@ DIP会将计算的到的RMSD数据绘制成折线图，如果有计算RMSD矩阵
 
 ## References
 
-如果您使用了DIP的本分析模块，请一定引用GROMACS模拟引擎、DuIvyTools(https://zenodo.org/doi/10.5281/zenodo.6339993)，以及合理引用本文档(https://zenodo.org/doi/10.5281/zenodo.10646113)。
+If you use this analysis module from DIP, please cite GROMACS simulation engine, DuIvyTools (https://zenodo.org/doi/10.5281/zenodo.6339993), and properly cite this documentation (https://zenodo.org/doi/10.5281/zenodo.10646113).

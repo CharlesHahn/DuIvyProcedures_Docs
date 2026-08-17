@@ -1,16 +1,16 @@
 # gmx_dPCA
 
-本模块利用GROMACS进行蛋白质骨架二面角的主成分分析。
+This module uses GROMACS to perform principal component analysis on protein backbone dihedral angles.
 
-具体计算过程请参考：https://zhuanlan.zhihu.com/p/479009558
+For detailed calculation process, please refer to: https://zhuanlan.zhihu.com/p/479009558
 
-由于`gmx angle`命令的存在，此模块的计算会非常慢；同时考虑到DIP不限制GROMACS的版本，而有些GROMACS版本中`gmx anaeig`命令的输出可能存在问题；再加上dPCA计算还有些科学性上的争议：
+Due to the existence of the `gmx angle` command, the calculation of this module will be very slow. At the same time, considering that DIP does not limit the GROMACS version, and some GROMACS versions may have issues with the `gmx anaeig` command output; plus there are some scientific controversies about dPCA calculation:
 - https://doi.org/10.1002/prot.20310
 - https://doi.org/10.1063/1.2746330
 
-因此，**建议用户使用此模块进行dPCA计算之后仔细检查分析结果！！！**
+Therefore, **users are advised to carefully check the analysis results after using this module for dPCA calculation!!!**
 
-使用本模块前请注意[前置处理](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7)已经完成！
+Before using this module, please ensure that the [preprocessing](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7) has been completed!
 
 ## Input YAML
 
@@ -22,17 +22,17 @@
       tu: ns
 ```
 
-`group`：蛋白质组名，即`Protein`，也可以选择包含了骨架原子的其他组。
-`gmx_parm`：此模块涉及到多个GROMACS命令，这里的gmx_parm参数只会被添加到`gmx anaeig`命令中，用于导出主成分，因而可以一般可以用户自定义`gmx anaeig`命令的参数。
+`group`: Protein group name, i.e., `Protein`, or other groups containing backbone atoms can be selected.
+`gmx_parm`: This module involves multiple GROMACS commands, the gmx_parm parameter here will only be added to the `gmx anaeig` command for exporting principal components, so users can generally customize parameters for the `gmx anaeig` command.
 
-`fast_mode`：是否使用快速模式。在执行dPCA分析的过程中，有一步`gmx angle`生成二面角的trr文件的步骤，因为该命令在生成了trr文件之后会执行一些统计计算的工作，所以需要等待非常长的时间。如果用户设置了`fast_mode: yes`，DIP不会等待`gmx angle`命令执行完，在dangle.trr文件生成之后，DIP会kill掉`gmx angle`进程，并继续执行后续的计算。**请注意，在windows系统上，可能由于各种原因导致`gmx angle`命令无法kill掉，但不影响DIP的计算。用户可以手动kill掉`gmx angle`进程。**
+`fast_mode`: Whether to use fast mode. During dPCA analysis, there is a step where `gmx angle` generates a dihedral angle trr file. Since this command performs some statistical calculations after generating the trr file, it takes a very long time to wait. If the user sets `fast_mode: yes`, DIP will not wait for the `gmx angle` command to complete. After the dangle.trr file is generated, DIP will kill the `gmx angle` process and continue with subsequent calculations. **Note that on Windows systems, the `gmx angle` command may not be killed due to various reasons, but this does not affect DIP's calculation. Users can manually kill the `gmx angle` process.**
 
-**请注意，因为此分析方法依赖于GROMACS，且有一些dirty tricks，所以不能保证一定能执行完成。** 例如，用于储存二面角的trr文件中如果某一个“原子”的三个坐标值都是0的话，GROMACS会报错，导致程序无法继续执行。
+**Note that because this analysis method depends on GROMACS and has some dirty tricks, it cannot be guaranteed to always complete successfully.** For example, if one of the three coordinate values of an "atom" in the trr file storing dihedral angles is 0, GROMACS will report an error and the program cannot continue.
 
 
 ## Output
 
-完成dPCA计算之后，本模块会导出前三个主成分并分别绘制两两主成分的散点图，以及所有和前10主成分的占比折线图。
+After completing the dPCA calculation, this module will export the first three principal components and plot scatter plots for each pair of principal components, as well as a line plot showing the proportion of all and the first 10 principal components.
 
 ![gmx_dPCA_dpc12](static/gmx_dPCA_dpc12_scatter.png)
 
@@ -44,15 +44,15 @@
 
 ![gmx_dPCA_all](static/gmx_dPCA_eigenval_probability.png)
 
-同时DIP也会整理好前三个主成分的两两主成分的xvg文件，可以直接用于`gmx_FEL`模块绘制基于dPCA的自由能形貌图。
+DIP will also organize xvg files for pairs of the first three principal components, which can be directly used in the `gmx_FEL` module to plot dPCA-based free energy landscapes.
 
-主成分余弦含量(cosine content)的计算也是对PCA的一种检查。DIP会计算每个PC的余弦含量并输出。当前几个成分的余弦含量的值接近1时，说明该PC可能对应于随机扩散，也即意味着模拟没有收敛，采样较差。关于更多余弦含量的内容，请参考 Berk Hess. Convergence of sampling in protein simulations. Phys. Rev. E 65, 031910 (2002).
+The calculation of principal component cosine content is also a check for PCA. DIP will calculate and output the cosine content for each PC. When the cosine content of the first few components is close to 1, it indicates that the PC may correspond to random diffusion, meaning the simulation has not converged and sampling is poor. For more information about cosine content, please refer to Berk Hess. Convergence of sampling in protein simulations. Phys. Rev. E 65, 031910 (2002).
 
 
 ## References
 
-如果您使用了DIP的本分析模块，请一定引用GROMACS模拟引擎、DuIvyTools(https://zenodo.org/doi/10.5281/zenodo.6339993)，以及合理引用本文档(https://zenodo.org/doi/10.5281/zenodo.10646113)。
+If you use this analysis module from DIP, please cite GROMACS, DuIvyTools (https://zenodo.org/doi/10.5281/zenodo.6339993), and properly cite this documentation (https://zenodo.org/doi/10.5281/zenodo.10646113).
 
-同时请一定引用dPCA的相关文献：
+Please also cite the relevant literature on dPCA:
 - https://doi.org/10.1002/prot.20310
 - https://doi.org/10.1063/1.2746330

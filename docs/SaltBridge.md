@@ -1,8 +1,8 @@
 # SaltBridge
 
-本模块负责分析盐桥，并输出盐桥占有率、距离等信息。
+This module analyzes salt bridges and outputs salt bridge occupancy, distance, and other information.
 
-使用本模块前请注意[前置处理](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7)已经完成！
+Before using this module, please ensure that the [preprocessing](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7) has been completed!
 
 ## Input YAML
 
@@ -35,29 +35,29 @@
     intermittency: 0  # allow 0 frame intermittency
 ```
 
-要计算盐桥，需要先**找到可以形成盐桥的原子组**。此模块提供了两种定义原子组的方式，第一种是通过索引，第二种是通过电荷。
+To calculate salt bridges, you first need to **find atom groups that can form salt bridges**. This module provides two ways to define atom groups: first through index, second through charge.
 
-`dist_cutoff`：盐桥的距离阈值，单位为nm。
+`dist_cutoff`: Distance threshold for salt bridges, in nm.
 
-`byIndex`：是否通过原子索引定义形成盐桥的原子组。如果设置为`yes`，则DIP会读取后面的`positive_Index`和`negative_Index`参数；如果设置为`no`，DIP会自行根据体系里面的电荷去寻找可能的能形成盐桥的原子组。
+`byIndex`: Whether to define atom groups that can form salt bridges through atom indices. If set to `yes`, DIP will read the subsequent `positive_Index` and `negative_Index` parameters. If set to `no`, DIP will automatically search for possible atom groups that can form salt bridges based on the charges in the system.
 
-`positive_Index`和`negative_Index`: 这两个参数都需要以列表的形式编写，列表的每一个元素都是一个可供形成盐桥的基团的原子编号（从1开始）。这里示例中定义了五个带正电的基团和五个带负电的基团。
+`positive_Index` and `negative_Index`: Both parameters need to be written in list form. Each element of the list is an atom index (starting from 1) for a group that can form salt bridges. Here in the example, five positively charged groups and five negatively charged groups are defined.
 
-如果`byIndex`为`no`的话，则DIP会根据体系的电荷去寻找可能形成盐桥的原子组。但是考虑到不同的力场条件下原子的名称可能不同，并且未形成肽键的C或者N端也有可能形成盐桥。**因而这里需要用户根据使用的力场去填写一下COO-和NH3+的原子名称，以帮助程序正确判断所有带电基团。** 这里默认提供了大概适用于三类主要力场的原子名称，但是不一定准确，需要根据具体的体系原子命名进行修改。
+If `byIndex` is `no`, DIP will search for possible atom groups that can form salt bridges based on system charges. However, considering that atom names may differ under different force fields, and C or N terminals that haven't formed peptide bonds may also form salt bridges, **users need to fill in the atom names for COO- and NH3+ according to the force field used to help the program correctly identify all charged groups.** Here we provide atom names that roughly apply to three major force fields by default, but they may not be accurate and need to be modified according to specific system atom naming.
 
-`group`: 如果`byIndex`为`no`，则需要指定一个组名，DIP会从该原子组中去寻找可能形成盐桥的基团。示例中默认是`protein`，即从蛋白质中寻找可能形成盐桥的基团。这里的原子选择的语法完全遵从MDAnalysis的原子选择语法。请参考：https://userguide.mdanalysis.org/2.7.0/selections.html
+`group`: If `byIndex` is `no`, a group name needs to be specified. DIP will search for possible salt bridge forming groups from this atom group. The default in the example is `protein`, meaning searching for possible salt bridge forming groups from the protein. The atom selection syntax here follows MDAnalysis atom selection syntax. Please refer to: https://userguide.mdanalysis.org/2.7.0/selections.html
 
-`ignore_chain_end`：是否忽略链端残基，设置为`yes`则程序会忽略链端残基，只计算链中段的带电基团。
+`ignore_chain_end`: Whether to ignore chain end residues. If set to `yes`, the program will ignore chain end residues and only calculate charged groups in the middle of the chain.
 
-`calc_lifetime`：是否计算SaltBridge的生命周期。
+`calc_lifetime`: Whether to calculate the lifetime of SaltBridge.
 
-`tau_max`：生命周期的最大时间，单位为帧。计算生命周期的过程中会计算从t0时刻开始，`tau_max`帧内，SaltBridge继续存在的概率。此值设置越大，则计算的窗口越大。
+`tau_max`: Maximum time for lifetime calculation, in frames. During lifetime calculation, the probability that the SaltBridge continues to exist within `tau_max` frames from time t0 will be calculated. The larger this value, the larger the calculation window.
 
-`window_step`：生命周期的窗口平移步长，单位为帧。
+`window_step`: Window translation step for lifetime, in frames.
 
-`intermittency`：允许的帧间隔，即允许多少帧没有发生SaltBridge仍旧视为SaltBridge；默认为0，即必须连续发生才被视为SaltBridge。
+`intermittency`: Allowed frame intermittency, i.e., how many frames without SaltBridge formation are still considered as SaltBridge; default is 0, meaning SaltBridge must be continuous to be counted.
 
-本模块还有三个隐藏参数可以对轨迹做帧的选择：
+This module also has three hidden parameters for frame selection:
 
 ```yaml
       frame_start:  # start frame index
@@ -65,9 +65,9 @@
       frame_step:  # frame index step, default=1
 ```
 
-这些参数可以指定计算轨迹的起始帧、终止帧（不包含）以及帧的步长。默认情况下，用户不需要设置这些参数，模块会自动分析整个轨迹。
+These parameters can specify the start frame, end frame (exclusive), and frame step for trajectory calculation. By default, users do not need to set these parameters, and the module will automatically analyze the entire trajectory.
 
-例如我们计算从1000帧开始，到5000帧结束，每隔10帧的数据：
+For example, to calculate from frame 1000 to frame 5000, every 10 frames:
 
 ```yaml
       frame_start: 1000 # start frame index
@@ -75,14 +75,14 @@
       frame_step: 10 # frame index step, default=1
 ```
 
-如果三个参数中只需要设置一个或两个，其余的参数都可以省略。
+If only one or two of the three parameters need to be set, the others can be omitted.
 
 
 ## Output
 
-首先是最重要的，**确定选中的原子组真的是可供形成盐桥的原子组**。为此，此模块会输出选中的所有原子到pdb文件中，用户可以自行查看和确认；另外也会输出基团和相应的原子index到txt文件中，方便确认和再次利用。
+First and most importantly, **confirm that the selected atom groups are truly atom groups that can form salt bridges**. For this purpose, this module outputs all selected atoms to a pdb file, which users can check themselves. It also outputs groups and corresponding atom indices to a txt file for confirmation and reuse.
 
-这里列举由DIP确定的原子组：
+Here is an example of atom groups determined by DIP:
 ```txt
 PositiveGroups, Indexs
 LYS12, [114, 115, 116, 117, 118, 119, 120, 121]
@@ -114,17 +114,17 @@ ALA104_COO, [896, 898, 899, 900]
 ALA130_COO, [1121, 1123, 1124, 1125]
 ```
 
-可以看到其中包含了侧链带电的残基，也包括链端的C和N端。其中原子可能是有多余的，但是没关系，计算的时候会以**电荷中心**的方式去计算盐桥距离，这样计算得到的电荷中心的距离是比较接近真正的形成盐桥的电荷中心的距离的。
+As you can see, it includes both side-chain charged residues and chain-end C and N terminals. There may be extra atoms, but it doesn't matter - the calculation uses the **charge center** method to calculate salt bridge distances, so the calculated charge center distance is quite close to the true charge center distance of the salt bridge.
 
-当然，用户也可以根据DIP猜测的原子组，自行编写更细致的原子索引去计算盐桥。
+Of course, users can also write more detailed atom indices based on DIP's guessed atom groups to calculate salt bridges.
 
-请注意，对于用户自定义的索引组，**DIP不会去检验电荷**，因此请确保索引组的正确性。
+Please note that for user-defined index groups, **DIP will not verify charges**, so please ensure the correctness of the index groups.
 
-之后，DIP会计算带相反电荷的索引组之间的距离，并将距离输出到xvg文件并可视化：
+Then, DIP will calculate distances between oppositely charged index groups, output to xvg files and visualize:
 
 ![sltbr_distance](static/SaltBridge_Distance.png)
 
-之后DIP会根据截断计算所有盐桥的占有率、平均距离等信息，并输出到csv文件中：
+Then DIP will calculate occupancy, average distance and other information for all salt bridges based on cutoff, and output to a CSV file:
 
 ```csv
 Index,sltbr_name,occupancy(%),Distance(nm)±std.err
@@ -146,11 +146,11 @@ Index,sltbr_name,occupancy(%),Distance(nm)±std.err
 15,LEU105_NH3-ALA130_COO,0.02%,0.30225286587195854±0.002515915241203581
 ```
 
-DIP还会输出所有盐桥的占有率矩阵到xpm文件并可视化：
+DIP will also output an occupancy matrix for all salt bridges to xpm file and visualize:
 
 ![sltbr_occ](static/SaltBridge_Existence_Map.png)
 
-最后，DIP还会根据盐桥索引组的顺序，生成矩阵图，包括占有率矩阵图和距离矩阵图：
+Finally, DIP will generate matrix plots based on salt bridge index group order, including occupancy matrix plot and distance matrix plots:
 
 ![sltbr_occ_matrix](static/SaltBridges_Occupancy_Matrix.png)
 
@@ -158,10 +158,10 @@ DIP还会输出所有盐桥的占有率矩阵到xpm文件并可视化：
 
 ![sltbr_dist_stderr_matrix](static/SaltBridges_Distance_StdErr_Matrix.png)
 
-如果计算生命周期，则自相关函数会被输出并可视化；同时自相关函数的积分，也即生命周期，也会被输出到csv文件中。请注意，这里的生命周期是直接对自相关函数数据进行simpson积分得到的，准确度一般。
+If lifetime is calculated, the autocorrelation function will be output and visualized; the integral of the autocorrelation function, i.e., the lifetime, will also be output to a CSV file. Note that the lifetime here is obtained by direct Simpson integration of the autocorrelation function data, with moderate accuracy.
 
-如果观察到在自相关函数的自变量范围内函数值还没有降到0，说明应当适当调大`tau_max`参数以获得更准确的生命周期积分。
+If you observe that the function value has not dropped to 0 within the range of the autocorrelation function's independent variable, it indicates that you should appropriately increase the `tau_max` parameter to obtain a more accurate lifetime integral.
 
 ## References
 
-如果您使用了DIP的本分析模块，请一定引用MDAnalysis、DuIvyTools(https://zenodo.org/doi/10.5281/zenodo.6339993)，以及合理引用本文档(https://zenodo.org/doi/10.5281/zenodo.10646113)。
+If you use this analysis module from DIP, please cite MDAnalysis, DuIvyTools (https://zenodo.org/doi/10.5281/zenodo.6339993), and properly cite this documentation (https://zenodo.org/doi/10.5281/zenodo.10646113).

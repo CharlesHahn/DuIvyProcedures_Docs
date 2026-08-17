@@ -1,8 +1,8 @@
 # gmx_Density
 
-本模块用于依赖`gmx density`命令生成体系沿某一轴向方向上的密度分布图。默认是沿z轴方向。
+This module depends on the `gmx density` command to generate density distribution plots along a certain axis. The default is along the Z-axis.
 
-使用本模块前请注意[前置处理](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7)已经完成！
+Before using this module, please ensure that the [preprocessing](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7) has been completed!
 
 ## Input YAML
 
@@ -14,19 +14,16 @@
       d: Z
 ```
 
-`calc_group`：计算组的名称，即需要生成密度分布图的原子组。
+`calc_group`: The name of the calculation group, i.e., the atom group for which the density distribution plot will be generated.
 
-`gmx_parm`：可以在这里添加用户想要添加的`gmx density`命令参数，如定义分析的起止时间、`d`轴向方向等。DIP默认设置了`-o`输出参数，因而用户不需要再添加此参数了。
+`gmx_parm`: You can add `gmx density` command parameters here as needed, such as defining the start and end time of analysis, `d` axis direction, etc. DIP sets the `-o` output parameter by default, so users do not need to add this parameter.
 
 ## Output
 
-DIP默认会可视化输出的密度分布图，如下：
+DIP will visualize the output density distribution plot by default:
 
 ![gmx_Density_output](static/gmx_Density.png)
 
 ## References
 
-如果您使用了DIP的本分析模块，请一定引用GROMACS模拟引擎、DuIvyTools(https://zenodo.org/doi/10.5281/zenodo.6339993)，以及合理引用本文档(https://zenodo.org/doi/10.5281/zenodo.10646113)。
-
-
-
+If you use this analysis module from DIP, please cite GROMACS, DuIvyTools (https://zenodo.org/doi/10.5281/zenodo.6339993), and properly cite this documentation (https://zenodo.org/doi/10.5281/zenodo.10646113).

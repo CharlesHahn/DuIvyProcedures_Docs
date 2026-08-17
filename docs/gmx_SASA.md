@@ -1,8 +1,8 @@
 # gmx_SASA
 
-此模块依赖GROMACS进行溶剂可及表面积（SASA）的计算。
+This module depends on GROMACS to calculate the solvent accessible surface area (SASA).
 
-使用本模块前请注意[前置处理](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7)已经完成！
+Before using this module, please ensure that the [preprocessing](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7) has been completed!
 
 ## Input YAML
 
@@ -13,14 +13,14 @@
       tu: ns
 ```
 
-`group`参数设定要计算SASA的原子组。同时也可以通过`gmx_parm`增加一些想要添加到`gmx sasa`命令中的参数。
+`group` parameter sets the atom group for SASA calculation. You can also add parameters through `gmx_parm` that you want to add to the `gmx sasa` command.
 
 ## Output
 
-DIP会可视化计算得到的面积随时间的变化：
+DIP will visualize the calculated area over time:
 
 ![gmx_SASA](static/gmx_SASA.png)
 
 ## References
 
-如果您使用了DIP的本分析模块，请一定引用GROMACS模拟引擎、DuIvyTools(https://zenodo.org/doi/10.5281/zenodo.6339993)，以及合理引用本文档(https://zenodo.org/doi/10.5281/zenodo.10646113)。
+If you use this analysis module from DIP, please cite GROMACS, DuIvyTools (https://zenodo.org/doi/10.5281/zenodo.6339993), and properly cite this documentation (https://zenodo.org/doi/10.5281/zenodo.10646113).

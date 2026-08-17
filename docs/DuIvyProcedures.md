@@ -1,61 +1,60 @@
 # DuIvyProcedures
 
-## 简介
+## Introduction
 
-DuIvyProcedures(DIP)是一个对分子动力学模拟进行一站式自动化分析的软件，由杜艾维团队独立开发完成。
+DuIvyProcedures (DIP) is a software for one-stop automated analysis of molecular dynamics simulations, independently developed by Du Ivy's team.
 
-DIP支持对分子动力学模拟轨迹进行多种常见的分析，包含30个分析模块，支持至少18种不同的分析手段；快速出图、方便快捷；支持多种平台；能够用于多种分子动力学模拟体系。
-
-
-## 使用授权
-
-DuIvyProcedures的使用授权分为两类：**学术授权**和**商业授权**。
-
-学术授权：
-
-> **1000.00**元/每个授权码1年有效期，可用于科研工作者个人的研究、教学、科研、科研项目、学术报告、学术会议、期刊发表等学术用途。国内高校的在读学生（本科生、研究生、博士等）可以获得特别优惠，也即**200.00**元每个使用授权码1年有效期。
-
-商业授权：
-
-> 每个授权码每年10000元起，可用于商业用途，包括但不限于科学代算、科研培训、数据分析可视化、数据服务等，以及将DIP作为依赖整合到其它的系统或平台中等行为。具体详聊。
+DIP supports multiple common analyses of molecular dynamics simulation trajectories, including 30 analysis modules supporting at least 18 different analysis methods; rapid figure generation, convenient and fast; supports multiple platforms; can be used for various molecular dynamics simulation systems.
 
 
-**有购买需要的用户可以在微信公众号【杜艾维】后台联系杜若购买使用授权 ！**
+## License
 
-**有购买需要的用户可以在微信公众号【杜艾维】后台联系杜若购买使用授权 ！**
+DuIvyProcedures licenses are divided into two categories: **Academic License** and **Commercial License**.
 
-**有购买需要的用户可以在微信公众号【杜艾维】后台联系杜若购买使用授权 ！**
+Academic License:
+
+> **1000.00** CNY per license code for 1-year validity, can be used by researchers for personal research, teaching, scientific research, research projects, academic reports, academic conferences, journal publications and other academic purposes. Students (undergraduates, graduate students, PhD students, etc.) currently enrolled in domestic universities can get a special discount, i.e., **200.00** CNY per license code for 1-year validity.
+
+Commercial License:
+
+> Starting from 10,000 CNY per license code per year, can be used for commercial purposes, including but not limited to scientific computation services, research training, data analysis and visualization, data services, and integrating DIP as a dependency into other systems or platforms. Please contact us for details.
 
 
-授权码是绑定硬件的，因而每个授权码可供DIP的单一大版本、同一台机器的使用。例如用户购买了1.0.0版本的DIP，在一台计算机上使用；如果用户想要在新的机器上使用DIP，则需要购买新的使用授权码；如果用户想要将已经获得授权的**1.0.0**版本的DIP升级到**1.1.0**版本，则也需要购买新的使用授权码。DIP的1.0.0和1.1.0视为不同的大版本，将1.0.0和2.0.0视为不同的主版本。如果用户想要将已经获得授权的1.0.0版本升级到1.0.1版本，则不需要购买新的使用授权码。
+**Users who need to purchase can contact Du Ruo through the WeChat Official Account [杜艾维] to purchase a license !**
 
-用户所购买的授权仅包括使用授权，不包括除此之外的任何授权和服务。
+**Users who need to purchase can contact Du Ruo through the WeChat Official Account [杜艾维] to purchase a license !**
 
-杜艾维保留对本软件的所有权利。任何个人和机构不得以任何形式或任何目的复制、修改、分发、再许可、销售、出租、转让等。杜艾维保留对使用授权的最终解释权。
+**Users who need to purchase can contact Du Ruo through the WeChat Official Account [杜艾维] to purchase a license !**
 
 
-## 用户协议
+License codes are hardware-bound, so each license code is valid for a single major version of DIP on a single machine. For example, if a user purchases DIP version 1.0.0 for use on one computer; if the user wants to use DIP on a new machine, a new license code must be purchased; if the user wants to upgrade the already licensed **1.0.0** version of DIP to **1.1.0** version, a new license code must also be purchased. DIP versions 1.0.0 and 1.1.0 are considered different major versions, and 1.0.0 and 2.0.0 are considered different main versions. If a user wants to upgrade from an already licensed 1.0.0 version to 1.0.1 version, no new license code is needed.
 
-任何购买了DuIvyProcedures(以下简称DIP)软件使用授权的个人和机构，均须遵守本协议。本协议是您与杜艾维之间关于使用DuIvyProcedures软件的协议，请您仔细阅读本协议。您一旦购买使用授权和使用DuIvyProcedures软件，即视为您已阅读并同意本协议的全部内容。
+The license purchased by users only includes the usage license, and does not include any other licenses or services.
 
-1. 知识产权
-  用户承认杜艾维拥有DuIvyProcedures的所有知识产权，包括但不限于商标、版权、专利、商业机密、其他所有权利。除非法律禁止或杜艾维书面许可，用户不得以任何方式复制、修改、分发、再许可、销售、出租、转让、许可使用、修改或以其它方式使用DuIvyProcedures的任何部分或全部。“知识产权”指在专利法、版权法、商业机密法、商标法、反不正当竞争法等法中规定的所有权利以及其中的所有应用、更新、扩展和恢复，无论在现在还是以后在全球范围内实施和生效。用户同意不会修改、改编、翻译DIP、创作DIP的派生作品、通过反编译、反向工程、反汇编或其它方式从源代码中提取任何信息。用户同意不会删除、掩盖或更改杜艾维或任何第三方的版权声明、商标或其它所有权声明。
+Du Ivy reserves all rights to this software. No individual or organization may copy, modify, distribute, re-license, sell, rent, transfer, etc. in any form or for any purpose. Du Ivy reserves the final right to interpret the license.
 
-2. 使用
-  DIP的学术使用授权允许用户将DIP用于科研工作者个人的研究、教学、科研、科研项目、学术报告、学术会议、期刊发表等非盈利的学术目的。用户承诺遵守DuIvyProcedures的使用规则，包括但不限于遵守DuIvyProcedures的各项规则、使用说明、隐私政策、知识产权声明等。用户承诺不会利用DuIvyProcedures进行任何违法或不正当的活动，包括但不限于利用DuIvyProcedures进行任何可能危害公共利益和公共安全的活动。如果要销售DIP或者与DIP有关或派生的任何资料、服务或软件，则必须得到杜艾维的书面许可。如果用户对DIP有任何意见，或有如何改进的建议，可向杜艾维提出。请注意，如果这样做，还会授予杜艾维无偿使用和加入用户的建议或意见的权利。
 
-3. 收集用户信息
-  尊重用户个人隐私是DIP的一项基本原则。DIP仅收集用户机器的相关硬件识别信息（如芯片型号、MAC码等）用于授权机制。除此之外，DIP不会收集、存储或泄露用户的任何个人信息。杜艾维一般不会公开、编辑或透露用户的硬件识别信息，除非杜艾维在诚信的基础上认为透露这些信息在以下几种情况是必要的：遵守有关法律规定；保持维护杜艾维的知识产权，在紧急情况下竭力维护用户个人和社会大众的隐私安全，杜艾维认为必要的其他情况下。
+## User Agreement
 
-4. 服务变更
-  杜艾维保留随时变更、中断或终止服务而不需通知用户的权利。用户接受杜艾维行使变更、中断或终止服务的权利，杜艾维不需对用户或第三方负责。
+Any individual or organization that purchases a license for DuIvyProcedures (hereinafter referred to as DIP) software must comply with this agreement. This agreement is between you and Du Ivy regarding the use of DuIvyProcedures software. Please read this agreement carefully. Once you purchase a license and use DuIvyProcedures software, you are deemed to have read and agreed to all contents of this agreement.
 
-5. 责任限制
-  用户理解并同意自主选择下载和使用DIP和所有与DIP一同提供或通过DIP提供的第三方软件，风险自负，并且对于因下载或使用DIP和此类第三方软件而对计算机系统造成的损坏或数据的丢失，用户应承担全部责任。在适用法律允许的最大范围内，杜艾维明确表示不提供任何其他类型的保证，不论是明示的或默示的，包括但不限于适销性、适用性、可靠性、准确性、完整性、无病毒以及无错误的任何默示保证和责任。杜艾维不对使用本软件引发的任何问题承担任何责任。使用者应自行承担因使用本软件而导致的任何风险，杜艾维对此不承担任何责任。
+1. Intellectual Property
+  Users acknowledge that Du Ivy owns all intellectual property rights of DuIvyProcedures, including but not limited to trademarks, copyrights, patents, trade secrets, and all other rights. Unless prohibited by law or with written permission from Du Ivy, users may not copy, modify, distribute, re-license, sell, rent, transfer, license for use, modify or otherwise use any part or all of DuIvyProcedures in any way. "Intellectual property" refers to all rights specified in patent law, copyright law, trade secret law, trademark law, anti-unfair competition law, etc., and all applications, updates, extensions and restorations therein, whether now or later implemented and effective worldwide. Users agree not to modify, adapt, translate DIP, create derivative works of DIP, or extract any information from source code through decompilation, reverse engineering, disassembly or other means. Users agree not to remove, obscure or alter copyright notices, trademarks or other ownership statements of Du Ivy or any third party.
 
-6. 保障
-  用户同意保障和维护杜艾维的利益，负责支付由用户违反本服务条款或杜艾维其它服务条款而引起的律师费用、损害补偿费用、政府机关处罚费用和其它侵权赔偿费用等。
+2. Use
+  DIP's academic license allows users to use DIP for non-profit academic purposes such as personal research, teaching, scientific research, research projects, academic reports, academic conferences, journal publications by researchers. Users promise to comply with DuIvyProcedures' usage rules, including but not limited to complying with DuIvyProcedures' various rules, instructions for use, privacy policy, intellectual property statements, etc. Users promise not to use DuIvyProcedures for any illegal or improper activities, including but not limited to using DuIvyProcedures for any activities that may endanger public interest and public safety. If you want to sell DIP or any materials, services or software related to or derived from DIP, you must obtain written permission from Du Ivy. If users have any opinions about DIP or suggestions for improvement, they can propose to Du Ivy. Please note that doing so also grants Du Ivy the right to use and incorporate your suggestions or opinions free of charge.
 
-7. 法律
-  上述条款将受中华人民共和国法律的约束并依据其解释。如出现纠纷，用户和杜艾维一致同意将纠纷交由当地人民法院管辖。如本协议中的任何条款因任何原因完全或部分无效或不具有执行力，均不影响本协议其他条款的效力。本协议及本协议任何条款内容的最终解释权及修改权归杜艾维所有。
+3. Collection of User Information
+  Respecting user privacy is a basic principle of DIP. DIP only collects relevant hardware identification information of user machines (such as chip model, MAC code, etc.) for the licensing mechanism. Beyond this, DIP will not collect, store or disclose any personal information of users. Du Ivy generally will not disclose, edit or reveal user hardware identification information unless Du Ivy believes in good faith that revealing this information is necessary in the following situations: compliance with relevant legal provisions; maintaining Du Ivy's intellectual property rights; in emergency situations making every effort to maintain user personal and public privacy and safety; other situations that Du Ivy deems necessary.
 
+4. Service Changes
+  Du Ivy reserves the right to change, interrupt or terminate services at any time without notice to users. Users accept Du Ivy's right to change, interrupt or terminate services, and Du Ivy does not need to be responsible to users or third parties.
+
+5. Limitation of Liability
+  Users understand and agree to choose to download and use DIP and all third-party software provided with or through DIP at their own risk, and users should bear full responsibility for any damage to computer systems or data loss caused by downloading or using DIP and such third-party software. To the maximum extent permitted by applicable law, Du Ivy expressly disclaims any other types of warranties, whether express or implied, including but not limited to any implied warranties and liabilities for merchantability, fitness for a particular purpose, reliability, accuracy, completeness, virus-free and error-free. Du Ivy assumes no responsibility for any problems arising from the use of this software. Users should bear any risks arising from the use of this software themselves, and Du Ivy assumes no responsibility for this.
+
+6. Indemnification
+  Users agree to indemnify and hold Du Ivy harmless, responsible for paying attorney fees, damage compensation fees, government agency penalty fees and other infringement compensation fees caused by users violating these service terms or Du Ivy's other service terms.
+
+7. Law
+  The above terms will be bound by the laws of the People's Republic of China and interpreted in accordance with them. In case of disputes, users and Du Ivy unanimously agree to submit the disputes to the jurisdiction of the local People's Court. If any provision in this agreement is wholly or partially invalid or unenforceable for any reason, it shall not affect the validity of other provisions in this agreement. The final right to interpret and modify this agreement and any provision of this agreement belongs to Du Ivy.

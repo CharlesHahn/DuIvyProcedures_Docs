@@ -1,58 +1,92 @@
-.. DuIvyProcedures_Docs documentation master file, created by
-   sphinx-quickstart on Thu Feb 01 21:42:12 2024.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+.. DuIvyProcedures English Documentation
 
-Welcome to DuIvyProcedures's documentation!
-===========================================
+Welcome to DuIvyProcedures's Documentation
+==========================================
+
+DuIvyProcedures is a comprehensive toolkit for analyzing GROMACS molecular dynamics simulation results. It provides a wide range of analysis methods including RMSD, RMSF, PCA, DCCM, free energy landscape, and many more.
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
+   :caption: Getting Started
 
-   DuIvyProcedures.md
-   Install.md
-   Framework.md
-   gmx_Cluster.md
-   gmx_DCCM.md
-   gmx_Density.md
-   gmx_dPCA.md
-   gmx_DSSP.md
-   gmx_FEL.md
-   gmx_Gyrate.md
-   gmx_Hbond.md
-   gmx_Mdmat.md
-   gmx_PCA.md
-   gmx_RMSD.md
-   gmx_RMSF.md
-   gmx_SASA.md
-   DCCM.md
-   Density.md
-   DensityMap.md
-   Gyrate.md
-   FEL.md
-   Hbond.md
-   Hydrophobic.md
-   MSM.md
-   PCA.md
-   PiCation.md
-   PiStacking.md
-   RDCM.md
-   RDF.md
-   RMSD.md
-   RMSF.md
-   SaltBridge.md
-   SPM.md
-   tICA.md
-   tSNE.md
-   UMAP.md
-   User_Mod.md
-   Develop.md
+   DuIvyProcedures
+   Install
+   Framework
+
+.. toctree::
+   :maxdepth: 2
+   :caption: GROMACS Analysis Modules
+
+   gmx_RMSD
+   gmx_RMSF
+   gmx_PCA
+   gmx_dPCA
+   gmx_DCCM
+   gmx_DSSP
+   gmx_Gyrate
+   gmx_Hbond
+   gmx_Density
+   gmx_Mdmat
+   gmx_SASA
+   gmx_FEL
+   gmx_Cluster
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Advanced Analysis Modules
+
+   RMSD
+   RMSF
+   PCA
+   DCCM
+   FEL
+   Gyrate
+   Hbond
+   Density
+   DensityMap
+   RDF
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Interaction Analysis
+
+   SaltBridge
+   Hbond
+   Hydrophobic
+   PiStacking
+   PiCation
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Dimensionality Reduction
+
+   tICA
+   tSNE
+   UMAP
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Kinetic Analysis
+
+   MSM
+   SPM
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Comprehensive Analysis
+
+   RDCM
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Developer Guide
+
+   Develop
+   User_Mod
 
 
+Indices and tables
+==================
 
-.. Indices and tables
-.. ==================
-
-.. * :ref:`genindex`
-.. * :ref:`modindex`
-.. * :ref:`search`
+* :ref:`genindex`
+* :ref:`search`

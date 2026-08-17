@@ -1,10 +1,10 @@
 # RDCM
 
-本模块主要用于残基距离接触矩阵的分析。基于残基间距离可以拓展出很多有意思的分析，可用于观察蛋白质结构的变化、基于残基距离接触矩阵计算RMSD、RMSF、DCCM、PCA、聚类等，还可计算残基间距离与其它变量的相关性等。同时此模块还支持定义contact并计算contact形成的时间占有率等数据、以及自定义encounter并计算基于encounter的时间占有率、互相关等信息。
+This module is mainly used for residue distance contact matrix analysis. Based on residue distances, many interesting analyses can be extended, including observing protein structural changes, calculating RMSD, RMSF, DCCM, PCA, clustering based on residue distance contact matrices, and calculating correlations between residue distances and other variables. This module also supports defining contacts and calculating contact formation time occupancy and other data, as well as custom encounters and calculating time occupancy and cross-correlation information based on encounters.
 
-可参考：https://zhuanlan.zhihu.com/p/578885815
+Reference: https://zhuanlan.zhihu.com/p/578885815
 
-使用本模块前请注意[前置处理](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7)已经完成！
+Before using this module, please ensure that the [preprocessing](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7) has been completed!
 
 ## Input YAML
 
@@ -28,45 +28,45 @@
     calc_encounter_DCCM: no
 ```
 
-以上是RDCM模块的输入YAML文件，下面逐一阐释参数含义：
+The above is the input YAML file for the RDCM module. Below is a detailed explanation of each parameter:
 
-`type_select`: 选择用于计算残基接触距离矩阵的类型。`center`表示使用残基质心，`atom`表示使用原子坐标、`min`表示使用残基间的最小距离。当为`center`或者`min`时，原子选择请包含残基的所有原子，否则只会计算残基中被选中原子的质心距离或者最小距离。
+`type_select`: Select the type for calculating residue contact distance matrix. `center` means using residue centroid, `atom` means using atom coordinates, `min` means using minimum distance between residues. When using `center` or `min`, please include all atoms of residues in atom selection, otherwise only centroid distance or minimum distance of selected atoms within residues will be calculated.
 
-**请注意，如果选择`min`类型，则计算会非常慢！** 可结合后面的帧选择参数来减少要计算的帧数。
+**Note: If `min` type is selected, the calculation will be very slow!** You can combine with the frame selection parameters below to reduce the number of frames to calculate.
 
-自v1.0.3开始，`type_select`支持`res_com`、`res_cog`、`res_coc`、`res_min`、以及`atom`五种参数，同时之前的`center`、`atom`、`min`参数也继续支持，其中`center`等同于`res_com`、`min`等同于`res_min`。`res_com`、`res_cog`、`res_coc`以及`res_min`分别表示使用残基的重心、残基的几何中心、残基的电荷中心、残基对原子之间的最小距离去计算距离矩阵。
+Starting from v1.0.3, `type_select` supports `res_com`, `res_cog`, `res_coc`, `res_min`, and `atom` parameters. The previous `center`, `atom`, `min` parameters are also still supported, where `center` is equivalent to `res_com`, `min` is equivalent to `res_min`. `res_com`, `res_cog`, `res_coc`, and `res_min` represent using residue center of mass, geometric center, charge center, and minimum distance between residue atom pairs to calculate distance matrix respectively.
 
-如果蛋白质较大且帧数较多，建议结合后面的帧选择参数来减少计算量，否则有内存不够的可能。
+If the protein is large and has many frames, it is recommended to combine with frame selection parameters below to reduce computation, otherwise there may be insufficient memory.
 
-`atom_selection`: 选择用于计算残基接触距离矩阵的原子组。如果`type_select`为`center`，则会直接按照残基计算质心；如果`type_select`为`atom`，则会按照此原子的坐标计算残基距离，因而不建议同时选择一个残基的多个原子；如果`type_select`为`min`，则会按照残基计算。
+`atom_selection`: Select the atom group for calculating residue contact distance matrix. If `type_select` is `center`, residue centroid will be calculated directly; if `type_select` is `atom`, residue distance will be calculated based on this atom's coordinates, so selecting multiple atoms of one residue is not recommended; if `type_select` is `min`, calculation will be by residue.
 
-`frames_output_step`: 输出接触矩阵的步长，即每隔多少帧输出一次接触矩阵。`-1`表示不输出接触矩阵。假设轨迹有n帧，则RDCM也有n帧，全部输出的话会比较耗时，因而建议可以设置较大的输出步长，以节省时间。在输出的帧中，DIP也会计算两帧矩阵的差，表征的是两帧之间RDCM矩阵的变化。
+`frames_output_step`: Step for outputting contact matrices, i.e., output contact matrix every how many frames. `-1` means not outputting contact matrices. If the trajectory has n frames, RDCM also has n frames. Outputting all will be time-consuming, so it is recommended to set a larger output step to save time. In output frames, DIP will also calculate the difference between two frames of matrices, representing the change of RDCM matrix between two frames.
 
-`calc_RMSD`: 是否基于RDCM计算RMSD。
+`calc_RMSD`: Whether to calculate RMSD based on RDCM.
 
-`RMSD_Matrix_step`: `-1`表示不基于RDCM计算RMSD矩阵；当值为正的时候，DIP会按照设置的帧步长去计算RMSD矩阵并输出。当步长太小的时候，计算RMSD矩阵的耗时会明显增加！
+`RMSD_Matrix_step`: `-1` means not calculating RMSD matrix based on RDCM; when the value is positive, DIP will calculate RMSD matrix and output according to the set frame step. When the step is too small, the time for calculating RMSD matrix will increase significantly!
 
-`calc_RMSF`: 是否基于RDCM计算RMSF。
+`calc_RMSF`: Whether to calculate RMSF based on RDCM.
 
-`calc_DCCM`: 是否基于RDCM计算DCCM。
+`calc_DCCM`: Whether to calculate DCCM based on RDCM.
 
-`Pearson_Observe`: 此模块默认会计算两两残基距离与时间的pearson相关系数，用以表征残基距离与时间的协同变化趋势。同样的，用户可以自定义用以计算pearson相关系数的变量，例如可以设置某个关键的距离，或者RMSD值等。自定义变量的输入需要以xvg文件的形式，第一列是时间、第二列是随时间变化的变量的值；同时请注意，这个变量的维度（随时间变化的数据个数）需要与轨迹的帧数一致！
+`Pearson_Observe`: This module by default calculates Pearson correlation coefficients between pairwise residue distances and time to characterize the co-variation trend of residue distances and time. Similarly, users can customize variables for calculating Pearson correlation coefficients, such as setting a key distance or RMSD value. Custom variable input needs to be in xvg file format, with the first column being time and the second column being the variable value over time. Please note that the dimension of this variable (number of data points over time) needs to be consistent with the number of trajectory frames!
 
-`calc_PCA`: 是否基于RDCM计算PCA。
+`calc_PCA`: Whether to calculate PCA based on RDCM.
 
-`clustering_step`: `-1`表示不基于RDCM进行残基和帧的聚类；当值为正的时候，此模块会按照设置的步长去进行帧聚类并输出，同时也会对残基进行聚类。当步长太小，可能导致有较多帧需要聚类，耗时会增加且最后可视化效果不好。
+`clustering_step`: `-1` means not performing residue and frame clustering based on RDCM; when the value is positive, this module will perform frame clustering and output according to the set step, and will also cluster residues. When the step is too small, there may be many frames to cluster, which will increase time consumption and the final visualization effect may not be good.
 
-`calc_contact`: 是否基于RDCM计算contact。
+`calc_contact`: Whether to calculate contact based on RDCM.
 
-`contact_cutoff`: 定义contact的距离阈值，即两残基间距离小于此阈值的两残基视为contact。
+`contact_cutoff`: Defines the distance threshold for contact, i.e., two residues with distance less than this threshold are considered as contact.
 
-`calc_encounter`: 是否基于RDCM计算encounter。
+`calc_encounter`: Whether to calculate encounter based on RDCM.
 
-`encounter_low_cutoff`和`encounter_high_cutoff`：encounter可以视为更加严格的contact；当残基间距离小于`encounter_low_cutoff`时，视为形成encounter；当距离大于`encounter_high_cutoff`时，视为encounter断裂。这两个阈值可以结合文献进行相应的设置！
+`encounter_low_cutoff` and `encounter_high_cutoff`: Encounter can be considered as a stricter contact; when residue distance is less than `encounter_low_cutoff`, it is considered as forming an encounter; when distance is greater than `encounter_high_cutoff`, it is considered as encounter breaking. These two thresholds can be set according to the literature!
 
-`calc_encounter_DCCM`: 是否基于encounter矩阵计算DCCM。
+`calc_encounter_DCCM`: Whether to calculate DCCM based on encounter matrix.
 
-本模块还有三个隐藏参数可以对轨迹做帧的选择：
+This module also has three hidden parameters for frame selection:
 
 ```yaml
       frame_start:  # start frame index
@@ -74,9 +74,9 @@
       frame_step:  # frame index step, default=1
 ```
 
-这些参数可以指定计算轨迹的起始帧、终止帧（不包含）以及帧的步长。默认情况下，用户不需要设置这些参数，模块会自动分析整个轨迹。
+These parameters can specify the start frame, end frame (exclusive), and frame step for trajectory calculation. By default, users do not need to set these parameters, and the module will automatically analyze the entire trajectory.
 
-例如我们计算从1000帧开始，到5000帧结束，每隔10帧的数据：
+For example, to calculate from frame 1000 to frame 5000, every 10 frames:
 
 ```yaml
       frame_start: 1000 # start frame index
@@ -84,11 +84,11 @@
       frame_step: 10 # frame index step, default=1
 ```
 
-如果三个参数中只需要设置一个或两个，其余的参数都可以省略。
+If only one or two of the three parameters need to be set, the others can be omitted.
 
 ## Output
 
-下面以一个具体的输入来阐述结果。这里我们对蛋白质的所有残基的质心进行了距离矩阵的计算，体系共有10001帧，130个残基：
+Below is an explanation of results with a specific input. Here we calculated the distance matrix of all residue centroids for a protein, with 10001 frames and 130 residues:
 
 ```yaml
 - RDCM:
@@ -110,109 +110,109 @@
     calc_encounter_DCCM: yes
 ```
 
-首先DIP会输出RDCM的初始帧和结束帧，每隔1000帧输出一次的中间帧会被保存到RDCM_frames文件夹中。**矩阵会被同时输出成csv文件和xpm文件，并且可视化**。
+First, DIP will output the initial and final frames of RDCM. Intermediate frames output every 1000 frames will be saved to the RDCM_frames folder. **Matrices will be output to both csv files and xpm files, and visualized.**
 
-初始帧：
+Initial frame:
 ![RDCM_initial_frame](static/RDCM_Distance_First.png)
 
 
-结束帧：
+Final frame:
 ![RDCM_final_frame](static/RDCM_Distance_Last.png)
 
-中间输出的某一帧：
+A certain intermediate output frame:
 ![RDCM_middle_frame](static/RDCM_Distance_Time_60000.0.png)
 
-中间帧与其前一帧的差：
+Difference between intermediate frame and its previous frame:
 ![RDCM_diff](static/RDCM_Distance_Time_60000.0-50000.0.png)
 
-DIP还会计算RDCM所有帧的平均和标准偏差，并输出：
+DIP will also calculate the average and standard deviation of all RDCM frames and output:
 
-平均值：
+Average:
 ![RDCM_ave](static/RDCM_Distance_Average.png)
 
-标准偏差：
+Standard deviation:
 ![RDCM_std](static/RDCM_Distance_Deviation.png)
 
-如果设置了`calc_RMSD`为`yes`，则会计算基于RDCM的RMSD曲线：
+If `calc_RMSD` is set to `yes`, the RMSD curve based on RDCM will be calculated:
 ![RDCM_RMSD](static/RDCM_RMSD.png)
 
-如果设置了输出RMSD矩阵，则会输出RMSD矩阵：
+If RMSD matrix output is set, the RMSD matrix will be output:
 ![RDCM_RMSD_Matrix](static/RDCM_RMSD_Matrix.png)
 
-如果设置了`calc_RMSF`为`yes`，则会计算基于RDCM的RMSF曲线：
+If `calc_RMSF` is set to `yes`, the RMSF curve based on RDCM will be calculated:
 ![RDCM_RMSF](static/RDCM_RMSF.png)
 
-如果设置了`calc_DCCM`为`yes`，则会计算基于RDCM的DCCM矩阵：
+If `calc_DCCM` is set to `yes`, the DCCM matrix based on RDCM will be calculated:
 ![RDCM_DCCM](static/RDCM_DCCM.png)
 
-DIP默认会计算残基距离与时间的pearson相关系数，并输出相关性矩阵：
+DIP by default calculates Pearson correlation coefficients between residue distances and time and outputs the correlation matrix:
 ![RDCM_Pearson_Time](static/RDCM_Pearson_Time.png)
 
-由于计算Pearson相关系数可以得到p_value，因而也有对应的p_value矩阵：
+Since p_values can be obtained from Pearson correlation coefficient calculation, there is also a corresponding p_value matrix:
 ![RDCM_Pearson_Time_pvalue](static/RDCM_Pearson_Time_p_Value.png)
 
-如果设置了`Perason_Observe`，还会计算残基距离与自定义变量的pearson相关系数，这里案例中我们使用的是基于RDCM的RMSD数据，得到输出如下：
+If `Perason_Observe` is set, Pearson correlation coefficients between residue distances and custom variables will also be calculated. Here in the example, we used RMSD data based on RDCM, yielding the following output:
 ![RDCM_Pearson_RMSD](static/RDCM_Pearson_Observe.png)
 
-与RMSD的Pearson相关性计算的p_value矩阵：
+P-value matrix for Pearson correlation with RMSD:
 ![RDCM_Pearson_RMSD_pvalue](static/RDCM_Pearson_Observe_p_Value.png)
 
-如果设置了`calc_PCA`为`yes`，则会计算基于RDCM的PCA，得到三个主成分的散点图：
+If `calc_PCA` is set to `yes`, PCA based on RDCM will be calculated, yielding scatter plots of three principal components:
 ![RDCM_PCA12](static/RDCM_PCA12.png)
 ![RDCM_PCA13](static/RDCM_PCA13.png)
 ![RDCM_PCA23](static/RDCM_PCA23.png)
 
-这里我们也设置了聚类的步长，因而会有对残基聚类和对帧聚类的图：
+Here we also set the clustering step, so there will be residue clustering and frame clustering plots:
 ![RDCM_Clustering_Frame](static/RDCM_Time_dendrogram.png)
 ![RDCM_Clustering_Residue](static/RDCM_Residues_dendrogram.png)
 
-下面是contact的部分，包括contact的占有率矩阵：
+Below is the contact section, including contact occupancy matrix:
 ![RDCM_Contact_Occupancy](static/RDCM_Contact_Time_Occupancy.png)
 
-以及将contact矩阵的占有率转换到一维，得到所谓的局部接触时间曲线，可以反映局部的接触稳定性：
+And converting contact matrix occupancy to one dimension to obtain the so-called local contact time curve, which can reflect local contact stability:
 ![RDCM_Contact_Time](static/RDCM_contact_occupancy_curve.png)
 
-contact部分还会计算几个无量纲数，例如C50即为：contact的时间占有率超过50%的残基对占总残基对的比例。结果可以在屏显的输出或log中看到：
+The contact section will also calculate several dimensionless numbers, such as C50: the proportion of residue pairs with contact time occupancy exceeding 50% to total residue pairs. Results can be seen in screen output or log:
 ```txt
 >>> C50 of contact matrix: 0.6702317290552585
 >>> C70 of contact matrix: 0.6292335115864528
 >>> C90 of contact matrix: 0.5583778966131907
 ```
 
-最后是Encounter的部分。
+Finally is the Encounter section.
 
-首先是Encounter第一次形成的时间矩阵：
+First, the first formation time matrix of Encounter:
 ![RDCM_Encounter_Time_First](static/RDCM_Encounter_FirstTime.png)
 
-最后一次形成的时间矩阵：
+Last formation time matrix:
 ![RDCM_Encounter_Time_Last](static/RDCM_Encounter_LastTime.png)
 
-形成时间的平均时间矩阵：
+Average formation time matrix:
 ![RDCM_Encounter_Time_Average](static/RDCM_Encounter_AvesTime.png)
 
-Encounter的平均时间长度矩阵：
+Average time length matrix of Encounter:
 ![RDCM_Encounter_Time_Length](static/RDCM_Encounter_TimeLens.png)
 
-Encounter的时间占有率矩阵：
+Encounter time occupancy matrix:
 ![RDCM_Encounter_Occupancy](static/RDCM_Encounter_Time_Occupancy.png)
 
-同样的局部Encounter曲线：
+Similar local Encounter curve:
 ![RDCM_Encounter_Occupancy_Curve](static/RDCM_encounter_occupancy_curve.png)
 
-形成Encounter的次数的矩阵：
+Matrix of number of Encounter formations:
 ![RDCM_Encounter_Count](static/RDCM_Encounter_Count.png)
 
-同样的有几个无量纲数，但含义稍有不同，例如C50指：时间占有率超过50%的encounter的总时间，占所有encounter的总时间的比例。结果可以在屏显的输出或log中看到：
+There are also several dimensionless numbers with slightly different meanings, for example C50: the total time of encounters with time occupancy exceeding 50% as a proportion of total time of all encounters. Results can be seen in screen output or log:
 ```txt
 >>> C50 of encounter matrix: 0.8080651265333009
 >>> C70 of encounter matrix: 0.7812075139181635
 >>> C90 of encounter matrix: 0.7155487165048366
 ```
 
-最后是基于Encounter的DCCM矩阵：
+Finally, the DCCM matrix based on Encounter:
 ![RDCM_Encounter_DCCM](static/RDCM_Encounter_DCCM.png)
 
 
 ## References
 
-如果您使用了DIP的本分析模块，请一定引用MDAnalysis、CONAN(https://doi.org/10.1016/j.bpj.2018.01.033)、DuIvyTools(https://zenodo.org/doi/10.5281/zenodo.6339993)，以及合理引用本文档(https://zenodo.org/doi/10.5281/zenodo.10646113)。
+If you use this analysis module from DIP, please cite MDAnalysis, CONAN (https://doi.org/10.1016/j.bpj.2018.01.033), DuIvyTools (https://zenodo.org/doi/10.5281/zenodo.6339993), and properly cite this documentation (https://zenodo.org/doi/10.5281/zenodo.10646113).

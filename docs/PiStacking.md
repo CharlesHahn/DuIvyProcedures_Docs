@@ -1,8 +1,8 @@
 # PiStacking
 
-此模块用于分析Pi-Pi相互作用。
+This module is used to analyze Pi-Pi interactions.
 
-使用本模块前请注意[前置处理](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7)已经完成！
+Before using this module, please ensure that the [preprocessing](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7) has been completed!
 
 ## Input YAML
 
@@ -36,37 +36,37 @@
     intermittency: 0  # allow 0 frame intermittency
 ```
 
-同前面的盐桥分析模块一样，这里也提供了两种方式去定义可形成PiStacking的环。第一种是通过索引，第二种是DIP通过rdkit去判别。
+Like the salt bridge analysis module above, this module also provides two ways to define rings that can form PiStacking. The first is through index, the second is through DIP using rdkit for identification.
 
-`distance_max_cutoff`：定义Pi-Pi相互作用距离的最大值，单位为纳米。
+`distance_max_cutoff`: Defines the maximum distance for Pi-Pi interaction, in nanometers.
 
-`distance_min_cutoff`：定义Pi-Pi相互作用距离的最小值，单位为纳米。
+`distance_min_cutoff`: Defines the minimum distance for Pi-Pi interaction, in nanometers.
 
-`ring_center_offset`：定义环中心偏移量，单位为纳米。offset定义为一个环的质心在另一个环的平面上的投影，与另一个环的质心的距离。
+`ring_center_offset`: Defines the ring center offset, in nanometers. Offset is defined as the distance between the projection of one ring's centroid onto another ring's plane and that other ring's centroid.
 
-`angle4T_stacking`：定义T-stacking的角度范围，单位为度。
+`angle4T_stacking`: Defines the angle range for T-stacking, in degrees.
 
-`angle4P_stacking`：定义P-stacking的角度范围，单位为度。
+`angle4P_stacking`: Defines the angle range for P-stacking, in degrees.
 
-`byIndex`：是否通过索引定义可形成PiStacking的环。如果`yes`，则`Pi_rings_Index`必须提供。如果`no`, 则DIP自行寻找。
+`byIndex`: Whether to define rings that can form PiStacking through index. If `yes`, `Pi_rings_Index` must be provided. If `no`, DIP will search automatically.
 
-`group1`和`group2`：定义两个原子组，用于从中寻找环结构。这两个参数只有当`byIndex`为`no`时才有效。上面的示例中，两个原子组分别是蛋白质和配体，如此，DIP会自动从这两个组中寻找芳香环，并计算组间的PiStacking；如果需要计算组内的PiStacking，则只需将`group1`和`group2`设置为相同的原子组即可。这里的原子选择的语法完全遵从MDAnalysis的原子选择语法。请参考：https://userguide.mdanalysis.org/2.7.0/selections.html
+`group1` and `group2`: Define two atom groups for finding ring structures. These two parameters are only valid when `byIndex` is `no`. In the example above, the two atom groups are protein and ligand, so DIP will automatically find aromatic rings from these two groups and calculate PiStacking between groups. If you need to calculate PiStacking within a group, just set `group1` and `group2` to the same atom group. The atom selection syntax here follows MDAnalysis atom selection syntax. Please refer to: https://userguide.mdanalysis.org/2.7.0/selections.html
 
-`only_aromatic_rings`：当DIP自动寻找可形成PiStacking的环时，是否只考虑芳香环（环上每一根键都是芳香键），还是考虑所有环。**非芳香环极有可能存在误判，因而需要用户对结果进行检查！**
+`only_aromatic_rings`: When DIP automatically searches for rings that can form PiStacking, whether to only consider aromatic rings (every bond in the ring is an aromatic bond), or consider all rings. **Non-aromatic rings are very likely to be misidentified, so users need to check the results!**
 
-`other_ring_max_atom_num`：当DIP自动寻找可形成PiStacking的环时，对于没有被判别为芳香环的环，其最大允许的原子数量。其最小允许的原子数量为5。
+`other_ring_max_atom_num`: When DIP automatically searches for rings that can form PiStacking, the maximum allowed number of atoms for rings not identified as aromatic rings. The minimum allowed number of atoms is 5.
 
-`planarity_cutoff`：当DIP自动寻找可形成PiStacking的环时，对于没有被判别为芳香环的环，其允许的平面度；DIP会计算环上所有原子与其邻居原子的法向，任意两个法向之间的夹角需要小于这里设定的值才会被判别为平面环，并被DIP当作可形成PiStacking的环加以计算。**请注意，平面环并不等于芳香环，还请自行根据输出的环的pdb文件加以检查！**
+`planarity_cutoff`: When DIP automatically searches for rings that can form PiStacking, the allowed planarity for rings not identified as aromatic rings. DIP will calculate the normal vectors of all atoms in the ring with their neighbor atoms. The angle between any two normal vectors needs to be less than the value set here for the ring to be identified as a planar ring and be calculated by DIP as a ring that can form PiStacking. **Note that planar rings do not equal aromatic rings. Please check according to the output ring pdb file!**
 
-`calc_lifetime`：是否计算PiStacking的生命周期。
+`calc_lifetime`: Whether to calculate the lifetime of PiStacking.
 
-`tau_max`：生命周期的最大时间，单位为帧。计算生命周期的过程中会计算从t0时刻开始，`tau_max`帧内，PiStacking继续存在的概率。此值设置越大，则计算的窗口越大。
+`tau_max`: Maximum time for lifetime calculation, in frames. During lifetime calculation, the probability that the PiStacking continues to exist within `tau_max` frames from time t0 will be calculated. The larger this value, the larger the calculation window.
 
-`window_step`：生命周期的窗口平移步长，单位为帧。
+`window_step`: Window translation step for lifetime, in frames.
 
-`intermittency`：允许的帧间隔，即允许多少帧没有发生PiStacking仍旧视为PiStacking；默认为0，即必须连续发生才被视为PiStacking。
+`intermittency`: Allowed frame intermittency, i.e., how many frames without PiStacking formation are still considered as PiStacking; default is 0, meaning PiStacking must be continuous to be counted.
 
-本模块还有三个隐藏参数可以对轨迹做帧的选择：
+This module also has three hidden parameters for frame selection:
 
 ```yaml
       frame_start:  # start frame index
@@ -74,9 +74,9 @@
       frame_step:  # frame index step, default=1
 ```
 
-这些参数可以指定计算轨迹的起始帧、终止帧（不包含）以及帧的步长。默认情况下，用户不需要设置这些参数，模块会自动分析整个轨迹。
+These parameters can specify the start frame, end frame (exclusive), and frame step for trajectory calculation. By default, users do not need to set these parameters, and the module will automatically analyze the entire trajectory.
 
-例如我们计算从1000帧开始，到5000帧结束，每隔10帧的数据：
+For example, to calculate from frame 1000 to frame 5000, every 10 frames:
 
 ```yaml
       frame_start: 1000 # start frame index
@@ -84,11 +84,11 @@
       frame_step: 10 # frame index step, default=1
 ```
 
-如果三个参数中只需要设置一个或两个，其余的参数都可以省略。
+If only one or two of the three parameters need to be set, the others can be omitted.
 
 ## Output
 
-首先是输出DIP判定的可形成PiStacking的环，以供用户判断正确性。DIP会将之输出成pdb文件，用户可以自行检查。同时DIP还会输出各个环及其对应的原子索引到txt文件，供用户进一步确认和重复利用：
+First, output the rings that DIP identified as capable of forming PiStacking for users to judge correctness. DIP will output them to pdb files for users to check. DIP will also output each ring and its corresponding atom indices to a txt file for further confirmation and reuse:
 
 ```txt
 PiStacking_Names, Indexs
@@ -104,7 +104,7 @@ PHE107, [924, 925, 927, 929, 931, 933]
 PHE108, [941, 942, 944, 946, 948, 950]
 ```
 
-之后会输出所有PiStacking的质心距离、角度、偏移量等数据到xvg文件，并可视化：
+Then output centroid distance, angle, offset and other data for all PiStacking to xvg files and visualize:
 
 ![Pistacking_Distance](static/PiStacking_Distances.png)
 
@@ -112,13 +112,13 @@ PHE108, [941, 942, 944, 946, 948, 950]
 
 ![PiStacking_Offset](static/PiStacking_Offsets.png)
 
-之后会输出所有PiStacking的占有率图，以及不同种类的PiStacking的占有率图：
+Then output occupancy plots for all PiStacking and occupancy plots for different types of PiStacking:
 
 ![Pistacking_Occupancy](static/PiStacking_Existence_Map.png)
 
 ![Pistacking_Type_Occupancy](static/PiStacking_Type_Map.png)
 
-所有PiStacking的汇总信息可以在输出的csv文件中找到：
+Summary information for all PiStacking can be found in the output CSV file:
 
 ```csv
 id,Name,Occupancy,Distance(nm),Offset(nm),P-Stacking_Occupancy,T-Stacking_Occupancy,P-Angle(deg),T-Angle(deg)
@@ -132,10 +132,10 @@ id,Name,Occupancy,Distance(nm),Offset(nm),P-Stacking_Occupancy,T-Stacking_Occupa
 7,PHE82-PHE108,3.65%,0.482846,0.147029,1.59%,2.06%,21.05,68.96
 ```
 
-如果计算生命周期，则自相关函数会被输出并可视化；同时自相关函数的积分，也即生命周期，也会被输出到csv文件中。请注意，这里的生命周期是直接对自相关函数数据进行simpson积分得到的，准确度一般。
+If lifetime is calculated, the autocorrelation function will be output and visualized; the integral of the autocorrelation function, i.e., the lifetime, will also be output to a CSV file. Note that the lifetime here is obtained by direct Simpson integration of the autocorrelation function data, with moderate accuracy.
 
-如果观察到在自相关函数的自变量范围内函数值还没有降到0，说明应当适当调大`tau_max`参数以获得更准确的生命周期积分。
+If you observe that the function value has not dropped to 0 within the range of the autocorrelation function's independent variable, it indicates that you should appropriately increase the `tau_max` parameter to obtain a more accurate lifetime integral.
 
 ## References
 
-如果您使用了DIP的本分析模块，请一定引用MDAnalysis、rdkit，DuIvyTools(https://zenodo.org/doi/10.5281/zenodo.6339993)，以及合理引用本文档(https://zenodo.org/doi/10.5281/zenodo.10646113)。
+If you use this analysis module from DIP, please cite MDAnalysis, rdkit, DuIvyTools (https://zenodo.org/doi/10.5281/zenodo.6339993), and properly cite this documentation (https://zenodo.org/doi/10.5281/zenodo.10646113).

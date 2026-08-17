@@ -1,10 +1,10 @@
 # gmx_DCCM
 
-本模块用于生成动态互相关矩阵（DCCM）。
+This module is used to generate the dynamic cross-correlation matrix (DCCM).
 
-本模块调用`gmx covar`命令生成用户所选原子之间的协方差矩阵，之后将之转化成DCCM并可视化。
+This module calls the `gmx covar` command to generate the covariance matrix between user-selected atoms, then converts it to DCCM and visualizes it.
 
-使用本模块前请注意[前置处理](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7)已经完成！
+Before using this module, please ensure that the [preprocessing](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7) has been completed!
 
 ## Input YAML
 
@@ -13,17 +13,16 @@
     group: C-alpha
 ```
 
-本模块的输入参数非常简单，只需要定义一个用于计算协方差矩阵的原子组就行了。一般的绘制蛋白质DCCM的分析，只需要对蛋白质的C-alpha组进行计算即可。
+The input parameters for this module are very simple - you only need to define an atom group for calculating the covariance matrix. For general protein DCCM analysis, calculating for the protein's C-alpha group is sufficient.
 
 ## Output
 
-该模块会输出协方差矩阵(xpm文件)、DCCM(xpm文件)以及DCCM的可视化图片。
+This module outputs the covariance matrix (xpm file), DCCM (xpm file), and DCCM visualization image.
 
 ![gmx_DCCM](static/gmx_DCCM_dccm.png)
 
-默认输出的图片是比较朴素的，用户如果喜欢bio3D的风格，可以使用`dit`软件自行更改风格。
+The default output image is relatively simple. If users prefer the bio3D style, they can use the `dit` tool to change the style.
 
 ## References
 
-如果您使用了DIP的本分析模块，请一定引用GROMACS模拟引擎、DuIvyTools(https://zenodo.org/doi/10.5281/zenodo.6339993)，以及合理引用本文档(https://zenodo.org/doi/10.5281/zenodo.10646113)。
-
+If you use this analysis module from DIP, please cite GROMACS, DuIvyTools (https://zenodo.org/doi/10.5281/zenodo.6339993), and properly cite this documentation (https://zenodo.org/doi/10.5281/zenodo.10646113).

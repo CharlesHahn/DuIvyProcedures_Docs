@@ -1,8 +1,8 @@
 # PCA
 
-此模块可以用于计算所选原子组的主成分分析（PCA）。可以对坐标进行主成分分析，也可以对蛋白质骨架二面角做PCA。
+This module can be used to perform principal component analysis (PCA) on selected atom groups. PCA can be performed on coordinates or on protein backbone dihedral angles.
 
-使用本模块前请注意[前置处理](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7)已经完成！
+Before using this module, please ensure that the [preprocessing](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7) has been completed!
 
 
 ## Input YAML
@@ -19,17 +19,17 @@
     target: dihedrals
 ```
 
-这里同时列举了基于坐标和基于二面角的PCA分析所需要的参数。
+Here we list the parameters for both coordinate-based and dihedral-based PCA analysis.
 
-`atom_selection`：原子选择，用于指定需要进行PCA的原子组。如果进行二面角分析的话，则所选的原子组必须包含形成骨架二面角的原子。这里的原子选择的语法完全遵从MDAnalysis的原子选择语法。请参考：https://userguide.mdanalysis.org/2.7.0/selections.html
+`atom_selection`: Atom selection for specifying the atom group for PCA. If performing dihedral analysis, the selected atom group must contain atoms that form backbone dihedral angles. The atom selection syntax here follows MDAnalysis atom selection syntax. Please refer to: https://userguide.mdanalysis.org/2.7.0/selections.html
 
-`byType`：指定计算基于坐标的PCA的方式，只有`target`为`coordinates`时有效。有四种选择：`atom`、`res_com`、`res_cog`、`res_coc`。`atom`计算选中的所有原子坐标的PCA；常见的，可以在`atom_selection`中选择CA原子`protein and name CA`来计算蛋白质的PCA；`res_com`计算每个残基的质心的PCA；`res_cog`计算每个残基的几何中心的PCA；`res_coc`计算每个残基的电荷中心的PCA。当为`res_com`、`res_cog`或`res_coc`时，原子选择器应当包含选中的残基的所有原子，否则只会计算某一残基中选中原子的质心、几何中心或者电荷中心的PCA。
+`byType`: Specifies the method for coordinate-based PCA calculation, only effective when `target` is `coordinates`. There are four options: `atom`, `res_com`, `res_cog`, `res_coc`. `atom` calculates PCA of all selected atom coordinates; commonly, you can select CA atoms in `atom_selection` with `protein and name CA` to calculate protein PCA; `res_com` calculates PCA of each residue's center of mass; `res_cog` calculates PCA of each residue's geometric center; `res_coc` calculates PCA of each residue's charge center. When using `res_com`, `res_cog` or `res_coc`, the atom selector should contain all atoms of the selected residues, otherwise only the center of mass, geometric center, or charge center of the selected atoms within a residue will be calculated.
 
-`target`：PCA的目标，可以是`coordinates`或`dihedrals`。如果选择`coordinates`，则PCA将基于原子的坐标进行分析；如果选择`dihedrals`，则PCA将基于二面角进行分析。
+`target`: The target for PCA, can be `coordinates` or `dihedrals`. If `coordinates` is selected, PCA will be based on atom coordinates; if `dihedrals` is selected, PCA will be based on dihedral angles.
 
-**需要注意的是**：dPCA的文献中讨论到二面角与坐标不同，二面角具有周期性；因而dPCA的文章中是对角度进行了三角变换再将之应用于PCA分析，而此模块同样将二面角转换成sin和cos值再进行PCA分析。**用户在进行dPCA分析的时候，需要妥善对照文献分析计算过程是否合适！** 有任何问题或者改进的建议，请联系杜若，杜若和杜艾维非常欢迎任何的建议和argue，非常感谢！。
+**Note**: The dPCA literature discusses that dihedral angles differ from coordinates - dihedral angles are periodic. Therefore, dPCA articles apply trigonometric transformation to angles before PCA analysis. This module also converts dihedral angles to sin and cos values before PCA analysis. **Users performing dPCA analysis should carefully compare with the literature to verify if the calculation process is appropriate!** For any questions or improvement suggestions, please contact Du Ruo. Du Ruo and Du Ivy welcome any suggestions and arguments. Thank you very much!
 
-本模块还有三个隐藏参数可以对轨迹做帧的选择：
+This module also has three hidden parameters for frame selection:
 
 ```yaml
       frame_start:  # start frame index
@@ -37,9 +37,9 @@
       frame_step:  # frame index step, default=1
 ```
 
-这些参数可以指定计算轨迹的起始帧、终止帧（不包含）以及帧的步长。默认情况下，用户不需要设置这些参数，模块会自动分析整个轨迹。
+These parameters can specify the start frame, end frame (exclusive), and frame step for trajectory calculation. By default, users do not need to set these parameters, and the module will automatically analyze the entire trajectory.
 
-例如我们计算从1000帧开始，到5000帧结束，每隔10帧的DCCM：
+For example, to calculate DCCM from frame 1000 to frame 5000, every 10 frames:
 
 ```yaml
       frame_start: 1000 # start frame index
@@ -47,31 +47,31 @@
       frame_step: 10 # frame index step, default=1
 ```
 
-如果三个参数中只需要设置一个或两个，其余的参数都可以省略。
+If only one or two of the three parameters need to be set, the others can be omitted.
 
 ## Output
 
-DIP在对体系进行PCA分析之后，会将前三个主成分的数值保存到xvg文件中，并对主成分进行两两的散点图可视化。
+After performing PCA analysis on the system, DIP will save the first three principal component values to xvg files and create pairwise scatter plots for visualization.
 
-基于坐标的PCA的前两个主成分：
+First two principal components from coordinate-based PCA:
 
 ![PCA_coordinates](static/PCA_pca12.png)
 
-基于Dihedral的PCA的前两个主成分：
+First two principal components from dihedral-based PCA:
 
 ![PCA_dihedrals](static/PCA_d_pca12.png)
 
 
-需要注意的是，**前三个主成分的占比输出在屏显或者log中**：
+**Note that the proportion of the first three principal components is output in the screen display or log:**
 
 ```txt
-The ratio of engenvalues -> [0.35126355 0.25190672 0.049121  ]
+The ratio of eigenvalues -> [0.35126355 0.25190672 0.049121  ]
 ```
 
-主成分余弦含量(cosine content)的计算也是对PCA的一种检查。DIP会计算每个PC的余弦含量并输出。当前几个成分的余弦含量的值接近1时，说明该PC可能对应于随机扩散，也即意味着模拟没有收敛，采样较差。关于更多余弦含量的内容，请参考 Berk Hess. Convergence of sampling in protein simulations. Phys. Rev. E 65, 031910 (2002).
+The calculation of principal component cosine content is also a check for PCA. DIP will calculate and output the cosine content for each PC. When the cosine content of the first few components is close to 1, it indicates that the PC may correspond to random diffusion, meaning the simulation has not converged and sampling is poor. For more information about cosine content, please refer to Berk Hess. Convergence of sampling in protein simulations. Phys. Rev. E 65, 031910 (2002).
 
-前三个主成分的极值在轨迹上的投影也会输出到pdb文件，如`pc1_proj.pdb`，可以通过pymol等工具可视化查看沿PC方向结构的变化。
+The projections of the extreme values of the first three principal components on the trajectory will also be output to pdb files, such as `pc1_proj.pdb`, which can be visualized using PyMOL or other tools to observe structural changes along the PC direction.
 
 ## References
 
-如果您使用了DIP的本分析模块，请一定引用MDAnalysis、scikit-learn(https://scikit-learn.org/stable/about.html#citing-scikit-learn)、DuIvyTools(https://zenodo.org/doi/10.5281/zenodo.6339993)，以及合理引用本文档(https://zenodo.org/doi/10.5281/zenodo.10646113)。
+If you use this analysis module from DIP, please cite MDAnalysis, scikit-learn (https://scikit-learn.org/stable/about.html#citing-scikit-learn), DuIvyTools (https://zenodo.org/doi/10.5281/zenodo.6339993), and properly cite this documentation (https://zenodo.org/doi/10.5281/zenodo.10646113).

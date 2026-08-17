@@ -1,8 +1,8 @@
 # gmx_RMSF
 
-此模块依赖GROMACS进行均方根波动（RMSF）的计算。
+This module depends on GROMACS to calculate the root mean square fluctuation (RMSF).
 
-使用本模块前请注意[前置处理](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7)已经完成！
+Before using this module, please ensure that the [preprocessing](https://duivyprocedures-docs.readthedocs.io/en/latest/Framework.html#id7) has been completed!
 
 ## Input YAML
 
@@ -13,21 +13,21 @@
     multichain: yes
 ```
 
-`calc_group`：计算组，即需要计算RMSF的原子组。
+`calc_group`: The calculation group, i.e., the atom group for which RMSF will be calculated.
 
-`by_residues`：是否以残基为单位计算RMSF, `no`表示以原子为单位计算。
+`by_residues`: Whether to calculate RMSF by residues. `no` means calculating by atoms.
 
-`multichain`：体系是否是多链，也即残基编号是否有重复；如果有重复的话，绘图会出现很乱的折线，这里设置一下之后，DIP在绘图的时候会对残基重新编号；这里的示例体系包含多条链，故而设置为yes。
+`multichain`: Whether the system has multiple chains, i.e., whether residue numbers are duplicated. If duplicated, the plot will show messy lines. When set to yes, DIP will renumber residues during plotting. The example system here contains multiple chains, so it is set to yes.
 
-如果还需要对`gmx rmsf`命令添加其它的参数设置，可以使用`gmx_parm`参数。
+If you need to add other parameters to the `gmx rmsf` command, you can use the `gmx_parm` parameter.
 
 ## Output
 
-DIP会对得到的RMSF数据进行绘图：
+DIP will visualize the calculated RMSF data:
 
 ![gmx_RMSF](static/gmx_RMSF.png)
 
 
 ## References
 
-如果您使用了DIP的本分析模块，请一定引用GROMACS模拟引擎、DuIvyTools(https://zenodo.org/doi/10.5281/zenodo.6339993)，以及合理引用本文档(https://zenodo.org/doi/10.5281/zenodo.10646113)。
+If you use this analysis module from DIP, please cite GROMACS, DuIvyTools (https://zenodo.org/doi/10.5281/zenodo.6339993), and properly cite this documentation (https://zenodo.org/doi/10.5281/zenodo.10646113).
